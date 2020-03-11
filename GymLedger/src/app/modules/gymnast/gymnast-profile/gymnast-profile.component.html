@@ -1,0 +1,10 @@
+<div class=page *ngIf="gymnast; else loading">
+    <div>dit is gymnast {{ gymnast.firstname }}</div>
+    <div>Hier komt een dashbord</div>
+    <div>Hier komt een add-training</div>
+    <app-training-list [trainings]= gymnast.trainings></app-training-list>
+</div>
+
+<ng-template #loading>
+    <mat-spinner></mat-spinner>
+</ng-template>

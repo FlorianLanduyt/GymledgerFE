@@ -1,12 +1,16 @@
+import { Category } from './category.enum';
+
 export class Training {
+    
     
 private _id: number;
 
     constructor(
-        private _category: number, 
+        private _category: Category, 
         private _date: Date,
         private _feelingBefore: string, 
-        private _feelingAfter: string 
+        private _feelingAfter: string,
+        private _amountOfExercises: number
     ){}
 
     public get feelingAfter(): string {
@@ -27,11 +31,18 @@ private _id: number;
     public set date(value: Date) {
         this._date = value;
     }
-    public get category(): number {
+    public get category(): Category {
         return this._category;
     }
-    public set category(value: number) {
+    public set category(value: Category) {
         this._category = value;
+    }
+
+    public get amountOfExercises(): number {
+        return this._amountOfExercises;
+    }
+    public set amountOfExercises(value: number) {
+        this._amountOfExercises = value;
     }
 
     toJson(): any{
@@ -41,6 +52,21 @@ private _id: number;
             date: this.date,
             feelingBeforeTraining: this.feelingBefore,
             feelAfterTraining: this.feelingAfter,
+            
         }
+    }
+
+    static fromJson(json: any): Training {
+        const t = new Training (
+            json.kind,
+            json.date,
+            json.feelingBeforeTraining,
+            json.feelAfterTraining,
+            json.amountOfExercises
+        )
+
+        t._id = json.id;
+
+        return t;
     }
 }

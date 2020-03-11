@@ -54,4 +54,17 @@ export class Gymnast {
         }
     }
 
+    static fromJson(json: any): Gymnast {
+        const g = new Gymnast(
+            json.firstname, 
+            json.lastname,
+            json.birthDate,
+            json.email,
+            json.trainings.map(t => Training.fromJson(t)));
+
+        g._id = json.id;
+
+        return g;
+    } 
+
 }

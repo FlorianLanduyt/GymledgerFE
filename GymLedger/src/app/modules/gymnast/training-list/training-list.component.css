@@ -1,0 +1,14 @@
+.trainingLijst {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.trainingLijst > * {
+    width: 20%;
+    min-width: 122px;
+    margin: 0 30px 10px 0;
+}
+
+
