@@ -42,6 +42,9 @@ export class Gymnast {
         this._firstname = value;
     }
 
+    public get id(): number{
+        return this._id
+    }
 
     toJson(): any {
         return {
@@ -55,6 +58,7 @@ export class Gymnast {
     }
 
     static fromJson(json: any): Gymnast {
+        console.log(json.trainings)
         const g = new Gymnast(
             json.firstname, 
             json.lastname,

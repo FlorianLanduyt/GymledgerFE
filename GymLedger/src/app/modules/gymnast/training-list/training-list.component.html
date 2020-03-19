@@ -1,5 +1,3 @@
-<div class="trainingLijst" >
-    <div *ngFor="let training of trainings" >
-        <app-training class="training" [training]=training></app-training>
-    </div>
-</div>
+<section class="trainingLijst">
+    <app-training *ngFor="let training of (trainings$ | async)"  [training]=training></app-training>
+</section>

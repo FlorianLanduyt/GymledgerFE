@@ -1,8 +1,15 @@
 <div class=page *ngIf="gymnast; else loading">
     <div>dit is gymnast {{ gymnast.firstname }}</div>
-    <div>Hier komt een dashbord</div>
-    <div>Hier komt een add-training</div>
-    <app-training-list [trainings]= gymnast.trainings></app-training-list>
+    <div>
+    <section class="trainingSection">
+        <span class="naastElkaar">
+            <h3>Trainingen</h3>
+            <app-add-training (click)='toggleForm()'></app-add-training>
+        </span>
+        <app-training-list  [gymnastId]= gymnast.id></app-training-list>
+    </section>
+</div>
+    <app-training-form (newTraining)=addTraining($event) (newTrainingForm)=cancelNewTraining($event) *ngIf="newTrainingForm"></app-training-form>
 </div>
 
 <ng-template #loading>

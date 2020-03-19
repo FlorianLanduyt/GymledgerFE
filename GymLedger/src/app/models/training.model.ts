@@ -1,16 +1,16 @@
-import { Category } from './category.enum';
+import { Category } from './category.model';
 
 export class Training {
     
     
-private _id: number;
+    private _id: number;
+    private _feelingAfter: string;
+    private _amountOfExercises: number
+    private _category: Category;
+    private _date: Date;
+    private _feelingBefore: string;
 
-    constructor(
-        private _category: Category, 
-        private _date: Date,
-        private _feelingBefore: string, 
-        private _feelingAfter: string,
-        private _amountOfExercises: number
+    constructor( 
     ){}
 
     public get feelingAfter(): string {
@@ -48,23 +48,22 @@ private _id: number;
     toJson(): any{
         return {
             id: this._id,
-            kind: this.category,
-            date: this.date,
-            feelingBeforeTraining: this.feelingBefore,
-            feelAfterTraining: this.feelingAfter,
+            categoryId: this.category.id,
+            day: this.date,
+            beforeFeeling: this.feelingBefore,
+            afterFeeling: this.feelingAfter,
             
         }
     }
 
     static fromJson(json: any): Training {
         const t = new Training (
-            json.kind,
-            json.date,
-            json.feelingBeforeTraining,
-            json.feelAfterTraining,
-            json.amountOfExercises
+            // json.amountOfExercises
         )
-
+        t._category = Category.fromJson(json.category)
+        t._date = json.date;
+        t._feelingBefore = json.feelingBeforeTraining
+        t._feelingAfter = json.feelingAfterTraining
         t._id = json.id;
 
         return t;

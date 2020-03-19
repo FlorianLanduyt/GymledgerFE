@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Training } from 'src/app/models/training.model';
 import { GymnastDataService } from '../gymnast-data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-training-list',
@@ -8,9 +9,10 @@ import { GymnastDataService } from '../gymnast-data.service';
   styleUrls: ['./training-list.component.css']
 })
 export class TrainingListComponent implements OnInit {
-  @Input() public trainings: Training[]
+  @Input() public gymnastId: number
+  private _fetchTrainings$: Observable<Training[]> = this._gymnastService.allTrainings$
 
-  constructor() { 
+  constructor(private _gymnastService: GymnastDataService) { 
     
   }
 
@@ -18,7 +20,9 @@ export class TrainingListComponent implements OnInit {
 
   }
 
-
+  get trainings$(): Observable<Training[]>{
+    return this._fetchTrainings$
+  }
   
 
 }

@@ -6,6 +6,7 @@ import { GymnastModule } from "./modules/gymnast/gymnast.module";
 import { MaterialModule } from './modules/material/material.module';
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from "@angular/common/http";
     GymnastModule,
     MaterialModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

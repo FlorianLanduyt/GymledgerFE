@@ -1,6 +1,8 @@
 <div class="training">
-    training van {{training.date | date}} <br>
-    soort: {{ category}}
+    <p class="category">{{ training.category.name }}</p>
+    <p class="date">{{training.date | date}}</p>
+    <p class="gevoel">Startgevoel: <span>{{beforeFeeling}}</span></p>
+    <p class="gevoel">Eindgevoel: <span>{{afterFeeling}}</span></p>
 </div>
 
 

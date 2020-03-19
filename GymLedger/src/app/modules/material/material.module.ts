@@ -7,6 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatDatepickerModule, } from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
+
+
+
+
 
 
 
@@ -19,7 +27,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     MatCardModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule
   ], 
   exports: [
     BrowserAnimationsModule,
@@ -27,7 +39,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     MatCardModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule
+  ],
+  providers: [
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

@@ -1,2 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css'; 
+@import url('https://fonts.googleapis.com/css?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Inter:600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Inter:300&display=swap');
+
+
+html {
+    font-family: 'Inter', sans-serif;
+}
+
+html, body { height: 100%; }
+body { margin: 0; }
+
+:root {
+    --paars: #f2f2f8;
+    --blauw: #006b89;
+    
+  }
+
+  /* KNOPPEN  */
+  .addButton {
+    /* border: 1px black solid; */
+    cursor: pointer;
+    /* margin: 5px; */
+    padding: 10px 25px;
+    border-radius: 5px;
+    background-color: var(--blauw);
+    transition: ease-in-out 0.1s;
+    color: white;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.addButton:hover{
+    background-color: #8BBBC9;
+    /* color: black; */
+}
+
+.cancelButton {
+    background-color: white !important;
+    color: black;
+}
+
+
