@@ -7,10 +7,13 @@ import { MaterialModule } from './modules/material/material.module';
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { GeneralModule } from "./modules/general/general.module";
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -18,7 +21,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     CommonModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GeneralModule,
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

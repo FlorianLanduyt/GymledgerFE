@@ -12,7 +12,7 @@ import { tap } from 'rxjs/operators';
 })
 export class GymnastProfileComponent implements OnInit {
   private _gymnast: Gymnast
-  public newTrainingForm: boolean = false;
+  public newTrainingForm: boolean = true;
 
   constructor(private _gymnastService: GymnastDataService) { }
 
@@ -27,7 +27,7 @@ export class GymnastProfileComponent implements OnInit {
   }
 
   toggleForm(){
-    this.newTrainingForm = !this.newTrainingForm
+   
   }
 
   cancelNewTraining(continueForm: boolean){
@@ -37,6 +37,17 @@ export class GymnastProfileComponent implements OnInit {
   addTraining(newTraining: Training){
     this._gymnastService.addNewTraining(newTraining);
     this.newTrainingForm = false;
+  }
+
+  scroll(el: HTMLElement){
+    //this.newTrainingForm = !this.newTrainingForm
+    if(this.newTrainingForm){
+      el.scrollIntoView({behavior: "smooth"})
+    } else {
+      el.scrollIntoView({behavior: "smooth"})
+
+      this.newTrainingForm = true;
+    }
   }
 
 }

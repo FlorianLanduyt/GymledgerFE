@@ -41,6 +41,14 @@ export class GymnastDataService {
         ))
   }
 
+   getTraining$(id: string): Observable<Training> {
+    return this.http.get(`${environment.apiUrl}/Training/${id}`)
+      .pipe(
+        catchError(this.handleError),
+        map((jsonTraining: any): Training => Training.fromJson(jsonTraining))
+      )
+  }
+
   addNewTraining(training: Training){
     console.log(training.toJson())
     return this.http

@@ -1,15 +1,17 @@
 <div class=page *ngIf="gymnast; else loading">
-    <div>dit is gymnast {{ gymnast.firstname }}</div>
+    <!-- <div>dit is gymnast {{ gymnast.firstname }}</div> -->
     <div>
-    <section class="trainingSection">
-        <span class="naastElkaar">
-            <h3>Trainingen</h3>
-            <app-add-training (click)='toggleForm()'></app-add-training>
-        </span>
-        <app-training-list  [gymnastId]= gymnast.id></app-training-list>
-    </section>
-</div>
-    <app-training-form (newTraining)=addTraining($event) (newTrainingForm)=cancelNewTraining($event) *ngIf="newTrainingForm"></app-training-form>
+        <section class="trainingSection">
+            <span class="naastElkaar">
+                <h1>Trainingen</h1>
+                <app-add-training-button (click)='scroll(doel)'></app-add-training-button>
+            </span>
+            <app-training-list  [gymnastId]= gymnast.id></app-training-list>
+        </section>
+    </div>
+    <div #doel>
+        <app-add-training *ngIf="newTrainingForm" (newTraining)=addTraining($event) (newTrainingForm)=cancelNewTraining($event)></app-add-training>
+    </div>
 </div>
 
 <ng-template #loading>
