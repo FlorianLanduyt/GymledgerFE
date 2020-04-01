@@ -1,4 +1,5 @@
 import { Category } from './category.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export class Training {
     
@@ -17,13 +18,26 @@ export class Training {
         return this._feelingAfter;
     }
     public set feelingAfter(value: string) {
-        this._feelingAfter = value;
+        if(this.isNan(value)){
+            this._feelingAfter == "0"
+        } else {
+            this._feelingAfter = value
+        }
     }
+
+    private isNan(value: string): boolean {
+        return (value === ""? true: false)
+    }
+
     public get feelingBefore(): string {
         return this._feelingBefore;
     }
     public set feelingBefore(value: string) {
-        this._feelingBefore = value;
+        if(this.isNan(value)){
+            this._feelingBefore = "0"
+        } else {
+            this._feelingBefore = value;
+        }
     }
     public get date(): Date {
         return this._date;
@@ -43,6 +57,10 @@ export class Training {
     }
     public set amountOfExercises(value: number) {
         this._amountOfExercises = value;
+    }
+
+    public get id(): number {
+        return this._id;
     }
 
     toJson(): any{

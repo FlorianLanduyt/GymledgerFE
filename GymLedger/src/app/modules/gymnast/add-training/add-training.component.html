@@ -1,1 +1,53 @@
-<button type="button" class="addButton">Voeg toe</button>
+<div class="formPage">
+    <div class="formContainer">
+<form  [formGroup]="trainingFg" (ngSubmit)='addTraining()'>
+    <h2>Creëer een nieuwe training </h2>
+    <p class="subHead">Maak een nieuwe training door de velden op een juiste manier in te vullen </p>
+    <div class="inputItem">
+        <mat-form-field>
+        <mat-label>Kies een datum</mat-label>
+        <input  formControlName='date'  matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> 
+      <mat-error 
+        *ngIf="trainingFg.get('date')['errors'] && trainingFg.get('date').touched" >
+            <!-- {{getErrorMessage(trainingFg.get('category')['errors'])}} -->
+            {{ getErrorMessage(trainingFg.get('category')['errors']) }}
+        </mat-error>
+    </div>
+    <div class="inputItem">
+        <label>Category</label>
+        <select formControlName='category'>
+            <option value="">Kies het onderwerp</option>
+            <option [ngValue]="c"  *ngFor="let c of (categories$ | async)">
+                {{c.name}}
+            </option>
+        </select>
+        <mat-error 
+        *ngIf="trainingFg.get('category')['errors']  
+           && trainingFg.get('category').touched" >
+            <!-- {{getErrorMessage(trainingFg.get('category')['errors'])}} -->
+            {{ getErrorMessage(trainingFg.get('category')['errors']) }}
+        </mat-error>
+    </div>
+    <div class="inputItem">
+      <label>Gevoel voor de training (tussen 1 en 10)</label>
+      <input class="normalInput" formControlName="feelingBefore" type="number">
+    </div>
+    <div class="inputItem">  
+        <label>Gevoel na de training (getal tussen 1 en 10)</label>
+        <input class="normalInput" formControlName='feelingAfter' type='number'>
+    </div>
+    <div class="btnContainer">
+        <div>
+            <button class="btn addButton cancelButton" (click)="cancelForm()">Annuleer</button>
+            <button class="btn addButton" type="submit" [disabled]='!trainingFg.valid'>Voeg toe</button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+
+
+

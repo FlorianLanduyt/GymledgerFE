@@ -1,0 +1,27 @@
+.bar { 
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.09);
+    padding-inline-start: 0px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+.item { 
+    display: inline-block;
+    outline: none;
+    padding: 30px;
+    border: 1px solid transparent;
+}
+
+.item:hover {
+    border-bottom: 1px solid var(--blauw);
+    color: var(--blauw);
+    cursor: pointer;
+}
+
+
+

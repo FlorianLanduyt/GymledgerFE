@@ -5,11 +5,14 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-training-list',
-  templateUrl: './training-list.component.html',
-  styleUrls: ['./training-list.component.css']
+  templateUrl: './all-training.component.html',
+  styleUrls: ['./all-training.component.css']
 })
-export class TrainingListComponent implements OnInit {
+export class AllTrainingComponent implements OnInit {
   @Input() public gymnastId: number
+  private _showDetails: boolean = false;
+  private _clickedTraining: Training;
+
   private _fetchTrainings$: Observable<Training[]> = this._gymnastService.allTrainings$
 
   constructor(private _gymnastService: GymnastDataService) { 
@@ -22,6 +25,20 @@ export class TrainingListComponent implements OnInit {
 
   get trainings$(): Observable<Training[]>{
     return this._fetchTrainings$
+  }
+
+  public showDetails(selected: Training){
+    
+      this._showDetails = true;
+    this._clickedTraining = selected
+  }
+ 
+  get show(){
+    return this._showDetails;
+  }
+
+  get selectedTraining(){
+    return this._clickedTraining;
   }
   
 

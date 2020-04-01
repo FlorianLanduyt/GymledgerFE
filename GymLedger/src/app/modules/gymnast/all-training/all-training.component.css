@@ -1,10 +1,31 @@
-.trainingLijst {
+.trainingContainer {
+    background-color:var(--paars);
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     overflow: auto;
+    padding-bottom: 3em;
+}
+
+/* .trainingBox {
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+} */
+
+.trainingLijst {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.trainingLijst > * {
+    width: 30%;
+    min-width: 190px;
+    max-width: 300px;
 }
 
 /* app-training {
