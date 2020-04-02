@@ -1,10 +1,14 @@
-<div class="trainingContainer">
-    <!-- <div class="trainingBox"> -->
+<div class="trainingContainer" *ngIf="(trainings) as trainings; else loadingOrError">
     <section class="trainingLijst">
-        <app-training (selectedTraining)='showDetails($event)' *ngFor="let training of (trainings$ | async)"  [training]=training></app-training>
+        <app-training (selectedTraining)='showDetails($event)' *ngFor="let training of trainings"  [training]=training></app-training>
     </section>
 </div>
-<!-- </div> -->
-<div *ngIf="show">
-    <app-training-details></app-training-details>
-</div>
+<ng-template #loadingOrError>
+     <!-- <mat-card *ngIf="errorMessage; else laden">
+        Een fout heeft zicht voorgedaan bij het laden van de lijst met trainingen: {{ errorMessage }}. <br/>
+        Probeer later opnieuw. -->
+       <!-- <ng-template #laden> -->
+         <mat-spinner></mat-spinner>
+       <!-- </ng-template> -->
+     <!-- </mat-card> -->
+</ng-template>

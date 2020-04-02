@@ -3,7 +3,8 @@ import { Gymnast } from 'src/app/models/gymnast.model';
 import { Observable } from 'rxjs';
 import { GymnastDataService } from '../gymnast-data.service';
 import { Training } from 'src/app/models/training.model';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gymnast-profile',
@@ -14,7 +15,8 @@ export class GymnastProfileComponent implements OnInit {
   private _gymnast: Gymnast
   public newTrainingForm: boolean = true;
 
-  constructor(private _gymnastService: GymnastDataService) { }
+  constructor(private _gymnastService: GymnastDataService,
+    private _toastr: ToastrService) { }
 
   ngOnInit(): void {
     this._gymnastService.gymnast$.subscribe(
@@ -26,16 +28,13 @@ export class GymnastProfileComponent implements OnInit {
     return this._gymnast;
   }
 
-  toggleForm(){
-   
-  }
-
   cancelNewTraining(continueForm: boolean){
     this.newTrainingForm = continueForm 
   }
 
   addTraining(newTraining: Training){
-    this._gymnastService.addNewTraining(newTraining);
+    this._gymnastService.addNewTraining(newTraining)
+    this._toastr.success("De training is toegevoegd","Succes")
     this.newTrainingForm = false;
   }
 

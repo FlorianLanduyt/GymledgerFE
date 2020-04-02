@@ -4,6 +4,8 @@ import { Training } from 'src/app/models/training.model';
 import { Category } from 'src/app/models/category.model';
 import { Observable } from 'rxjs';
 import { CategoryDataService } from '../category-data.service';
+import { Toast, ToastrService } from 'ngx-toastr';
+import { GymnastDataService } from '../gymnast-data.service';
 
 @Component({
   selector: 'app-add-training',
@@ -15,13 +17,16 @@ import { CategoryDataService } from '../category-data.service';
 export class AddTrainingComponent implements OnInit {
   // @Output() public training: Training;
   @Output() public newTrainingForm = new EventEmitter <boolean>();
-  @Output() public newTraining = new EventEmitter<Training>()
+  //@Output() public newTraining = new EventEmitter<Training>()
   public trainingFg: FormGroup;
   private _fetchCategories$: Observable<Category[]> = this._catService.categories$;
   
 
   constructor(private fb: FormBuilder, 
-      private _catService: CategoryDataService) { }
+      private _catService: CategoryDataService,
+      private _toastr: ToastrService,
+      private _gymnastService: GymnastDataService,
+      ) { }
 
   ngOnInit(): void {
 
@@ -54,8 +59,10 @@ export class AddTrainingComponent implements OnInit {
       training.feelingBefore = this.trainingFg.value.feelingBefore
       training.feelingAfter = this.trainingFg.value.feelingAfter
 
-      console.log(training)
-    this.newTraining.emit(training)
+    this._gymnastService.addNewTraining(training).add(() => {
+        this._toastr.success(`De training is toegevoegd`,"Succes")
+      
+    })
   }
 
   cancelForm(){

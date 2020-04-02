@@ -2,7 +2,8 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Training } from 'src/app/models/training.model';
 import { Category } from 'src/app/models/category.model';
 import { CategoryDataService } from '../category-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GymnastDataService } from '../gymnast-data.service';
 
 @Component({
   selector: 'app-training',
@@ -49,6 +50,8 @@ export class TrainingComponent implements OnInit {
   public clickedTraining(){
     this.selectedTraining.emit(this.training)
   }
+
+  
 
   
 }
