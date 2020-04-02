@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Training } from 'src/app/models/training.model';
 import { GymnastDataService } from '../gymnast-data.service';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-training-list',
@@ -12,19 +13,51 @@ export class AllTrainingComponent implements OnInit {
   @Input() public gymnastId: number
   private _showDetails: boolean = false;
   private _clickedTraining: Training;
+  public errorMessage: string = ""
 
-  private _fetchTrainings$: Observable<Training[]> = this._gymnastService.allTrainings$
+  // private _fetchTrainings$: Observable<Training[]>
+  private _trainingList: Training[];
 
   constructor(private _gymnastService: GymnastDataService) { 
     
   }
 
   ngOnInit(): void {
+    this._gymnastService.refreshTrainingList$.subscribe(() => {
+      this.getAllTrainings()
+      });
 
+      this.getAllTrainings()
+    }
+  
+
+  private getAllTrainings() {
+    this._gymnastService.trainings$.subscribe((t: Training[]) => {
+      this._trainingList = t;
+    });
   }
+  
+    // )
+    // this.fetchTrainings()
+  
 
-  get trainings$(): Observable<Training[]>{
-    return this._fetchTrainings$
+  // private fetchTrainings(){
+  //   this._gymnastService.allTrainings$.subscribe((t: []) => {
+  //     this._trainings = t
+  //   })
+
+  // this._fetchTrainings$ = this._gymnastService.allTrainings$.pipe(
+  //   catchError(err => {
+  //     this.errorMessage = err;
+  //     return EMPTY
+  //   })
+  // )
+
+
+
+  
+  get trainings(): Training[]{
+    return this._trainingList
   }
 
   public showDetails(selected: Training){

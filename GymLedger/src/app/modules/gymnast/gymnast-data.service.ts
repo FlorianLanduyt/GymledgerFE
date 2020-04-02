@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, throwError, BehaviorSubject, Subject } from 'rxjs';
 import { Gymnast } from 'src/app/models/gymnast.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map, delay, catchError } from 'rxjs/operators';
+import { map, delay, catchError, tap } from 'rxjs/operators';
 import { Training } from 'src/app/models/training.model';
 
 @Injectable({
@@ -11,19 +11,27 @@ import { Training } from 'src/app/models/training.model';
 })
 export class GymnastDataService {
   private gymnastId: number;
-  private _trainings$ = new BehaviorSubject<Training[]>([]);
+
+  // private _trainings$ = new BehaviorSubject<Training[]>([]);
+  private _refreshTrainingList$ = new Subject<void>();
+
+
   private _trainings: Training[]
 
   constructor(private http: HttpClient) { 
     this.gymnastId = 2;
-    this.trainings$.subscribe((trainings: Training[]) => {
-      this._trainings = trainings;
-      this._trainings$.next(this._trainings)
-    })
+    // this.trainings$.subscribe((trainings: Training[]) => {
+    //   this._trainings = trainings;
+    //   this._trainings$.next(this._trainings)
+    // })
   }
 
-  get allTrainings$(): Observable<Training[]> {
-    return this._trainings$;
+  // get allTrainings$(): Observable<Training[]> {
+  //   return this._trainings$;
+  // }
+
+  get refreshTrainingList$() {
+    return this._refreshTrainingList$;
   }
 
   get gymnast$(): Observable<Gymnast> {
@@ -53,10 +61,27 @@ export class GymnastDataService {
     console.log(training.toJson())
     return this.http
       .post(`${environment.apiUrl}/Training/${this.gymnastId}`, training.toJson())
-      .pipe(catchError(this.handleError), map(Training.fromJson))
-      .subscribe((t: Training) => {
-        this._trainings = [...this._trainings, t]
-      })
+      .pipe(
+        tap(() => {
+          this._refreshTrainingList$.next()
+        }),
+        catchError(this.handleError), map(Training.fromJson)
+        )
+      // .subscribe((t: Training) => {
+      //   this._trainings = [...this._trainings, t]
+      // })
+      .subscribe()
+  }
+
+  deleteTraining(trainingId: number){
+    return this.http.delete(`${environment.apiUrl}/Training/${trainingId}`)
+    .pipe(
+      tap(() => {
+        this._refreshTrainingList$.next();
+      }),
+      catchError(this.handleError),
+      map((jsonTraining: any): Training => Training.fromJson(jsonTraining))
+    )
   }
 
   handleError(err: any) : Observable<never>{
@@ -69,5 +94,7 @@ export class GymnastDataService {
     console.error(err);
     return throwError(errorMsg)
   }
+
+
 
 }

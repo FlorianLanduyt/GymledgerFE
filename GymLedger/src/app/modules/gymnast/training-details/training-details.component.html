@@ -6,7 +6,7 @@
         <p>Gevoel na de training: <span class="number">{{training.feelingAfter}}</span></p>
         <p>Trainingen:</p>
         <div class="btnContainer">
-            <button class="btn deleteBtn">Verwijder</button>
+            <button (click)="removeTraining()" class="btn deleteBtn">Verwijder</button>
             <button [routerLink]="['']" class="btn">Annuleer</button>
         </div>
     </div>

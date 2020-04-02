@@ -11,7 +11,8 @@ import {MatDatepickerModule, } from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
-
+ 
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -31,7 +32,8 @@ import {MatInputModule} from '@angular/material/input';
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    ToastrModule.forRoot()
   ], 
   exports: [
     BrowserAnimationsModule,
