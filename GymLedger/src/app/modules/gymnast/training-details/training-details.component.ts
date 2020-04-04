@@ -4,6 +4,7 @@ import { GymnastDataService } from '../gymnast-data.service';
 import { Training } from 'src/app/models/training.model';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-training-details',
@@ -13,12 +14,16 @@ import { ToastrService } from 'ngx-toastr';
 export class TrainingDetailsComponent implements OnInit {
   //@Input() public training: Training
   public training:Training;
+  private _isEdit = false;
+  
+  public trainingFg: FormGroup
 
   constructor(
     private _gymnastService: GymnastDataService,
     private router: Router,
     private _route: ActivatedRoute,
-    private _toastr: ToastrService
+    private _toastr: ToastrService,
+    private fb: FormBuilder
     ) { }
 
   ngOnInit(): void {
@@ -34,7 +39,20 @@ export class TrainingDetailsComponent implements OnInit {
             this.router.navigate([''])
       }
       )
-      
     }
+
+    public changeToEdit(){
+      this._isEdit = !this._isEdit;
+    }
+
+   
+
+    public get isEdit() {
+      return this._isEdit;
+    }
+    public set isEdit(value) {
+      this._isEdit = value;
+    }
+  
 
 }

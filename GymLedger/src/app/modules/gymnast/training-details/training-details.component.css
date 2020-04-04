@@ -33,6 +33,7 @@ p {
 
 h2 {
     margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .btnContainer {
@@ -71,5 +72,20 @@ h2 {
       background-color: #E34543 !important;
       border-color: #E34543 !important;
       color: white;
+  }
+
+
+  .infoContainer {
+      display: flex;
+      align-items: center;
+  }
+
+  .infoContainer > *:not(:first-child) {
+      margin-left: 2em;
+  }
+
+  .customIcon {
+      /* background-color: white; */
+      cursor: pointer;
   }
 
