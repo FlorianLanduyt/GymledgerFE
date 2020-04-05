@@ -14,7 +14,6 @@ export class CategoryDataService {
 
   get categories$(): Observable<Category[]>{
     return this.http.get(`${environment.apiUrl}/Category`).pipe(
-      tap(console.log),
       map((list: any[]): Category[] => list.map(Category.fromJson))
     )
   }

@@ -25,8 +25,8 @@ export class TrainingComponent implements OnInit {
     // const cat = Category[this.training.category.name].toLowerCase();
     // this._category = cat.charAt(0).toUpperCase() + cat.slice(1)
 
-    this._beforeFeeling = this.checkZero(this.training.feelingBefore)
-    this._afterFeeling = this.checkZero(this.training.feelingAfter);
+    this._beforeFeeling = this.checkZero(this.training.feelingBeforeTraining)
+    this._afterFeeling = this.checkZero(this.training.feelingAfterTraining);
   }
 
   private checkZero(feeling: string): string {

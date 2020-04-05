@@ -1,15 +1,17 @@
 <div class="formPage">
     <div class="formContainer">
-<form  [formGroup]="trainingFg" (ngSubmit)='addTraining()'>
-    <h2>Creëer een nieuwe training </h2>
-    <p class="subHead">Maak een nieuwe training door de velden op een juiste manier in te vullen </p>
+<form  [formGroup]="trainingFg" (ngSubmit)='onSubmit()'>
+    <h2 *ngIf="!isEdit">Creëer een nieuwe training </h2>
+    <h2 *ngIf="isEdit">Pas training aan </h2>
+    <p *ngIf="!isEdit" class="subHead">Maak een nieuwe training door de velden op een juiste manier in te vullen </p>
+    <p *ngIf="isEdit" class="subHead">Pas de velden van de gekozen training aan.</p>
     <div class="inputItem">
         <mat-form-field>
-        <mat-label>Kies een datum</mat-label>
-        <input  formControlName='date'  matInput [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field> 
+            <mat-label>Kies een datum</mat-label>
+            <input  formControlName='date'  matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field> 
       <mat-error 
         *ngIf="trainingFg.get('date')['errors'] && trainingFg.get('date').touched" >
             <!-- {{getErrorMessage(trainingFg.get('category')['errors'])}} -->
@@ -19,8 +21,8 @@
     <div class="inputItem">
         <label>Category</label>
         <select formControlName='category'>
-            <option value="">Kies het onderwerp</option>
-            <option [ngValue]="c"  *ngFor="let c of (categories$ | async)">
+            <option hidden value="">Kies het onderwerp</option>
+            <option  [ngValue]="c"  *ngFor="let c of (categories$ | async)">
                 {{c.name}}
             </option>
         </select>
@@ -41,8 +43,10 @@
     </div>
     <div class="btnContainer">
         <div>
-            <button class="btn addButton cancelButton" (click)="cancelForm()">Annuleer</button>
-            <button class="btn addButton" type="submit" [disabled]='!trainingFg.valid'>Voeg toe</button>
+            <button type="button" class="btn addButton cancelButton" (click)="closeForm()">Annuleer</button>
+            <button *ngIf="!isEdit" class="btn addButton" type="submit" [disabled]='!trainingFg.valid'>Voeg toe</button>
+            <button *ngIf="isEdit" class="btn addButton" type="submit" [disabled]='!trainingFg.valid'>Pas aan</button>
+
         </div>
     </div>
 </form>

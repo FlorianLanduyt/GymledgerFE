@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, delay, catchError, tap } from 'rxjs/operators';
 import { Training } from 'src/app/models/training.model';
+import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -42,11 +43,12 @@ export class GymnastDataService {
   }
 
   get trainings$(): Observable<Training[]> {
-    return this.http.get(`${environment.apiUrl}/Training/${this.gymnastId}/trainings`)
+    return this.http.get<Training[]>(`${environment.apiUrl}/Training/${this.gymnastId}/trainings`)
         .pipe(
+          tap( training => console.log("Products: ", JSON.stringify(training))),
           catchError(this.handleError),
-          map((list: any): Training[] => list.map(Training.fromJson)
-        ))
+          //map((list: any): Training[] => list.map(Training.fromJson))
+          )
   }
 
    getTraining$(id: string): Observable<Training> {
@@ -65,12 +67,8 @@ export class GymnastDataService {
         tap(() => {
           this._refreshTrainingList$.next()
         }),
-        catchError(this.handleError), map(Training.fromJson)
-        )
-      // .subscribe((t: Training) => {
-      //   this._trainings = [...this._trainings, t]
-      // })
-      .subscribe()
+        catchError(this.handleError), map(Training.fromJson))
+        .subscribe()
   }
 
   deleteTraining(trainingId: number){
@@ -79,6 +77,15 @@ export class GymnastDataService {
       tap(() => {
         this._refreshTrainingList$.next();
       }),
+      catchError(this.handleError),
+      map((jsonTraining: any): Training => Training.fromJson(jsonTraining))
+    )
+  }
+
+  putTraining(training: Training){
+    console.log(training.toJson())
+    return this.http.put(`${environment.apiUrl}/Training/edit`,training.toJsonEdit())
+    .pipe(
       catchError(this.handleError),
       map((jsonTraining: any): Training => Training.fromJson(jsonTraining))
     )

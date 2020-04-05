@@ -5,23 +5,28 @@ export class Training {
     
     
     private _id: number;
-    private _feelingAfter: string;
+    private _feelingAfterTraining: string;
     private _amountOfExercises: number
-    private _category: Category;
+    private _category?: Category;
     private _date: Date;
-    private _feelingBefore: string;
+    private _feelingBeforeTraining: string;
+    private _day: string;
 
-    constructor( 
-    ){}
-
-    public get feelingAfter(): string {
-        return this._feelingAfter;
+    public get day(): string {
+        return this._day;
     }
-    public set feelingAfter(value: string) {
+    public set day(value: string) {
+        this._day = value;
+    }
+
+    public get feelingAfterTraining(): string {
+        return this._feelingAfterTraining;
+    }
+    public set feelingAfterTraining(value: string) {
         if(this.isNan(value)){
-            this._feelingAfter == "0"
+            this._feelingAfterTraining == "0"
         } else {
-            this._feelingAfter = value
+            this._feelingAfterTraining = value
         }
     }
 
@@ -29,14 +34,15 @@ export class Training {
         return (value === ""? true: false)
     }
 
-    public get feelingBefore(): string {
-        return this._feelingBefore;
+    public get feelingBeforeTraining(): string {
+        return this._feelingBeforeTraining;
     }
-    public set feelingBefore(value: string) {
+
+    public set feelingBeforeTraining(value: string) {
         if(this.isNan(value)){
-            this._feelingBefore = "0"
+            this._feelingBeforeTraining = "0"
         } else {
-            this._feelingBefore = value;
+            this._feelingBeforeTraining = value;
         }
     }
     public get date(): Date {
@@ -67,10 +73,19 @@ export class Training {
         return {
             id: this._id,
             categoryId: this.category.id,
-            day: this.date,
-            beforeFeeling: this.feelingBefore,
-            afterFeeling: this.feelingAfter,
-            
+            date: this.date,
+            feelingBeforeTraining: this.feelingBeforeTraining,
+            feelingAfterTraining: this.feelingAfterTraining,
+        }
+    }
+
+    toJsonEdit(): any {
+        return {
+            trainingId: this._id,
+            categoryId: this.category.id,
+            date: this.date,
+            feelingBeforeTraining: this.feelingBeforeTraining,
+            feelingAfterTraining: this.feelingAfterTraining,
         }
     }
 
@@ -80,9 +95,10 @@ export class Training {
         )
         t._category = Category.fromJson(json.category)
         t._date = json.date;
-        t._feelingBefore = json.feelingBeforeTraining
-        t._feelingAfter = json.feelingAfterTraining
+        t._feelingBeforeTraining = json.feelingBeforeTraining
+        t._feelingAfterTraining = json.feelingAfterTraining
         t._id = json.id;
+        t._day = json.day;
 
         return t;
     }

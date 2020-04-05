@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Training } from 'src/app/models/training.model';
 import { Category } from 'src/app/models/category.model';
@@ -15,9 +15,11 @@ import { GymnastDataService } from '../gymnast-data.service';
 
 
 export class AddTrainingComponent implements OnInit {
-  // @Output() public training: Training;
   @Output() public newTrainingForm = new EventEmitter <boolean>();
-  //@Output() public newTraining = new EventEmitter<Training>()
+  @Input() public training: Training;
+
+  public isEdit: boolean = false;
+
   public trainingFg: FormGroup;
   private _fetchCategories$: Observable<Category[]> = this._catService.categories$;
   
@@ -29,6 +31,9 @@ export class AddTrainingComponent implements OnInit {
       ) { }
 
   ngOnInit(): void {
+    if(this.training){
+      this.isEdit = true;
+    }
 
     this.initTrainingForm();
   }
@@ -36,10 +41,10 @@ export class AddTrainingComponent implements OnInit {
 
   private initTrainingForm() {
     this.trainingFg = this.fb.group({
-      category: ['', Validators.required],
-      date: ['', Validators.required],
-      feelingBefore: [''],
-      feelingAfter: ['']
+      category: [this.isEdit? this.training.category:'', Validators.required],
+      date: [this.isEdit? this.training.date:'', Validators.required],
+      feelingBefore: [this.isEdit? this.training.feelingBeforeTraining:''],
+      feelingAfter: [this.isEdit? this.training.feelingAfterTraining:'']
     }
     // ,
     // { validator: validateCategory}
@@ -51,21 +56,45 @@ export class AddTrainingComponent implements OnInit {
     return this._fetchCategories$;
   }
 
-  addTraining(){
-    const training = new Training()
+  onSubmit(){
+    this.closeForm()
 
-      training.category = this.trainingFg.value.category
-      training.date = this.trainingFg.value.date
-      training.feelingBefore = this.trainingFg.value.feelingBefore
-      training.feelingAfter = this.trainingFg.value.feelingAfter
+    if(!this.isEdit){
+      var newTraining:Training = this.createNewTraining();
+    } else {
+      this.editTraining();
+    }
+    
 
-    this._gymnastService.addNewTraining(training).add(() => {
-        this._toastr.success(`De training is toegevoegd`,"Succes")
-      
-    })
+      if(!this.isEdit){
+        this._gymnastService.addNewTraining(newTraining).add(() => {
+          this._toastr.success(`De training is toegevoegd`,"Succes")
+      })
+      } else {
+        this._gymnastService.putTraining(this.training).subscribe()
+      }
+    
+
   }
 
-  cancelForm(){
+  private editTraining() {
+    console.log("edit")
+    this.training.category = this.trainingFg.value.category;
+    this.training.date = this.trainingFg.value.date;
+    this.training.feelingBeforeTraining = this.trainingFg.value.feelingBefore;
+    this.training.feelingAfterTraining = this.trainingFg.value.feelingAfter;
+  }
+
+  private createNewTraining() {
+    const newTraining = new Training();
+    newTraining.category = this.trainingFg.value.category;
+    newTraining.date = this.trainingFg.value.date;
+    newTraining.feelingBeforeTraining = this.trainingFg.value.feelingBefore;
+    newTraining.feelingAfterTraining = this.trainingFg.value.feelingAfter;
+    return newTraining;
+  }
+
+  closeForm(){
     this.newTrainingForm.emit(false);
   }
 
