@@ -2,7 +2,7 @@
     <div class="infoSection">
         <p class="category">{{training.category.name}}</p>
         <div class="infoContainer">
-            <h2>Training van {{training.date |  date: "EEEE"}} {{training.date | date}} </h2>
+            <h2>Training van {{training.day}} {{training.date | date}} </h2>
             <mat-icon (click)="changeToEdit()" class="icon md-36 customIcon">edit</mat-icon>
         </div>        
         <p>Lichaamsgevoel voor de training: <span class="number"> {{training.feelingBeforeTraining}}</span></p>

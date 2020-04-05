@@ -10,9 +10,14 @@ export class Training {
     private _category?: Category;
     private _date: Date;
     private _feelingBeforeTraining: string;
+    private _day: string;
 
-    constructor( 
-    ){}
+    public get day(): string {
+        return this._day;
+    }
+    public set day(value: string) {
+        this._day = value;
+    }
 
     public get feelingAfterTraining(): string {
         return this._feelingAfterTraining;
@@ -93,6 +98,7 @@ export class Training {
         t._feelingBeforeTraining = json.feelingBeforeTraining
         t._feelingAfterTraining = json.feelingAfterTraining
         t._id = json.id;
+        t._day = json.day;
 
         return t;
     }
