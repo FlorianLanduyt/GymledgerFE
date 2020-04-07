@@ -11,7 +11,7 @@ import { JsonPipe } from '@angular/common';
   providedIn: 'root'
 })
 export class GymnastDataService {
-  private gymnastId: number;
+  private gymnastId: string;
 
   // private _trainings$ = new BehaviorSubject<Training[]>([]);
   private _refreshTrainingList$ = new Subject<void>();
@@ -20,7 +20,7 @@ export class GymnastDataService {
   private _trainings: Training[]
 
   constructor(private http: HttpClient) { 
-    this.gymnastId = 2;
+    this.gymnastId = 'f5e9a638-46cd-438b-9156-90fd3ccfbc2d';
     // this.trainings$.subscribe((trainings: Training[]) => {
     //   this._trainings = trainings;
     //   this._trainings$.next(this._trainings)
@@ -64,7 +64,7 @@ export class GymnastDataService {
     return this.http
       .post(`${environment.apiUrl}/Training/${this.gymnastId}`, training.toJson())
       .pipe(
-        tap(() => {
+        tap((trainingJson: any) => {
           this._refreshTrainingList$.next()
         }),
         catchError(this.handleError), map(Training.fromJson))
@@ -78,7 +78,10 @@ export class GymnastDataService {
         this._refreshTrainingList$.next();
       }),
       catchError(this.handleError),
-      map((jsonTraining: any): Training => Training.fromJson(jsonTraining))
+      tap((jsonTraining: any) => {
+        console.log(jsonTraining)
+      }),
+      //map((jsonTraining: any): Training => Training.fromJson(jsonTraining))
     )
   }
 
