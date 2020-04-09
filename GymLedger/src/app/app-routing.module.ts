@@ -9,9 +9,13 @@ import { PageNotFoundComponent } from './modules/general/page-not-found/page-not
 const routes: Routes = [
   { 
     path: 'training',
-    loadChildren: () => import('./modules/gymnast-profiel/gymnast.module').then(mod => mod.GymnastModule)
+    loadChildren: () => 
+      import('./modules/gymnast-profiel/gymnast.module')
+      .then(mod => mod.GymnastModule)
   },
-  //{ path: '', redirectTo: 'gymnast', pathMatch: 'full'},
+  // {
+  //   path: ''
+  // },
   { path: '**', component: PageNotFoundComponent }
 ] 
 

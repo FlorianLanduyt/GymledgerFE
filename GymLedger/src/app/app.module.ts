@@ -9,6 +9,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { GeneralModule } from "./modules/general/general.module";
+import { UserModule } from './user/user.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { GeneralModule } from "./modules/general/general.module";
     ReactiveFormsModule,
     GeneralModule,
     AppRoutingModule,
+    UserModule,
 
   ],
   providers: [],

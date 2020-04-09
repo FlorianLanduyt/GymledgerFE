@@ -20,7 +20,7 @@ export class GymnastDataService {
   private _trainings: Training[]
 
   constructor(private http: HttpClient) { 
-    this.gymnastId = 'f5e9a638-46cd-438b-9156-90fd3ccfbc2d';
+    this.gymnastId = '23229b9b-d8f7-428c-9926-b0efa9096add';
     // this.trainings$.subscribe((trainings: Training[]) => {
     //   this._trainings = trainings;
     //   this._trainings$.next(this._trainings)
