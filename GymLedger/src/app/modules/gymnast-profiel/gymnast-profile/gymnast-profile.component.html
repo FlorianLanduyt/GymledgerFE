@@ -4,7 +4,7 @@
         <section class="trainingSection">
             <span class="naastElkaar">
                 <h1>Trainingen</h1>
-                <app-add-training-button (click)='scroll(doel)'></app-add-training-button>
+                <button (click)='scroll(doel)' type="button" class="addButton">Voeg toe</button>
             </span>
             <app-training-list  [gymnastId]= gymnast.id></app-training-list>
         </section>

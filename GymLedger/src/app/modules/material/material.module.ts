@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -11,6 +10,7 @@ import {MatDatepickerModule, } from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
+import { MatRadioModule } from "@angular/material/radio";
  
 import { ToastrModule } from 'ngx-toastr';
 
@@ -20,10 +20,10 @@ import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
     MatListModule,
     MatCardModule,
@@ -33,10 +33,10 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatRadioModule
   ], 
   exports: [
-    BrowserAnimationsModule,
     FlexLayoutModule,
     MatListModule,
     MatCardModule,
@@ -45,7 +45,9 @@ import { ToastrModule } from 'ngx-toastr';
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatRadioModule,
+    ToastrModule
   ],
   providers: [
     MatNativeDateModule

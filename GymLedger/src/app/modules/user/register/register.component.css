@@ -1,0 +1,25 @@
+.formContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.formSection {
+    width: 50%;
+    min-width: 240px;
+    padding: 30px 50px;
+    border-radius: 1em;
+    border: 1px solid black;
+}
+
+.field {
+    margin-top: 15px;
+}
+
+
+mat-radio-button:not(:first-child) {
+    margin-left: 15px;
+}

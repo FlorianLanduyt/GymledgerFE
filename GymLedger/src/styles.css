@@ -38,6 +38,11 @@ body { margin: 0; }
     /* color: black; */
 }
 
+.addButton:disabled {
+    background-color: #A2C9D4;
+    cursor: default;
+}
+
 .cancelButton {
     background-color: white !important;
     color: black;

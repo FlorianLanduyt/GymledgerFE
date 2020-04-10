@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 
 function parseJwt(token) {
-  if (!token){
+  if (!token) {
     return null
   }
   const base64token = token.split('.')[1];
@@ -19,27 +19,28 @@ function parseJwt(token) {
 })
 
 export class AuthenticationService {
-  private readonly _tokenKey= 'currentUser';
+  private readonly _tokenKey = 'currentUser';
   private _user$: BehaviorSubject<string>
+  public redirectUrl: string = null;
 
-  constructor(private http:HttpClient) { 
+  constructor(private http: HttpClient) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
-    if(parsedToken){
+    if (parsedToken) {
       const expires = new Date(parseInt(parsedToken.exp, 10) * 1000) < new Date()
-      if(expires) {
+      if (expires) {
         localStorage.removeItem(this._tokenKey)
         parsedToken = null
       }
     }
-     this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name)
+    this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name)
   }
 
   login(email: string, password: string): Observable<boolean> {
     return this.http.post(
-        `${environment.apiUrl}/account`,
-        { email, password },
-        { responseType: 'text' }
-      ).pipe(
+      `${environment.apiUrl}/account`,
+      { email, password },
+      { responseType: 'text' }
+    ).pipe(
       map((token: any) => {
         if (token) {
           localStorage.setItem(this._tokenKey, token);
@@ -50,16 +51,23 @@ export class AuthenticationService {
         }
       })
     );
-  }   
-  
-  register(firstname: string, lastname: string, email: string, password: string): Observable<boolean> {
+  }
+
+  register(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    isCoach: boolean,
+    birthDay: Date): Observable<boolean> {
     return this.http
       .post(
         `${environment.apiUrl}/account/register`,
         {
-          firstname, lastname,
-          email, password, 
-          passwordConfirmation: password
+          firstName, lastName,
+          email, password,
+          passwordConfirmation: password,
+          isCoach, birthDay
         },
         { responseType: 'text' }
       )
@@ -85,13 +93,17 @@ export class AuthenticationService {
 
   checkUserNameAvailability = (email: string): Observable<boolean> => {
     return this.http.get<boolean>(
-      `${environment.apiUrl}/account.checkusername`,
+      `${environment.apiUrl}/account/checkusername`,
       {
-        params: {email}
+        params: { email }
       }
+    ).pipe(
+      tap((respons: any) => {
+        console.log(respons)
+      })
     )
   }
 
 
-  
+
 }

@@ -4,7 +4,6 @@ import { MaterialModule } from "../material/material.module";
 import { AllTrainingComponent } from "./all-training/all-training.component";
 import { TrainingComponent } from './training/training.component';
 import { GymnastProfileComponent } from './gymnast-profile/gymnast-profile.component';
-import { AddTrainingButtonComponent } from "./add-training-button/add-training-button.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddTrainingComponent } from "./add-training/add-training.component";
 import { TrainingDetailsComponent } from "./training-details/training-details.component";
@@ -30,7 +29,6 @@ const routes: Routes = [
     TrainingComponent,
     GymnastProfileComponent,
     AddTrainingComponent,
-    AddTrainingButtonComponent,
     TrainingDetailsComponent
   ],
   imports: [
@@ -42,7 +40,6 @@ const routes: Routes = [
     GymnastProfileComponent,
     TrainingComponent,
     AddTrainingComponent,
-    AddTrainingButtonComponent,
     TrainingDetailsComponent
   ]
 })

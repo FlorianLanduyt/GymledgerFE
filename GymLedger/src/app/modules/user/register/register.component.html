@@ -1,0 +1,62 @@
+<div class="formContainer">
+  <form class="formSection" [formGroup]="user" (ngSubmit)=onSubmit()>
+    <mat-card-header>
+      <mat-card-title>Registreer</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content fxLayout='column'>
+      <span fxLayout="column"  fxLayoutGap="2%">
+
+        <mat-form-field class="field">
+          <input matInput placeholder="Voornaam" formControlName="firstName" />
+        </mat-form-field>
+
+        <mat-form-field class="field">
+          <input matInput placeholder="Familienaam" formControlName="lastName" />
+        </mat-form-field>
+
+        <mat-form-field class="field">
+          <input matInput placeholder="Email" formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field class="field">
+          <mat-label>Kies een datum</mat-label>
+          <input formControlName='birthday' matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-radio-group class="field" aria-label="Kies een optie" formControlName="isCoach">
+          <mat-radio-button value="true"> Trainer </mat-radio-button>
+          <mat-radio-button value="false">Gymnast </mat-radio-button>
+        </mat-radio-group>
+      </span>
+
+
+
+      <span fxLayout="column" formGroupName="passwordGroup">
+        <mat-form-field class="field">
+          <input matInput placeholder="wachtwoord" formControlName="password" />
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput placeholder="bevestig wachtwoord" formControlName="confirmPassword" />
+        </mat-form-field>
+      </span>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center">
+        <a [routerLink]="['/login']">login</a>
+        <button class="addButton" 
+        
+        type="submit" dis>Registreer</button>
+    </mat-card-actions>
+  </form>
+
+</div>
+
+
+<!-- <mat-form-field>
+    <input matInput placeholder="Password" formControlName="password" /> 
+</mat-form-field>
+<mat-form-field>
+    <input matInput placeholder="Confirm assword" formControlName="confirmPassword" /> 
+</mat-form-field> -->

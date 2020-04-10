@@ -20,7 +20,7 @@ export class GymnastDataService {
   private _trainings: Training[]
 
   constructor(private http: HttpClient) { 
-    this.gymnastId = '23229b9b-d8f7-428c-9926-b0efa9096add';
+    this.gymnastId = '59eae936-8e06-45ed-b451-3f1b869b54ab';
     // this.trainings$.subscribe((trainings: Training[]) => {
     //   this._trainings = trainings;
     //   this._trainings$.next(this._trainings)
@@ -36,7 +36,11 @@ export class GymnastDataService {
   }
 
   get gymnast$(): Observable<Gymnast> {
-    return this.http.get(`${environment.apiUrl}/Gymnast/gymnastsWithTraining/${this.gymnastId}`).pipe(
+    return this.http.get(`${environment.apiUrl}/Gymnast/gymnastsWithTraining/${this.gymnastId}`)
+    .pipe(
+      tap((jsonG: any) => {
+        console.log(jsonG)
+      }),
       catchError(this.handleError),
       map((jsonGymnast: any): Gymnast => Gymnast.fromJson(jsonGymnast))
     );

@@ -1,4 +1,5 @@
 <div class="trainingContainer" *ngIf="(trainings) as trainings; else loadingOrError">
+  
     <section class="trainingLijst">
         <app-training (selectedTraining)='showDetails($event)' *ngFor="let training of trainings"  [training]=training></app-training>
     </section>
