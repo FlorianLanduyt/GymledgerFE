@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div class="formContainer">
+    <form class="formSection" [formGroup]="user" (ngSubmit)=onSubmit()>
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content fxLayout='column'>
+        <span fxLayout="column"  fxLayoutGap="2%">
+  
+          <mat-form-field class="field">
+            <input matInput placeholder="Email" formControlName="email" />
+          </mat-form-field>
+          
+          <mat-form-field class="field">
+            <input type='password' matInput placeholder="wachtwoord" formControlName="password" />
+          </mat-form-field>
+          
+        </span>
+  
+      </mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center">
+          <a [routerLink]="['/user/register']">registreer</a>
+          <button class="addButton" 
+          
+          type="submit" dis>Meld aan</button>
+      </mat-card-actions>
+    </form>
+  </div>

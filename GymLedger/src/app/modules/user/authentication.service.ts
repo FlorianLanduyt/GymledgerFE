@@ -35,6 +35,15 @@ export class AuthenticationService {
     this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name)
   }
 
+  get token(): string {
+    const localToken = localStorage.getItem(this._tokenKey);
+    return !!localToken ? localToken : '';
+  }
+
+  get user$(): BehaviorSubject<string> {
+    return this._user$
+  }
+
   login(email: string, password: string): Observable<boolean> {
     return this.http.post(
       `${environment.apiUrl}/account`,
