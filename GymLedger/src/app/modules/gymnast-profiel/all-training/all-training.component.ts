@@ -3,6 +3,7 @@ import { Training } from 'src/app/models/training.model';
 import { GymnastDataService } from '../gymnast-data.service';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthenticationService } from '../../user/authentication.service';
 
 @Component({
   selector: 'app-training-list',
@@ -18,7 +19,9 @@ export class AllTrainingComponent implements OnInit {
   // private _fetchTrainings$: Observable<Training[]>
   private _trainingList: Training[];
 
-  constructor(private _gymnastService: GymnastDataService) { 
+  constructor(
+    private _gymnastService: GymnastDataService,
+    private _authService: AuthenticationService) { 
     
   }
 
@@ -32,9 +35,13 @@ export class AllTrainingComponent implements OnInit {
   
 
   private getAllTrainings() {
-    this._gymnastService.trainings$.subscribe((t: Training[]) => {
-      this._trainingList = t;
-    });
+    this._authService.user$.subscribe((email: string) => {
+      this._gymnastService.getTrainings$(email).subscribe((t: Training[]) => {
+        this._trainingList = t;
+      });
+    }
+    )
+    
   }
   
     // )

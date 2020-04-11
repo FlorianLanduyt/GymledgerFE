@@ -5,6 +5,7 @@ import { GymnastDataService } from '../gymnast-data.service';
 import { Training } from 'src/app/models/training.model';
 import { tap, catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../../user/authentication.service';
 
 @Component({
   selector: 'app-gymnast-profile',
@@ -15,13 +16,17 @@ export class GymnastProfileComponent implements OnInit {
   private _gymnast: Gymnast
   public newTrainingForm: boolean = true;
 
-  constructor(private _gymnastService: GymnastDataService,
+  constructor(
+    private _gymnastService: GymnastDataService,
+    private _authService: AuthenticationService,
     private _toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this._gymnastService.gymnast$.subscribe(
-      g => this._gymnast = g
-    )
+    this._authService.user$.subscribe((email: string) => {
+      this._gymnastService.getGymnastByEmail$(email).subscribe(
+        g => this._gymnast = g
+      )
+    })
   }
 
   get gymnast(): Gymnast{

@@ -12,6 +12,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class GymnastDataService {
   private gymnastId: string;
+  private gymnastEmail: string;
 
   // private _trainings$ = new BehaviorSubject<Training[]>([]);
   private _refreshTrainingList$ = new Subject<void>();
@@ -20,7 +21,7 @@ export class GymnastDataService {
   private _trainings: Training[]
 
   constructor(private http: HttpClient) { 
-    this.gymnastId = '59eae936-8e06-45ed-b451-3f1b869b54ab';
+    this.gymnastEmail = 'florian.landuyt@hotmail.com'
     // this.trainings$.subscribe((trainings: Training[]) => {
     //   this._trainings = trainings;
     //   this._trainings$.next(this._trainings)
@@ -46,10 +47,21 @@ export class GymnastDataService {
     );
   }
 
-  get trainings$(): Observable<Training[]> {
-    return this.http.get<Training[]>(`${environment.apiUrl}/Training/${this.gymnastId}/trainings`)
+  getGymnastByEmail$(email:string): Observable<Gymnast> {
+    return this.http.get(`${environment.apiUrl}/Gymnast/gymnast/${email}`)
+    .pipe(
+      tap((jsonG: any) => {
+        console.log(jsonG)
+      }),
+      catchError(this.handleError),
+      map((jsonGymnast: any): Gymnast => Gymnast.fromJson(jsonGymnast))
+    );
+  }
+
+  getTrainings$(email:string): Observable<Training[]> {
+    return this.http.get<Training[]>(`${environment.apiUrl}/Training/${email}/trainings`)
         .pipe(
-          tap( training => console.log("Products: ", JSON.stringify(training))),
+          tap( training => console.log("Trainings: ", JSON.stringify(training))),
           catchError(this.handleError),
           //map((list: any): Training[] => list.map(Training.fromJson))
           )
@@ -66,7 +78,7 @@ export class GymnastDataService {
   addNewTraining(training: Training){
     console.log(training.toJson())
     return this.http
-      .post(`${environment.apiUrl}/Training/${this.gymnastId}`, training.toJson())
+      .post(`${environment.apiUrl}/Training/${this.gymnastEmail}`, training.toJson())
       .pipe(
         tap((trainingJson: any) => {
           this._refreshTrainingList$.next()
