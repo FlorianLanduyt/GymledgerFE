@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './modules/general/page-not-found/page-not-found.component';
-import { AuthGuard } from './modules/user/auth.guard';
 
 const routes: Routes = [
   { 
@@ -9,6 +8,12 @@ const routes: Routes = [
     loadChildren: () => 
       import('./modules/gymnast-profiel/gymnast.module')
       .then(mod => mod.GymnastModule)
+  },
+  { 
+    path: 'exercise',
+    loadChildren: () => 
+      import('./modules/exercise/exercise.module')
+      .then(mod => mod.ExerciseModule)
   },
   {
     path: 'user',

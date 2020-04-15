@@ -11,7 +11,7 @@ import { GeneralModule } from "./modules/general/general.module";
 import { UserModule } from './modules/user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { httpInterceptorProviders } from "./interceptors/index";
-import { AuthGuard } from './modules/user/auth.guard';
+import { ExerciseModule } from "./modules/exercise/exercise.module";
 
 
 
@@ -30,7 +30,8 @@ import { AuthGuard } from './modules/user/auth.guard';
     AppRoutingModule,
     UserModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ExerciseModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

@@ -1,0 +1,28 @@
+.oefeningenContainer {
+    margin-top: 2em;
+    display: flex;
+    width: 100%;
+    justify-content: center; 
+}
+
+.lijstSection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    justify-content: space-between;
+}
+
+.oefeningenPage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.titleContainer {
+    width: 70%;
+}
+
+

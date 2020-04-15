@@ -3,7 +3,7 @@
       <ul class="bar">
         <li class="item" [routerLink]="['gymnast']">Home</li>
         <li class="item" [routerLink]="['list']">Trainingen</li>
-        <li class="item" routerLink="/oefeningen">Oefeningen</li>
+        <li class="item" [routerLink]="['exercise/exercises']">Oefeningen</li>
         <li class="item" routerLink="/Dashbord">Dashboard</li>
         <li class="item" (click)="logout()" >Logout</li>
         
