@@ -1,4 +1,4 @@
-<div class=page *ngIf="gymnast; else loading">
+<div class=page *ngIf="gymnast$ | async as gymnast; else loading">
     <!-- <div>dit is gymnast {{ gymnast.firstname }}</div> -->
     <div>
         <section class="trainingSection">
@@ -6,7 +6,7 @@
                 <h1>Trainingen</h1>
                 <button (click)='scroll(doel)' type="button" class="addButton">Voeg toe</button>
             </span>
-            <app-training-list  [gymnastId]= gymnast.id></app-training-list>
+            <app-training-list></app-training-list>
         </section>
     </div>
     <div #doel>

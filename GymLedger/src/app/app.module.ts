@@ -11,6 +11,7 @@ import { GeneralModule } from "./modules/general/general.module";
 import { UserModule } from './modules/user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { httpInterceptorProviders } from "./interceptors/index";
+import { AuthGuard } from './modules/user/auth.guard';
 
 
 

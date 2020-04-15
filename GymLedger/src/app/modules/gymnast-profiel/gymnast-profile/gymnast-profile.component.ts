@@ -13,8 +13,9 @@ import { AuthenticationService } from '../../user/authentication.service';
   styleUrls: ['./gymnast-profile.component.css']
 })
 export class GymnastProfileComponent implements OnInit {
-  private _gymnast: Gymnast
+  private _gymnast$: Observable<Gymnast>
   public newTrainingForm: boolean = true;
+  private _email: string
 
   constructor(
     private _gymnastService: GymnastDataService,
@@ -22,15 +23,20 @@ export class GymnastProfileComponent implements OnInit {
     private _toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this._authService.user$.subscribe((email: string) => {
-      this._gymnastService.getGymnastByEmail$(email).subscribe(
-        g => this._gymnast = g
-      )
-    })
+    // this._authService.user$.subscribe((email: string) => {
+    //   console.log("email: ", email)
+    //   if(email){
+    //     this._gymnastService.getGymnastByEmail$(email).subscribe(
+    //       g => this._gymnast = g
+    //     )
+    //   }
+    // })
+
+    this._gymnast$ = this._gymnastService.getGymnastByEmail$('florian.landuyt@hotmail.com')
   }
 
-  get gymnast(): Gymnast{
-    return this._gymnast;
+  get gymnast$(): Observable<Gymnast>{
+    return this._gymnast$;
   }
 
   cancelNewTraining(continueForm: boolean){
@@ -38,7 +44,7 @@ export class GymnastProfileComponent implements OnInit {
   }
 
   addTraining(newTraining: Training){
-    this._gymnastService.addNewTraining(newTraining)
+    this._gymnastService.addNewTraining(this._email, newTraining)
     this._toastr.success("De training is toegevoegd","Succes")
     this.newTrainingForm = false;
   }

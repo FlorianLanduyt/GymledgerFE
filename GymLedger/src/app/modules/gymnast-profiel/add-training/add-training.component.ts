@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CategoryDataService } from '../category-data.service';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { GymnastDataService } from '../gymnast-data.service';
+import { AuthenticationService } from '../../user/authentication.service';
 
 @Component({
   selector: 'app-add-training',
@@ -28,6 +29,7 @@ export class AddTrainingComponent implements OnInit {
       private _catService: CategoryDataService,
       private _toastr: ToastrService,
       private _gymnastService: GymnastDataService,
+      private _authService: AuthenticationService
       ) { }
 
   ngOnInit(): void {
@@ -67,9 +69,12 @@ export class AddTrainingComponent implements OnInit {
     
 
       if(!this.isEdit){
-        this._gymnastService.addNewTraining(newTraining).add(() => {
-          this._toastr.success(`De training is toegevoegd`,"Succes")
-      })
+        //this._authService.user$.subscribe((email: string) => {
+          this._gymnastService.addNewTraining('florian.landuyt@hotmail.com', newTraining).add(() => {
+            this._toastr.success(`De training is toegevoegd`,"Succes")
+        })
+        //})
+        
       } else {
         this._gymnastService.putTraining(this.training).subscribe()
       }

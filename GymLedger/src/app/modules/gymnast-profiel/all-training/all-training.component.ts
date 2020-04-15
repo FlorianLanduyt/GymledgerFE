@@ -11,42 +11,45 @@ import { AuthenticationService } from '../../user/authentication.service';
   styleUrls: ['./all-training.component.css']
 })
 export class AllTrainingComponent implements OnInit {
-  @Input() public gymnastId: number
+  //@Input() public gymnastId: string
   private _showDetails: boolean = false;
   private _clickedTraining: Training;
   public errorMessage: string = ""
 
   // private _fetchTrainings$: Observable<Training[]>
-  private _trainingList: Training[];
+  private _trainingList$: Observable<Training[]>;
 
   constructor(
     private _gymnastService: GymnastDataService,
-    private _authService: AuthenticationService) { 
-    
+    private _authService: AuthenticationService) {
+
   }
 
   ngOnInit(): void {
     this._gymnastService.refreshTrainingList$.subscribe(() => {
       this.getAllTrainings()
-      });
+    });
+    this.getAllTrainings()
+  }
 
-      this.getAllTrainings()
-    }
-  
 
   private getAllTrainings() {
-    this._authService.user$.subscribe((email: string) => {
-      this._gymnastService.getTrainings$(email).subscribe((t: Training[]) => {
-        this._trainingList = t;
-      });
-    }
-    )
-    
-  }
-  
+    // this._authService.user$.subscribe((email: string) => {
+    //   if (email) {
+    //     this._gymnastService.getTrainings$(email).subscribe((t: Training[]) => {
+    //       this._trainingList = t;
+    //     });
+    //   }
+    // }
     // )
-    // this.fetchTrainings()
-  
+
+    this._trainingList$ =  this._gymnastService.getTrainings$('florian.landuyt@hotmail.com')
+
+  }
+
+  // )
+  // this.fetchTrainings()
+
 
   // private fetchTrainings(){
   //   this._gymnastService.allTrainings$.subscribe((t: []) => {
@@ -62,24 +65,24 @@ export class AllTrainingComponent implements OnInit {
 
 
 
-  
-  get trainings(): Training[]{
-    return this._trainingList
+
+  get trainings$(): Observable<Training[]> {
+    return this._trainingList$
   }
 
-  public showDetails(selected: Training){
-    
-      this._showDetails = true;
+  public showDetails(selected: Training) {
+
+    this._showDetails = true;
     this._clickedTraining = selected
   }
- 
-  get show(){
+
+  get show() {
     return this._showDetails;
   }
 
-  get selectedTraining(){
+  get selectedTraining() {
     return this._clickedTraining;
   }
-  
+
 
 }

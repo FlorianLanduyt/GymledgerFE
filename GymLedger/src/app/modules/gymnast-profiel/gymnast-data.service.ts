@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { map, delay, catchError, tap } from 'rxjs/operators';
 import { Training } from 'src/app/models/training.model';
 import { JsonPipe } from '@angular/common';
+import { AuthenticationService } from '../user/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,9 @@ export class GymnastDataService {
 
   private _trainings: Training[]
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private _authService: AuthenticationService) { 
     this.gymnastEmail = 'florian.landuyt@hotmail.com'
+    
     // this.trainings$.subscribe((trainings: Training[]) => {
     //   this._trainings = trainings;
     //   this._trainings$.next(this._trainings)
@@ -50,11 +52,13 @@ export class GymnastDataService {
   getGymnastByEmail$(email:string): Observable<Gymnast> {
     return this.http.get(`${environment.apiUrl}/Gymnast/gymnast/${email}`)
     .pipe(
+      
       tap((jsonG: any) => {
         console.log(jsonG)
       }),
       catchError(this.handleError),
-      map((jsonGymnast: any): Gymnast => Gymnast.fromJson(jsonGymnast))
+      map((jsonGymnast: any): Gymnast => Gymnast.fromJson(jsonGymnast)),
+      
     );
   }
 
@@ -75,10 +79,10 @@ export class GymnastDataService {
       )
   }
 
-  addNewTraining(training: Training){
+  addNewTraining(email: string, training: Training){
     console.log(training.toJson())
     return this.http
-      .post(`${environment.apiUrl}/Training/${this.gymnastEmail}`, training.toJson())
+      .post(`${environment.apiUrl}/Training/${email}`, training.toJson())
       .pipe(
         tap((trainingJson: any) => {
           this._refreshTrainingList$.next()
@@ -90,9 +94,7 @@ export class GymnastDataService {
   deleteTraining(trainingId: number){
     return this.http.delete(`${environment.apiUrl}/Training/${trainingId}`)
     .pipe(
-      tap(() => {
-        this._refreshTrainingList$.next();
-      }),
+      
       catchError(this.handleError),
       tap((jsonTraining: any) => {
         console.log(jsonTraining)

@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
+
 export class AuthGuard implements CanActivate {
   constructor(
     private _authenticationService: AuthenticationService,
@@ -18,7 +19,7 @@ export class AuthGuard implements CanActivate {
     }
     
     this._authenticationService.redirectUrl = state.url;
-    this._router.navigate(['/login']);
+    this._router.navigate(['/user/login']);
     return false;
   }
   

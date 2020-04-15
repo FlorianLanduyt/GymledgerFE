@@ -9,14 +9,15 @@ import { AddTrainingComponent } from "./add-training/add-training.component";
 import { TrainingDetailsComponent } from "./training-details/training-details.component";
 import { Routes, RouterModule } from '@angular/router';
 import { TrainingResolver } from './training-resolver.service';
+import { AuthGuard } from '../user/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'gymnast', pathMatch: 'full'},
-  { path: 'gymnast' , component: GymnastProfileComponent},
-  { path: 'list', component: AllTrainingComponent},
+  { path: '', canActivate: [AuthGuard],  redirectTo: 'gymnast', pathMatch: 'full'},
+  { path: 'gymnast', canActivate: [AuthGuard], component: GymnastProfileComponent},
+  { path: 'list', canActivate: [AuthGuard], component: AllTrainingComponent},
   { 
-    path: 'details/:id', 
+    path: 'details/:id', canActivate: [AuthGuard], 
     component: TrainingDetailsComponent, 
     resolve: { training: TrainingResolver}},
   // { path: '**', component: PageNotFoundComponent }, 
