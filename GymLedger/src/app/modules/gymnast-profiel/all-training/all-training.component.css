@@ -1,51 +1,45 @@
 .trainingContainer {
-    background-color:var(--paars);
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    overflow: auto;
-    padding-bottom: 3em;
+    /* overflow: auto;
+    padding-bottom: 3em; */
 }
 
-/* .trainingBox {
-    display: flex;
-    justify-content: center;
-    align-content: space-between;
-} */
+.page {
+    background-color:var(--paars);
+}
 
 .trainingLijst {
-    width: 80%;
+    width: 70%;
     display: flex;
     flex-wrap: wrap;
-    align-content: space-between;
+    justify-content: space-between;
 }
 
-.trainingLijst > * {
-    width: 30%;
-    min-width: 190px;
-    max-width: 300px;
+
+
+.titleSection {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    justify-items: center;
+    background-color:var(--paars);
+
 }
 
-/* app-training {
-    width: 20%;
-    min-width: 100px;
-    max-width: 150px;
-    margin: 10px 30px 10px 0;
-    background-color: white;
-    border-radius: 15px;
-    padding: 15px;
-    height: 150px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0 2px 7px ; 
-    transition: ease-in-out 0.2s;
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    align-items: center;
+    justify-content: space-between;
 }
 
-app-training:hover {
-    cursor: pointer;
-    transform: scale(1.03, 1.03);
-} */
-
-
+.btn {
+    height: 40px;
+}
 
 

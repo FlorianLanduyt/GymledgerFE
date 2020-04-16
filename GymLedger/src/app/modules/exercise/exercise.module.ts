@@ -4,6 +4,8 @@ import { ExerciseListComponent } from './exercise-list/exercise-list.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../user/auth.guard';
+import { ExerciseFilterPipe } from './exercise-filter.pipe';
+import { MaterialModule } from "../material/material.module";
 
 
 const routes: Routes = [
@@ -14,10 +16,11 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [ExerciseListComponent, ExerciseComponent],
+  declarations: [ExerciseListComponent, ExerciseComponent, ExerciseFilterPipe],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MaterialModule
   ],
    exports: [
      ExerciseListComponent

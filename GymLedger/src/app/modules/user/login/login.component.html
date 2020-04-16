@@ -1,28 +1,27 @@
 <div class="formContainer">
-    <form class="formSection" [formGroup]="user" (ngSubmit)=onSubmit()>
-      <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-      </mat-card-header>
-  
-      <mat-card-content fxLayout='column'>
-        <span fxLayout="column"  fxLayoutGap="2%">
-  
-          <mat-form-field class="field">
-            <input matInput placeholder="Email" formControlName="email" />
-          </mat-form-field>
-          
-          <mat-form-field class="field">
-            <input type='password' matInput placeholder="wachtwoord" formControlName="password" />
-          </mat-form-field>
-          
-        </span>
-  
-      </mat-card-content>
-      <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center">
-          <a [routerLink]="['/user/register']">registreer</a>
-          <button class="addButton" 
-          
-          type="submit" dis>Meld aan</button>
-      </mat-card-actions>
-    </form>
-  </div>
+  <form class="formSection" [formGroup]="user" (ngSubmit)=onSubmit()>
+    <h3>Login</h3>
+
+
+    <mat-card-content fxLayout='column'>
+      <div fxLayout="column" fxLayoutGap="2%">
+        <div class="form-group">
+          <label>Email</label>
+          <input formControlName="email" />
+        </div>
+
+        <div class="form-group">
+          <label>Wachtwoord</label>
+          <input type='password' formControlName="password" />
+        </div>
+      </div>
+    </mat-card-content>
+    <div class="actions" fxLayout="row">
+      <button class="addButton ctmBtn" type="submit" dis>Meld aan</button>
+    </div>
+    <span class="registerContainer">
+      Heb je nog geen account? 
+      <a [routerLink]="['/user/register']">Registreer hier</a>
+    </span>
+  </form>
+</div>

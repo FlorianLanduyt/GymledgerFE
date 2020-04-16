@@ -52,4 +52,21 @@ button {
     outline: none;
 }
 
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+}
+.form-group > * {
+    padding-bottom: 10px ;
+}
 
+input {
+    background-color: #fff ;
+    border-radius: 3px;
+    border: 1px solid #ced4da;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+    outline: none;
+    font-size: 1rem;
+}

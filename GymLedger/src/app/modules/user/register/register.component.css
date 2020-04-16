@@ -4,15 +4,16 @@
     align-items: center;
     align-content: center;
     justify-content: center;
-    margin-top: 20px;
+    padding-top: 20px;
+    background-color: #f8f9fa !important;
+    padding-bottom: 30px;
 }
 
 .formSection {
-    width: 50%;
+    width: 40%;
     min-width: 240px;
+    max-width: 500px;
     padding: 30px 50px;
-    border-radius: 1em;
-    border: 1px solid black;
 }
 
 .field {
@@ -22,4 +23,13 @@
 
 mat-radio-button:not(:first-child) {
     margin-left: 15px;
+}
+
+.ctmBtn {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.loginContainer { 
+    font-size: 0.9em;
 }

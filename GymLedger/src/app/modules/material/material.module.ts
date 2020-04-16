@@ -34,7 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatNativeDateModule,
     MatInputModule,
     ToastrModule.forRoot(),
-    MatRadioModule
+    MatRadioModule,
   ], 
   exports: [
     FlexLayoutModule,
@@ -47,7 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatNativeDateModule,
     MatInputModule,
     MatRadioModule,
-    ToastrModule
+    ToastrModule,
   ],
   providers: [
     MatNativeDateModule

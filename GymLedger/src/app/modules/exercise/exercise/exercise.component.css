@@ -1,7 +1,10 @@
-.oefeningVierkant {
-    width: 250px;  
+/* .oefeningVierkant {
+    /* width: 250px;   
     border: 1px solid rgb(118, 114, 110, 0.1);
+    /* flex: 0 0 33%; 
+    max-width: 33%;
     border-radius: 15px;
+    /* max-width: 250px; 
     padding: 10px 20px;
     margin: 20px 20px;
     display: flex;
@@ -10,7 +13,7 @@
     background: rgb(250, 250, 250);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px ;
     transition: ease 0.4s;
-}
+} */
 
 .projectFoto {
     align-self: center;

@@ -2,15 +2,12 @@
     <!-- <div>dit is gymnast {{ gymnast.firstname }}</div> -->
     <div>
         <section class="trainingSection">
-            <span class="naastElkaar">
+            <!-- <span class="naastElkaar">
                 <h1>Trainingen</h1>
                 <button (click)='scroll(doel)' type="button" class="addButton">Voeg toe</button>
-            </span>
+            </span> -->
             <app-training-list></app-training-list>
         </section>
-    </div>
-    <div #doel>
-        <app-add-training *ngIf="newTrainingForm" (newTraining)=addTraining($event) (newTrainingForm)=cancelNewTraining($event)></app-add-training>
     </div>
 </div>
 

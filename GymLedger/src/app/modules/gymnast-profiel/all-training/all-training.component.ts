@@ -4,6 +4,7 @@ import { GymnastDataService } from '../gymnast-data.service';
 import { Observable, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthenticationService } from '../../user/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-training-list',
@@ -15,13 +16,15 @@ export class AllTrainingComponent implements OnInit {
   private _showDetails: boolean = false;
   private _clickedTraining: Training;
   public errorMessage: string = ""
+  public newTrainingForm: boolean = false;
 
   // private _fetchTrainings$: Observable<Training[]>
   private _trainingList$: Observable<Training[]>;
 
   constructor(
     private _gymnastService: GymnastDataService,
-    private _authService: AuthenticationService) {
+    private _authService: AuthenticationService,
+    private _toastr: ToastrService) {
 
   }
 
@@ -84,5 +87,26 @@ export class AllTrainingComponent implements OnInit {
     return this._clickedTraining;
   }
 
+
+  cancelNewTraining(continueForm: boolean){
+    this.newTrainingForm = continueForm 
+  }
+
+  addTraining(newTraining: Training){
+    this._gymnastService.addNewTraining("florian.landuyt#@hotmail.com", newTraining)
+    this._toastr.success("De training is toegevoegd","Succes")
+    this.newTrainingForm = false;
+  }
+
+  scroll(el: HTMLElement){
+    this.newTrainingForm = true
+    if(this.newTrainingForm){
+      el.scrollIntoView({behavior: "smooth"})
+    } else {
+      el.scrollIntoView({behavior: "smooth"})
+
+      this.newTrainingForm = true;
+    }
+  }
 
 }
