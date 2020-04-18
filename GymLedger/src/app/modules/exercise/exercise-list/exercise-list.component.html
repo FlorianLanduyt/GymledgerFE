@@ -1,5 +1,5 @@
 
-  <div class="oefeningenContainer" *ngIf="exercises$ | async as exercises">
+  <div class="oefeningenContainer" *ngIf="exercises">
     <div class="lijstSection">
         <app-exercise class="oefeningVierkant"  *ngFor="let e of (exercises | exerciseFilter : filterTitle)" [e]="e"></app-exercise>
     </div>

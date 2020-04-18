@@ -46,6 +46,7 @@ export class Exercise {
         t._weight = json.weight;
         t._image = json.image;
 
+
         return t;
     }
 

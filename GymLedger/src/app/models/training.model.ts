@@ -1,5 +1,6 @@
 import { Category } from './category.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Exercise } from './exercise.model';
 
 export class Training {
     
@@ -11,6 +12,9 @@ export class Training {
     private _date: Date;
     private _feelingBeforeTraining: string;
     private _day: string;
+    private _exercises: Exercise[];
+  
+
 
     public get day(): string {
         return this._day;
@@ -69,6 +73,13 @@ export class Training {
         return this._id;
     }
 
+    public get exercises(): Exercise[] {
+        return this._exercises;
+    }
+    public set exercises(value: Exercise[]) {
+        this._exercises = value;
+    }
+
     toJson(): any{
         return {
             id: this._id,
@@ -99,6 +110,7 @@ export class Training {
         t._feelingAfterTraining = json.feelingAfterTraining
         t._id = json.id;
         t._day = json.day;
+        t._exercises = json.trainingExercises.map(te => Exercise.fromJson(te.exercise))
 
         return t;
     }

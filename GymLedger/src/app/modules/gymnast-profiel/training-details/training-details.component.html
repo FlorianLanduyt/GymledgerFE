@@ -8,7 +8,7 @@
         <p>Lichaamsgevoel voor de training: <span class="number"> {{training.feelingBeforeTraining}}</span></p>
         <p>Lichaamsgevoel na de training: <span class="number">{{training.feelingAfterTraining}}</span></p>
         <p>Oefeningen:</p>
-        <app-exercise-list [listOfGymnast]="true"></app-exercise-list>
+        <app-exercise-list [exercises]="training.exercises"></app-exercise-list>
         <div class="btnContainer">
             <button (click)="removeTraining()" class="btn deleteBtn">Verwijder</button>
             <button [routerLink]="['']" class="btn">Terug</button>

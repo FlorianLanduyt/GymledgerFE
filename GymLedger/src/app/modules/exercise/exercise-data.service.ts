@@ -27,6 +27,10 @@ export class ExerciseDataService {
     );
   }
 
+  getExercisesOfTraining$(trainingId: number){
+    return this.http.get<Exercise[]>(`${environment.apiUrl}/Training/`)
+  }
+
 
 
   handleError(err: any) : Observable<never>{
@@ -39,6 +43,8 @@ export class ExerciseDataService {
     console.error(err);
     return throwError(errorMsg)
   }
+
+
 
 
 }
