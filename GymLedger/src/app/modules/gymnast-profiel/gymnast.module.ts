@@ -10,6 +10,7 @@ import { TrainingDetailsComponent } from "./training-details/training-details.co
 import { Routes, RouterModule } from '@angular/router';
 import { TrainingResolver } from './training-resolver.service';
 import { AuthGuard } from '../user/auth.guard';
+import { ExerciseModule } from "../exercise/exercise.module";
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ExerciseModule
   ], exports : [
     GymnastProfileComponent,
     TrainingComponent,

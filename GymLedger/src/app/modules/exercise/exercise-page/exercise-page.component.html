@@ -1,0 +1,10 @@
+<div class="oefeningenPage">
+  <div class="titleContainer">
+    <h1>Alle oefeningen</h1>
+    <div>
+      <input (keyup)="filterExercise$.next($event.target.value)" matInput placeholder="Zoek een oefening" type="text"
+        #filter />
+    </div>
+    </div>
+    <app-exercise-list [filterTitle]="filterTitle" class="lijstSection"></app-exercise-list>
+</div>

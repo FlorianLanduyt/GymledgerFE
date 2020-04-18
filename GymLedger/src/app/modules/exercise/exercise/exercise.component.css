@@ -1,12 +1,10 @@
 /* .oefeningVierkant {
-    /* width: 250px;   
     border: 1px solid rgb(118, 114, 110, 0.1);
-    /* flex: 0 0 33%; 
-    max-width: 33%;
+    flex: 0 0 30%;
+    max-width: 30%;
+    min-width: 180px;
     border-radius: 15px;
-    /* max-width: 250px; 
-    padding: 10px 20px;
-    margin: 20px 20px;
+    margin: 10px 1%;
     display: flex;
     align-items: center;
     flex-direction: column;

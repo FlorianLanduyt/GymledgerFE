@@ -1,15 +1,7 @@
-<div class="oefeningenPage">
-  <div class="titleContainer">
-    <h1>Oefeningen</h1>
-    <div>
-      <input (keyup)="filterExercise$.next($event.target.value)" matInput placeholder="Zoek een oefening" type="text"
-        #filter />
-    </div>
 
-  </div>
   <div class="oefeningenContainer" *ngIf="exercises$ | async as exercises">
     <div class="lijstSection">
         <app-exercise class="oefeningVierkant"  *ngFor="let e of (exercises | exerciseFilter : filterTitle)" [e]="e"></app-exercise>
     </div>
   </div>
-</div>
+

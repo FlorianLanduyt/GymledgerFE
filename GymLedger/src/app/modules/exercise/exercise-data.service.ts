@@ -28,6 +28,7 @@ export class ExerciseDataService {
   }
 
 
+
   handleError(err: any) : Observable<never>{
     let errorMsg: any;
     if (err instanceof HttpErrorResponse) {
