@@ -7,6 +7,7 @@ import { AuthGuard } from '../user/auth.guard';
 import { ExerciseFilterPipe } from './exercise-filter.pipe';
 import { MaterialModule } from "../material/material.module";
 import { ExercisePageComponent } from './exercise-page/exercise-page.component';
+import { AddExerciseToTrainingComponent } from './add-exercise-to-training/add-exercise-to-training.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [ExerciseListComponent, ExerciseComponent, ExerciseFilterPipe, ExercisePageComponent],
+  declarations: [ExerciseListComponent, ExerciseComponent, ExerciseFilterPipe, ExercisePageComponent, AddExerciseToTrainingComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -13,6 +13,8 @@ export class ExerciseListComponent implements OnInit {
   //private _exercises$: Observable<Exercise[]>;
   @Input() public exercises: Exercise[];
   @Input() public filterTitle: string = '';
+  @Input() public trainingId: number = 0;
+  @Input() public isAnAddExerciseToTraining = false;
 
   constructor(
     private _exerciseService: ExerciseDataService
@@ -26,6 +28,20 @@ export class ExerciseListComponent implements OnInit {
       })
     }
   }
+
+  AddExistingExerciseToTraining(eId: number) {
+    console.log('oefening:', eId);
+    console.log('training:', this.trainingId);
+    if(this.trainingId != 0){
+      this._exerciseService.addExerciseToTraining(this.trainingId, eId)
+    }
+    
+
+    
+    
+  }
+
+  
 
   
 

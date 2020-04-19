@@ -11,6 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class ExerciseDataService {
 
+ 
   constructor(
     private http: HttpClient
     ) {}
@@ -20,15 +21,27 @@ export class ExerciseDataService {
     return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise`)
     .pipe(
       tap((json: any) => {
-        console.log(json)
+        // console.log(json)
       }),
       catchError(this.handleError),
       map((list : any): Exercise[] => list.map(Exercise.fromJson))
     );
   }
 
-  getExercisesOfTraining$(trainingId: number){
-    return this.http.get<Exercise[]>(`${environment.apiUrl}/Training/`)
+  // getExercisesOfTraining$(trainingId: number){
+  //   return this.http.get<Exercise[]>(`${environment.apiUrl}/Training/`)
+  // }
+
+  addExerciseToTraining(trainingId: number, exerciseId: number){
+    return this.http
+    .post(`${environment.apiUrl}/Exercise/${trainingId}/${exerciseId}`, null)
+    .pipe(
+      catchError(this.handleError)
+    )
+    
+    .subscribe(() => {
+     // this.exercises$.next();
+    })
   }
 
 

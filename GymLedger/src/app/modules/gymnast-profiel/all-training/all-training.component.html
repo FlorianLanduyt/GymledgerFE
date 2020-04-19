@@ -7,7 +7,7 @@
   </div>
   <div class="trainingContainer" *ngIf="trainings$ | async as trainings; else loadingOrError">
     <section class="trainingLijst">
-      <app-training (selectedTraining)='showDetails($event)' *ngFor="let training of trainings" [training]=training>
+      <app-training class="training" (selectedTraining)='showDetails($event)' *ngFor="let training of trainings" [training]=training>
       </app-training>
     </section>
 

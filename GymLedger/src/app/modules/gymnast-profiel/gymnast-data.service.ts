@@ -65,7 +65,7 @@ export class GymnastDataService {
   getTrainings$(email:string): Observable<Training[]> {
     return this.http.get<Training[]>(`${environment.apiUrl}/Training/${email}/trainings`)
         .pipe(
-          tap( training => console.log("Trainings: ", JSON.stringify(training))),
+          // tap( training => console.log("Trainings: ", JSON.stringify(training))),
           catchError(this.handleError),
           //map((list: any): Training[] => list.map(Training.fromJson))
           )
@@ -80,14 +80,14 @@ export class GymnastDataService {
   }
 
   addNewTraining(email: string, training: Training){
-    console.log(training.toJson())
     return this.http
       .post(`${environment.apiUrl}/Training/${email}`, training.toJson())
       .pipe(
         tap((trainingJson: any) => {
           this._refreshTrainingList$.next()
         }),
-        catchError(this.handleError), map(Training.fromJson))
+        catchError(this.handleError), 
+        map(Training.fromJson))
         .subscribe()
   }
 
@@ -97,14 +97,13 @@ export class GymnastDataService {
       
       catchError(this.handleError),
       tap((jsonTraining: any) => {
-        console.log(jsonTraining)
+        // console.log(jsonTraining)
       }),
       //map((jsonTraining: any): Training => Training.fromJson(jsonTraining))
     )
   }
 
   putTraining(training: Training){
-    console.log(training.toJson())
     return this.http.put(`${environment.apiUrl}/Training/edit`,training.toJsonEdit())
     .pipe(
       catchError(this.handleError),

@@ -29,4 +29,11 @@
 
 p {
     font-size: 20px;
+    justify-self: center;
+    padding: 10px;
+}
+
+.vierkant {
+    display: flex;
+    flex-direction: column;    
 }

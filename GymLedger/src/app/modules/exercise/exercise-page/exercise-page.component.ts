@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
 
@@ -10,6 +10,9 @@ import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
 export class ExercisePageComponent implements OnInit {
   public filterExercise$ = new Subject<string>();
   public filterTitle: string = '';
+  public heading: string;
+  @Input() trainingId: number = 0;
+   
 
   constructor() { 
 
@@ -23,10 +26,22 @@ export class ExercisePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.trainingId == 0){
+      this.heading = "Alle Oefeningen"
+    } else {
+      this.heading = "Selecteer een of meerdere oefeningen"
+    }
   }
 
   applyFilter(filter: string) {
     this.filterTitle = filter;
   }
+
+  
+
+
+
+
+  
 
 }

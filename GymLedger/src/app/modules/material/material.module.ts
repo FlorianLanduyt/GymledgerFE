@@ -11,6 +11,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import { MatRadioModule } from "@angular/material/radio";
+import {MatDialogModule} from '@angular/material/dialog';
+
  
 import { ToastrModule } from 'ngx-toastr';
 
@@ -35,6 +37,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatInputModule,
     ToastrModule.forRoot(),
     MatRadioModule,
+    MatDialogModule
   ], 
   exports: [
     FlexLayoutModule,
@@ -48,6 +51,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatInputModule,
     MatRadioModule,
     ToastrModule,
+    MatDialogModule
   ],
   providers: [
     MatNativeDateModule

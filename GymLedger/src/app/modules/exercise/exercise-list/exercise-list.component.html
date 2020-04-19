@@ -1,7 +1,11 @@
 
   <div class="oefeningenContainer" *ngIf="exercises">
     <div class="lijstSection">
-        <app-exercise class="oefeningVierkant"  *ngFor="let e of (exercises | exerciseFilter : filterTitle)" [e]="e"></app-exercise>
+        <app-exercise 
+          class="oefeningVierkant"  
+          *ngFor="let e of (exercises | exerciseFilter : filterTitle)" 
+          [e]="e"
+          (exerciseId)="AddExistingExerciseToTraining($event)"
+          ></app-exercise>
     </div>
   </div>
-
