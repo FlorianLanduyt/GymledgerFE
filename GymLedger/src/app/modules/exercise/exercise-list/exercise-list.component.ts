@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ExerciseDataService } from '../exercise-data.service';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-exercise-list',
@@ -10,42 +10,50 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./exercise-list.component.css']
 })
 export class ExerciseListComponent implements OnInit {
-  //private _exercises$: Observable<Exercise[]>;
-  @Input() public exercises: Exercise[];
+  public exercises$: Observable<Exercise[]>;
   @Input() public filterTitle: string = '';
   @Input() public trainingId: number = 0;
-  @Input() public isAnAddExerciseToTraining = false;
+  @Input() public isAnAddExerciseToTraining: boolean;
 
   constructor(
-    private _exerciseService: ExerciseDataService
-    ) { 
+    private _exerciseService: ExerciseDataService,
+    private _toastr: ToastrService
+  ) {
+    this.isAnAddExerciseToTraining = false;
   }
 
   ngOnInit(): void {
-    if (!this.exercises){
-      this._exerciseService.exercises$.subscribe((exercises: Exercise[]) => {
-        this.exercises = exercises;
-      })
-    }
+    this._exerciseService.refreshExercises$.subscribe(() => {
+      if (this.trainingId == 0) {                   //All the existing exercises 
+        this.exercises$ = this._exerciseService.exercises$;
+      } else {
+        if (!this.isAnAddExerciseToTraining) {      //The exercises of a training 
+          this.exercises$ = this._exerciseService.getExercisesOfTraining$(this.trainingId);
+        } else {                                    // The still available exercises to add in the list with trainings
+          this.exercises$ = this._exerciseService.getExercisesNotInTraining$(this.trainingId);
+        }
+      }
+    })
   }
 
   AddExistingExerciseToTraining(eId: number) {
-    console.log('oefening:', eId);
-    console.log('training:', this.trainingId);
-    if(this.trainingId != 0){
+    if (this.isAnAddExerciseToTraining) {
       this._exerciseService.addExerciseToTraining(this.trainingId, eId)
+        .subscribe(
+          (response: Exercise) => {
+            if (response) {
+              this.exercises$ = this._exerciseService.getExercisesNotInTraining$(this.trainingId);
+              this._toastr.success(`\"${response.description}\" is toegevoegd aan de lijst van trainingen`, 'Success')
+              this._exerciseService.refreshExercises$.next([])
+            }
+          },
+          err => {
+            if (err) {
+              this._toastr.info("Deze oefening staat al in de lijst van trainingen", "Dubbele oefening")
+              return EMPTY
+            }
+          }
+        );
     }
-    
-
-    
-    
   }
-
-  
-
-  
-
-  
-
-
 }

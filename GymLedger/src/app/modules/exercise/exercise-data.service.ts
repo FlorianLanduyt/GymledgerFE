@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject, BehaviorSubject } from 'rxjs';
 import { Training } from 'src/app/models/training.model';
 import { Exercise } from 'src/app/models/exercise.model';
 import { environment } from 'src/environments/environment';
@@ -10,12 +10,15 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ExerciseDataService {
-
+  private _refreshExercises = new BehaviorSubject([])
  
   constructor(
     private http: HttpClient
     ) {}
 
+  get refreshExercises$() {
+    return this._refreshExercises;
+  }
 
   get exercises$(): Observable<Exercise[]> {
     return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise`)
@@ -28,20 +31,30 @@ export class ExerciseDataService {
     );
   }
 
-  // getExercisesOfTraining$(trainingId: number){
-  //   return this.http.get<Exercise[]>(`${environment.apiUrl}/Training/`)
-  // }
+  getExercisesOfTraining$(trainingId: number): Observable<Exercise[]>{
+    return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/${trainingId}`)
+      .pipe(
+        catchError(this.handleError),
+        map((list : any): Exercise[] => list.map(Exercise.fromJson))
+      )
+  }
+
+  getExercisesNotInTraining$(trainingId: number): Observable<Exercise[]>{
+    return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/oefeningNietInTraining/${trainingId}`)
+      .pipe(
+        catchError(this.handleError),
+        map((list : any): Exercise[] => list.map(Exercise.fromJson))
+      )
+  }
 
   addExerciseToTraining(trainingId: number, exerciseId: number){
     return this.http
     .post(`${environment.apiUrl}/Exercise/${trainingId}/${exerciseId}`, null)
     .pipe(
-      catchError(this.handleError)
+      tap(() => this.refreshExercises$.next([])),
+      catchError(this.handleError),
+      map((exerciseJson: any): Exercise => Exercise.fromJson(exerciseJson))
     )
-    
-    .subscribe(() => {
-     // this.exercises$.next();
-    })
   }
 
 
@@ -53,7 +66,6 @@ export class ExerciseDataService {
     } else {
       errorMsg = `an unknown error occurred ${err}`;
     }
-    console.error(err);
     return throwError(errorMsg)
   }
 

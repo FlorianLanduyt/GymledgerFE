@@ -6,5 +6,10 @@
         #filter />
     </div>
   </div>
-  <app-exercise-list [trainingId]="trainingId" [filterTitle]="filterTitle" class="lijstSection"></app-exercise-list>
+  <app-exercise-list 
+    class="lijstSection"
+    [trainingId]="trainingId" 
+    [filterTitle]="filterTitle"
+    [isAnAddExerciseToTraining]="isAnAddExerciseToTraining"
+    ></app-exercise-list>
 </div>

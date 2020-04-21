@@ -8,6 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AddExerciseToTrainingComponent implements OnInit {
   private _trainingId: number;
+  public isAddForm = true;
 
   constructor(
     public dialogRef: MatDialogRef<AddExerciseToTrainingComponent>,

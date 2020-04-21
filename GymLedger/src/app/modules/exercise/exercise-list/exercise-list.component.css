@@ -8,40 +8,22 @@
 .lijstSection {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
 }
 
-/* .oefening {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    max-width: 33%;
-    min-width: 33%;
-} */
 
 .oefeningVierkant {
-    border: 1px solid rgb(118, 114, 110, 0.1);
-    flex: 0 0 30%;
-    max-width: 30%;
-    min-width: 180px;
-    border-radius: 15px;
-    margin: 10px 1%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: rgb(250, 250, 250);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px ;
-    transition: ease 0.4s;
+    
+    max-width: 30%;
+    min-width: 180px;
+    margin: 10px 1%;
+    
+    flex: 0 0 30%;
+    align-self: stretch;
 } 
 
-.oefeningVierkant:hover {
-    cursor: pointer;
-    transform: scale(0.97,0.97);
-}
-
- .oefeningVierkant > *{
-    padding: 30px 0px;
-} 
 
 
 

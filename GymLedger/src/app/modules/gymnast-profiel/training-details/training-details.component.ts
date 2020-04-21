@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddExerciseToTrainingComponent } from '../../exercise/add-exercise-to-training/add-exercise-to-training.component';
+import { Exercise } from 'src/app/models/exercise.model';
+import { ExerciseDataService } from '../../exercise/exercise-data.service';
 
 @Component({
   selector: 'app-training-details',
@@ -17,11 +19,13 @@ export class TrainingDetailsComponent implements OnInit {
   //@Input() public training: Training
   public training: Training;
   private _isEdit = false;
+  //public exercises$ = new Observable<Exercise[]>();
 
   public trainingFg: FormGroup
 
   constructor(
     private _gymnastService: GymnastDataService,
+    private _exercisService: ExerciseDataService,
     private router: Router,
     private _route: ActivatedRoute,
     private _toastr: ToastrService,
@@ -29,14 +33,14 @@ export class TrainingDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._route.data.subscribe(item =>
+    this._route.data.subscribe(item => 
       this.training = item['training'])
+      //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id)
   }
 
   public removeTraining() {
     this._gymnastService.deleteTraining(this.training.id)
       .subscribe((response: Training) => {
-
         this._toastr.success("De training is verwijderd", "Succes")
         this.router.navigate([''])
       }
@@ -69,6 +73,10 @@ export class TrainingDetailsComponent implements OnInit {
     }
 
     const dialogRef = this.dialog.open(AddExerciseToTrainingComponent, config);
-  }
 
+    dialogRef.afterClosed().subscribe(() => {
+        //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id);
+        
+      })
+  }
 }

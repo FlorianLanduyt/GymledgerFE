@@ -12,9 +12,11 @@ export class ExercisePageComponent implements OnInit {
   public filterTitle: string = '';
   public heading: string;
   @Input() trainingId: number = 0;
+  @Input() isAnAddExerciseToTraining;
    
 
   constructor() { 
+    this.isAnAddExerciseToTraining = false;
 
     this.filterExercise$
     .pipe(

@@ -1,5 +1,5 @@
 
-  <div class="oefeningenContainer" *ngIf="exercises">
+  <div class="oefeningenContainer" *ngIf="exercises$ | async as exercises else link" >
     <div class="lijstSection">
         <app-exercise 
           class="oefeningVierkant"  
@@ -9,3 +9,7 @@
           ></app-exercise>
     </div>
   </div>
+
+  <ng-template #link>
+    hallo
+  </ng-template>
