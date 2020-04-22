@@ -2,12 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GymnastDataService } from '../gymnast-data.service';
 import { Training } from 'src/app/models/training.model';
-import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddExerciseToTrainingComponent } from '../../exercise/add-exercise-to-training/add-exercise-to-training.component';
-import { Exercise } from 'src/app/models/exercise.model';
 import { ExerciseDataService } from '../../exercise/exercise-data.service';
 
 @Component({
@@ -25,7 +23,7 @@ export class TrainingDetailsComponent implements OnInit {
 
   constructor(
     private _gymnastService: GymnastDataService,
-    private _exercisService: ExerciseDataService,
+    private _exerciseService: ExerciseDataService,
     private router: Router,
     private _route: ActivatedRoute,
     private _toastr: ToastrService,
@@ -33,9 +31,9 @@ export class TrainingDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._route.data.subscribe(item => 
+    this._route.data.subscribe(item =>
       this.training = item['training'])
-      //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id)
+    //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id)
   }
 
   public removeTraining() {
@@ -75,8 +73,8 @@ export class TrainingDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddExerciseToTrainingComponent, config);
 
     dialogRef.afterClosed().subscribe(() => {
-        //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id);
-        
-      })
+      //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id);
+      this._exerciseService.refreshExercises$.next
+    })
   }
 }

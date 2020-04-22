@@ -1,0 +1,35 @@
+.miniInput {
+    width: 70px;
+    height: 70px;
+    background-color: #F7F8F6;
+    font-size: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.exerciseInfoContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.exerciseInfoContainer > div {
+    margin-right: 20px;
+}
+
+.mini-form-group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.mini-form-group > * {
+     margin-bottom: 10px
+}
+
+textarea {
+    background-color: #F7F8F6;
+    border-radius: 10px;
+}

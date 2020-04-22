@@ -2,7 +2,7 @@
   <div class="titleSection">
     <div class="titleContainer">
       <h1>Trainingen</h1>
-      <button (click)='scroll(doel)' type="button" class="btn addButton">Voeg toe</button>
+      <button (click)='scroll(doel)' type="addButton" class="btn addButton">Voeg toe</button>
     </div>
   </div>
   <div class="trainingContainer" *ngIf="trainings$ | async as trainings; else loadingOrError">

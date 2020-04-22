@@ -12,7 +12,8 @@
         <div class="title">Oefeningen</div>
         <button (click)="initAddToTrainingForm()" class="addButton">Oefening toevoegen</button>
       </div>
-      <app-exercise-list [trainingId]="training.id"></app-exercise-list>
+      <!-- <app-exercise-list [trainingId]="training.id"></app-exercise-list> -->
+      <app-training-exercises-list [trainingId]="training.id"></app-training-exercises-list>
     </div>
     <div class="btnContainer">
       <button (click)="removeTraining()" class="btn deleteBtn">Verwijder</button>

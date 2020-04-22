@@ -8,6 +8,10 @@ import { ExerciseFilterPipe } from './exercise-filter.pipe';
 import { MaterialModule } from "../material/material.module";
 import { ExercisePageComponent } from './exercise-page/exercise-page.component';
 import { AddExerciseToTrainingComponent } from './add-exercise-to-training/add-exercise-to-training.component';
+import { TrainingExercisesListComponent } from './training-exercises-list/training-exercises-list.component';
+import { EvaluationComponent } from './evaluation/evaluation.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 const routes: Routes = [
@@ -18,14 +22,16 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [ExerciseListComponent, ExerciseComponent, ExerciseFilterPipe, ExercisePageComponent, AddExerciseToTrainingComponent],
+  declarations: [ExerciseListComponent, ExerciseComponent, ExerciseFilterPipe, ExercisePageComponent, AddExerciseToTrainingComponent, TrainingExercisesListComponent, EvaluationComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
    exports: [
-     ExerciseListComponent
+     ExerciseListComponent,
+     TrainingExercisesListComponent
    ]
 })
 export class ExerciseModule { }

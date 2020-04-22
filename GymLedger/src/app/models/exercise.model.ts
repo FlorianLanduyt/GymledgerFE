@@ -1,9 +1,20 @@
+import { ExerciseEvaluation } from './exerciseEvaluation.model';
+
 export class Exercise {
     private _id: number;
     private _description: string;
     private _amount: number;
     private _image: string;
     private _weight: number;
+    private _exerciseEvaluation?: ExerciseEvaluation;
+
+    
+    public get exerciseEvaluation(): ExerciseEvaluation {
+        return this._exerciseEvaluation;
+    }
+    public set exerciseEvaluation(value: ExerciseEvaluation) {
+        this._exerciseEvaluation = value;
+    }
 
     public get id(): number {
         return this._id;

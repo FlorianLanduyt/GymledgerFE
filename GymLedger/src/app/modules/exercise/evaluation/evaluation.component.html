@@ -1,0 +1,35 @@
+<div>
+    <form [formGroup]="evaluationFg">
+      <div class="form-group">
+        <label>Gevoel op 10</label>
+        <input class="miniInput" type="number" min="1" max="10" formControlName='score' />
+      </div>
+
+      <div class="exerciseInfoContainer">
+        <div class="mini-form-group">
+          <label>Sets</label>
+          <input class="miniInput" type="number" formControlName='sets' />
+        </div>
+        <div>x</div>
+        <div class="mini-form-group">
+          <label>Aantal</label>
+          <input class="miniInput" type="number" formControlName='repetitions' />
+        </div>
+        <div>x</div>
+        <div class="mini-form-group weight">
+          <label>Gewicht</label>
+          <input class="miniInput" type="number" formControlName='weight' />
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Opmerking</label>
+        <textarea formControlName='note' ></textarea>
+      </div>
+
+      <div btnContainer>
+        <button class=" btn">Verwijder</button>
+        <button type="submit" class="addButton btn">Sla op</button>
+      </div>
+    </form>
+  </div>

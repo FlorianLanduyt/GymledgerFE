@@ -39,43 +39,8 @@ h2 {
     margin-bottom: 8px;
 }
 
-.btnContainer {
-    display: flex;
-    justify-content: space-between;
-    border-top: solid rgb(0,0,0,0.3) 1px;
-    padding-top: 20px;
-    margin-top: 40px;
-}
 
-.btn:not(:first-child) {
-    margin-left: 20px;
-}
-
-.btn {
-    width: 10em;
-    height: 2.4em;
-    background-color: white;
-    font-size: 18px;
-    border-radius: 5px;
-    box-shadow: none;
-    outline: none;
-    border-style: solid;
-    transition: all ease-in-out 0.05s;
-}
-
-.btn:hover {
-    cursor: pointer;
-}
-
-.btn:active {
-    transform: scale(0.95,0.95);
-  }
-
-  .deleteBtn {
-      background-color: #E34543 !important;
-      border-color: #E34543 !important;
-      color: white;
-  }
+ 
 
 
   .infoContainer {
