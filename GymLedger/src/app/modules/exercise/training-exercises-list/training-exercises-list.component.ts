@@ -16,6 +16,7 @@ export class TrainingExercisesListComponent implements OnInit {
 
   public exercises$: Observable<Exercise[]>
 
+
   constructor(
     private _exerciseService: ExerciseDataService,
     private _fb: FormBuilder) { }
@@ -23,18 +24,10 @@ export class TrainingExercisesListComponent implements OnInit {
   ngOnInit(): void {
     this._exerciseService.refreshExercises$.subscribe(() => {
       this.exercises$ = this._exerciseService.getExercisesOfTraining$(this.trainingId)
-
-      // const exercises = this._exerciseService.getExercisesOfTraining$(this.trainingId)
-      // const evaluations = this._exerciseService.getEvaluationsOfTraining$(this.trainingId)
-
-      // const newExercises = combineLatest(exercises, evaluations);
-      // // console.log(exercises);
-      // // console.log(evaluations);
-
-      // newExercises.subscribe(ex => {
-      //   console.log(ex)
-      // })
     })
   }
+
 }
+
+
 

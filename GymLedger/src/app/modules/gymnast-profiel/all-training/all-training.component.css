@@ -1,22 +1,5 @@
 .page {
-    background-color:#f8f9fa !important;
-}
-
-.trainingContainer {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    /* overflow: auto;
-    padding-bottom: 3em; */
-}
-
-.trainingLijst {
-    width: 70%;
-    display: flex;
-    flex-wrap: wrap;
-    /* justify-content: space-between; */
+    background-color:var(--achtergrond) !important;
 }
 
 
@@ -25,7 +8,8 @@
     width: 100%;
     justify-content: center;
     justify-items: center;
-    background-color:#f8f9fa !important;
+    background-color:var(--achtergrond) !important;
+    margin-bottom: 30px;
 
 }
 
@@ -37,28 +21,37 @@
     justify-content: space-between;
 }
 
+.trainingContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+
+.trainingLijst {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+
+
 /* .btn {
     height: 40px;
 } */
 
 .training {
-    /* min-width: 100px; */
-    /* width: 200px;   */
-    /* border: 1px solid rgb(118, 114, 110, 0.2); */
-    /* flex: 0 0 33%;
-    margin: 20px 20px; */
-
-    flex: 0 0 30%;
-    max-width: 250px;
+    flex: 0 0 31%;
+    max-width: 450px;
     min-width: 180px;
     border-radius: 15px;
     margin: 10px 1%;
     
-
-
-    background-color: white;
-    border-radius: 15px;
-    background: rgb(250, 250, 250);
+    border-radius: 1.25rem 1.25rem 0px;
+    background:white;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px ;
     transition: ease 0.4s;
 }

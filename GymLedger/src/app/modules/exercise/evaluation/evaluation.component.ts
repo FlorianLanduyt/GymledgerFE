@@ -51,4 +51,12 @@ export class EvaluationComponent implements OnInit {
     )
   }
 
+  onSubmit() {
+    if(this.evaluation) { 
+      this._exerciseService.putEvaluation(this.trainingId, this.exerciseId);
+    } else {
+      this._exerciseService.createEvaluation(this.trainingId, this.exerciseId);
+    }
+  }
+
 }

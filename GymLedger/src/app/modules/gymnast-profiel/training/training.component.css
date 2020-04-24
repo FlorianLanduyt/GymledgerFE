@@ -1,54 +1,52 @@
-.category { 
-    font-size: small;
-    color: #006b89;
-    margin: 0px;
+.category {
+  color: var(--blue);
+  margin: 0px;
 }
 
 .vierkant {
-    padding: 20px
+  padding: 30px
 }
 
 
+.customBtn {
+  width: 100%;
+  background-color: var(--purple);
+  color: white;
+}
 
-/* .training:hover {
-    cursor: pointer;
-    transform: scale(1.03, 1.03);
-} */
+.customBtn:hover {
+  background-color: var(--purple-hover);
+}
 
-.date {
+.gevoelSection {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  /* width: 50%; */
+  justify-content: space-between;
+}
+
+.flexItem {
+  /* flex: 0 0 50%; */
+  background-color: var(--bone-hover);
+  border-radius: 10px;
+  height: 80px;
+  
+  width: 80px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px ;
+}
+
+.flexText {
+    font-size: 30px !important;
     font-weight: 600;
+    text-align: center;
+    line-height: 80px;
+
 }
-
-.gevoel {
-    margin: 5px 0;
-    width: 80%;
-    font-size: 14px;
-}
-
-span {
-    float: right;
-}
-
-.vierkant .btn-holder {
-    justify-content: space-between;
-    display: flex;
-}
-
-.btn-holder > * {
-    margin-top: 60px;
-    width: 40%;
-    height: 30px;
-    border-radius: 5px;
-    font-size: 13px;
-    outline: none;
-    cursor: pointer;
-}
-
-.editBtn {
-    border: 1px solid var(--blauw);
-    background-color: var(--blauw);
-    color: white;
-}
-
-
-

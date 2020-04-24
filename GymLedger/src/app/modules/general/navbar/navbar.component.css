@@ -18,8 +18,8 @@
 }
 
 .item:hover {
-    border-bottom: 1px solid var(--blauw);
-    color: var(--blauw);
+    border-bottom: 1px solid var(--blue);
+    color: var(--blue);
     cursor: pointer;
 }
 

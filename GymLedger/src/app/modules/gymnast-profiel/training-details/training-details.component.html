@@ -2,17 +2,17 @@
   <div class="infoSection">
     <p class="category">{{training.category.name}}</p>
     <div class="infoContainer">
-      <h2>Training van {{training.day}} {{training.date | date}} </h2>
+      <h1 class="hoofdtitel">Training van {{training.day}} {{training.date | date}} </h1>
       <mat-icon (click)="changeToEdit()" class="icon md-36 customIcon">edit</mat-icon>
     </div>
-    <p>Lichaamsgevoel voor de training: <span class="number"> {{training.feelingBeforeTraining}}</span></p>
+    <p class="infotekst">Lichaamsgevoel voor de training: <span class="number"> {{training.feelingBeforeTraining}}</span></p>
     <p>Lichaamsgevoel na de training: <span class="number">{{training.feelingAfterTraining}}</span></p>
     <div class="oefeningContainer">
       <div class="titleContainer">
-        <div class="title">Oefeningen</div>
-        <button (click)="initAddToTrainingForm()" class="addButton">Oefening toevoegen</button>
+        <div class="ondertitel">Oefeningen</div>
+        <button (click)="initAddToTrainingForm()" class="btn addButton">Oefening toevoegen</button>
       </div>
-      <!-- <app-exercise-list [trainingId]="training.id"></app-exercise-list> -->
+      <div class="infotekst extratekst">Pas je gekozen oefeningen aan indien nodig</div>
       <app-training-exercises-list [trainingId]="training.id"></app-training-exercises-list>
     </div>
     <div class="btnContainer">

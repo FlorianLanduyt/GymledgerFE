@@ -1,23 +1,23 @@
 <div class="formContainer">
   <form class="formSection" [formGroup]="user" (ngSubmit)=onSubmit()>
-    <h3>Login</h3>
+    <h1 class="hoofdtitel">Aanmelden</h1>
 
 
     <mat-card-content fxLayout='column'>
       <div fxLayout="column" fxLayoutGap="2%">
         <div class="form-group">
-          <label>Email</label>
+          <label class="infotekst">Email</label>
           <input formControlName="email" />
         </div>
 
         <div class="form-group">
-          <label>Wachtwoord</label>
+          <label class="infotekst">Wachtwoord</label>
           <input type='password' formControlName="password" />
         </div>
       </div>
     </mat-card-content>
     <div class="actions" fxLayout="row">
-      <button class="addButton ctmBtn" type="submit" dis>Meld aan</button>
+      <button class="btn addButton ctmBtn" type="submit" dis>Meld aan</button>
     </div>
     <span class="registerContainer">
       Heb je nog geen account? 
