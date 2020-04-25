@@ -1,0 +1,28 @@
+<div class="page">
+  <div class="titleSection">
+    <div class="titleContainer">
+      <h1 class="hoofdtitel">Trainingen</h1>
+      <button (click)='scroll(doel)' type="button" class="btn addButton">Nieuw training</button>
+    </div>
+  </div>
+  <div class="trainingContainer" *ngIf="trainings$ | async as trainings; else loadingOrError">
+    <section class="trainingLijst">
+      <app-training class="training" (selectedTraining)='showDetails($event)' *ngFor="let training of trainings" [training]=training>
+      </app-training>
+    </section>
+
+  </div>
+  <div #doel>
+    <app-add-training *ngIf="newTrainingForm" (newTraining)=addTraining($event)
+      (newTrainingForm)=cancelNewTraining($event)></app-add-training>
+  </div>
+  <ng-template #loadingOrError>
+    <!-- <mat-card *ngIf="errorMessage; else laden">
+        Een fout heeft zicht voorgedaan bij het laden van de lijst met trainingen: {{ errorMessage }}. <br/>
+        Probeer later opnieuw. -->
+    <!-- <ng-template #laden> -->
+    <mat-spinner></mat-spinner>
+    <!-- </ng-template> -->
+    <!-- </mat-card> -->
+  </ng-template>
+</div>

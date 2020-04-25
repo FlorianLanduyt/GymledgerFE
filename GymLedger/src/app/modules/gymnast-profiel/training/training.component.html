@@ -1,0 +1,18 @@
+<div class="vierkant">
+  <p class="category infotekst">{{ training.category.name }}</p>
+  <p class="ondertitel">{{training.date | date}}</p>
+  <p class="infotekst">Gevoel</p>
+  <div class="flexContainer">
+    <div class="flexItem">
+      <div class="infotekst flexText">{{beforeFeeling}}</div>
+    </div>
+    <div class="flexItem">
+      <div class="infotekst flexText">{{afterFeeling}}</div>
+    </div>
+  </div>
+
+  <div class="btnContainer">
+    <!-- <button  disabled class="editBtn">start</button> -->
+    <button class="btn customBtn" [routerLink]="['/details', training.id]">Details </button>
+  </div>
+</div>

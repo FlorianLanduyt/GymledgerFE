@@ -1,0 +1,39 @@
+<div>
+    <form [formGroup]="evaluationFg" (ngSubmit)="onSubmit()">
+      <div>
+        <p class="ondertitel customTitle"><span class="colorWord">Voor de start</span> van de oefening invullen</p>
+      </div>
+      <div class="exerciseInfoContainer">
+        <div class="mini-form-group">
+          <label>Sets</label>
+          <input class="miniInput" type="number" min="0" formControlName='sets' />
+        </div>
+        <!-- <div>x</div> -->
+        <div class="mini-form-group">
+          <label>Aantal</label>
+          <input class="miniInput" type="number"  min="0" formControlName='repetitions' />
+        </div>
+        <!-- <div>x</div> -->
+        <div class="mini-form-group weight">
+          <label>Gewicht</label>
+          <input class="miniInput" type="number"  min="0" formControlName='weight' />
+        </div>
+      </div>
+      
+      <div>
+        <p class="ondertitel customTitle"><span class="colorWord">Na het beëindigen</span> van de oefening invullen</p>
+      </div>
+      <div class="form-group">
+        <label>Opmerking</label>
+        <textarea formControlName='note' ></textarea>
+      </div>
+      <div class="form-group">
+        <label>Gevoel op 10</label>
+        <input class="miniInput" type="number" min="1" max="10" formControlName='score' />
+      </div>
+      <div class="btnContainer">
+        <button class="btn" (click)="removeExerciseFromTraining()">Verwijder</button>
+        <button type="submit" [disabled]="!evaluationFg.dirty" class="addButton btn">Sla op</button>
+      </div>
+    </form>
+  </div>

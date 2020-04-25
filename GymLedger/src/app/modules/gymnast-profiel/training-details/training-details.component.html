@@ -1,0 +1,26 @@
+<div class="detailContainer" *ngIf="training">
+  <div class="infoSection">
+    <p class="category">{{training.category.name}}</p>
+    <div class="infoContainer">
+      <h1 class="hoofdtitel">Training van {{training.day}} {{training.date | date}} </h1>
+      <mat-icon (click)="changeToEdit()" class="icon md-36 customIcon">edit</mat-icon>
+    </div>
+    <p class="infotekst">Lichaamsgevoel voor de training: <span class="number"> {{training.feelingBeforeTraining}}</span></p>
+    <p>Lichaamsgevoel na de training: <span class="number">{{training.feelingAfterTraining}}</span></p>
+    <div class="oefeningContainer">
+      <div class="titleContainer">
+        <div class="ondertitel">Oefeningen</div>
+        <button (click)="initAddToTrainingForm()" class="btn addButton">Oefening toevoegen</button>
+      </div>
+      <div class="infotekst extratekst">Pas je gekozen oefeningen aan indien nodig</div>
+      <app-training-exercises-list [trainingId]="training.id"></app-training-exercises-list>
+    </div>
+    <div class="btnContainer">
+      <button (click)="removeTraining()" class="btn deleteBtn">Verwijder</button>
+      <button [routerLink]="['']" class="btn">Terug</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="isEdit">
+  <app-add-training (newTrainingForm)="isEdit = false" [training]="training"></app-add-training>
+</div>

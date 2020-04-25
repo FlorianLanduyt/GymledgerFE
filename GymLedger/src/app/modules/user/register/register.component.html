@@ -1,0 +1,69 @@
+<div class="formContainer">
+  <form class="formSection" [formGroup]="user" (ngSubmit)=onSubmit()>
+    <h3 class="hoofdtitel">Registreren</h3>
+
+    <mat-card-content fxLayout='column'>
+      <div fxLayout="column" fxLayoutGap="2%">
+
+        <div class="form-group">
+          <label class="infotekst" class="infotekst">Voornaam</label>
+          <input formControlName="firstName" />
+        </div>
+
+        <div class="form-group">
+          <label class="infotekst">Familienaam</label>
+          <input formControlName="lastName" />
+        </div>
+
+        <div class="form-group">
+          <label class="infotekst">Email</label>
+          <input formControlName="email" />
+        </div>
+
+        <div class="form-group">
+          <label class="infotekst">Geboortedatum</label>
+          <div class="datumContainer">
+            <input formControlName='birthday' [matDatepicker]="picker">
+            <mat-datepicker-toggle class="toggle" matSuffix [for]="picker"></mat-datepicker-toggle>
+          </div>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+
+        <div class="form-group">
+          <label class="infotekst">Soort gebruiker</label>
+          <mat-radio-group class="field" aria-label="Kies een optie" formControlName="isCoach">
+            <mat-radio-button value="true"> Trainer </mat-radio-button>
+            <mat-radio-button value="false">Gymnast </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <span fxLayout="column" formGroupName="passwordGroup">
+        <div class="form-group">
+          <label class="infotekst">Wachtwoord</label>
+          <input type="password" formControlName="password" />
+        </div>
+        <div class="form-group">
+          <label class="infotekst">Bevestig wachtwoord</label>
+          <input type="password" formControlName="confirmPassword" />
+        </div>
+      </span>
+    </mat-card-content>
+    <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+      <button class="addButton ctmBtn btn" type="submit" dis>Registreer</button>
+    </div>
+    <div class="loginContainer">
+      Als je al een account aangemaakt hebt,
+      <a [routerLink]="['/user/login']">log hier in</a>
+    </div>
+  </form>
+
+</div>
+
+
+<!-- <mat-form-field>
+    <input matInput placeholder="Password" formControlName="password" /> 
+</mat-form-field>
+<mat-form-field>
+    <input matInput placeholder="Confirm assword" formControlName="confirmPassword" /> 
+</mat-form-field> -->

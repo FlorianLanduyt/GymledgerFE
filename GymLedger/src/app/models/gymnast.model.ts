@@ -58,14 +58,13 @@ export class Gymnast {
     }
 
     static fromJson(json: any): Gymnast {
-        console.log(json.trainings)
+        //console.log(json.trainings)
         const g = new Gymnast(
-            json.firstname, 
-            json.lastname,
-            json.birthDate,
+            json.firstName,
+            json.lastName,
             json.email,
+            json.birthDate,
             json.trainings.map(t => Training.fromJson(t)));
-
         g._id = json.id;
 
         return g;

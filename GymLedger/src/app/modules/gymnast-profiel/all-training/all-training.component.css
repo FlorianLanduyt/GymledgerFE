@@ -1,0 +1,58 @@
+.page {
+    background-color:var(--achtergrond) !important;
+}
+
+
+.titleSection {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    justify-items: center;
+    background-color:var(--achtergrond) !important;
+    margin-bottom: 30px;
+
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.trainingContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+
+.trainingLijst {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+
+
+/* .btn {
+    height: 40px;
+} */
+
+.training {
+    flex: 0 0 31%;
+    max-width: 450px;
+    min-width: 180px;
+    border-radius: 15px;
+    margin: 10px 1%;
+    
+    border-radius: 1.25rem 1.25rem 0px;
+    background:white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px ;
+    transition: ease 0.4s;
+}
+

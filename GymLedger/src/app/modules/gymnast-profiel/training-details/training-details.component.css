@@ -1,0 +1,68 @@
+.detailContainer { 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #F7F8F6;
+
+    /* margin-top: 20px; */
+}
+
+.infoSection {
+    display: flex;
+    width: 60%;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 3rem 8em 5em 8em;
+    background-color: #F7F8F6; 
+}
+
+.number {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--blauw);
+}
+
+.category { 
+    color: white;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: var(--blue);
+    margin-bottom: 0px;
+}
+
+
+  .infoContainer {
+      display: flex;
+      align-items: center;
+  }
+
+  .infoContainer > *:not(:first-child) {
+      margin-left: 2em;
+  }
+
+  .customIcon {
+      cursor: pointer;
+  }
+
+  .titleContainer {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      align-items: center !important;
+      justify-content: space-between;
+  }
+
+  .oefeningContainer { 
+      padding-top: 20px;
+      margin-top: 40px;
+      border-top: solid rgb(0,0,0,0.3) 1px;
+
+  }
+
+
+
+.extratekst {
+    color: #60737C;
+    line-height: 2em;
+}

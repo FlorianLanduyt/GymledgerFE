@@ -1,0 +1,32 @@
+.oefeningenContainer {
+    margin-top: 2em;
+    display: flex;
+    width: 100%;
+    justify-content: center; 
+}
+
+.lijstSection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.oefeningVierkant {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+    max-width: 30%;
+    min-width: 180px;
+    margin: 10px 1%;
+    
+    flex: 0 0 30%;
+    align-self: stretch;
+} 
+
+
+
+
+
+
+

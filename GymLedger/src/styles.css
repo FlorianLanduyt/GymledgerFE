@@ -1,50 +1,177 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/indigo-pink.css'; 
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import url('https://fonts.googleapis.com/css?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Inter:600&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Inter:300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;600;700&display=swap');
 
 
 
 html {
-    font-family: 'Inter', sans-serif;
+  /* font-family: 'Inter', sans-serif; */
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+input,
+textarea {
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #ced4da;
+  line-height: 1.5;
+  padding: .375rem .75rem;
+  outline: none;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  height: 70px;
+}
 
 :root {
-    --paars: #f2f2f8;
-    --blauw: #006b89;
-    
-  }
+  --paars: #f2f2f8;
+  --blauw: #006b89;
+  --achtergrond: #f8f9fa;
 
-  /* KNOPPEN  */
-  .addButton {
-    /* border: 1px black solid; */
-    cursor: pointer;
-    /* margin: 5px; */
-    padding: 10px 25px;
-    border-radius: 5px;
-    background-color: var(--blauw);
-    transition: ease-in-out 0.1s;
-    color: white;
-    overflow: hidden;
-    font-size: 14px;
+  /* PALETTE */
+
+  --blue: #623cea;
+  --blue-hover: #b18cf5;
+
+  --bone: #e7dfc6;
+  --bone-hover: #FDFCE3;
+
+
+  --gray: #d2d9df;
+
+  --purple: #54426b;
+  --purple-hover: #bbaec4;
+
+  --black: #001524;
+
 }
 
-.addButton:hover{
-    background-color: #8BBBC9;
-    /* color: black; */
+/* -------------- BUTTONS ------------------ */
+
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+  border-top: solid rgb(0, 0, 0, 0.3) 1px;
+  padding-top: 20px;
+  margin-top: 40px;
+}
+
+
+button {
+  outline: none;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 10px 25px;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 14px;
+  transition: ease-in-out 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.95, 0.95);
+}
+
+
+.addButton {
+  background-color: var(--blue);
+  color: white;
+
+}
+
+.addButton:hover {
+  background-color: var(--blue-hover);
+  /* color: black; */
+}
+
+.addButton:disabled {
+  background-color: #A2C9D4;
+  cursor: default;
+}
+
+
+.deleteButton {
+  background-color: #E34543 !important;
+  border-color: #E34543 !important;
+  color: white;
 }
 
 .cancelButton {
-    background-color: white !important;
-    color: black;
-}
-
-button {
-    outline: none;
+  background-color: white !important;
+  color: black;
 }
 
 
+/* .btn {
+  width: 10em;
+  height: 2.4em;
+  border-radius: 5px;
+  box-shadow: none;
+  outline: none;
+  border-style: solid;
+  transition: all ease-in-out 0.05s;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.95, 0.95);
+}
+
+.btn:not(:first-child) {
+  margin-left: 20px;
+} */
+
+
+/* --------------- FORMS ---------------- */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+
+.form-group>* {
+  padding-bottom: 10px;
+}
+
+
+/* tekst */
+
+.hoofdtitel {
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 50px;
+}
+
+.ondertitel {
+  font-size: 25px;
+  font-weight: 400;
+  /* line-height: 50px; */
+}
+
+.infotekst {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5rem;
+  /* line-height: 1.5em; */
+
+}
