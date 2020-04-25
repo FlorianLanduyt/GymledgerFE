@@ -35,7 +35,11 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        positionClass: "toast-bottom-right"
+      }
+    ),
     MatRadioModule,
     MatDialogModule
   ], 

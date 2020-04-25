@@ -27,7 +27,8 @@ export class ExerciseDataService {
   }
 
 
-  get exerciseEvaluations$(): Observable<ExerciseEvaluation[]> {
+
+  get evaluations$(): Observable<ExerciseEvaluation[]> {
     return this.http.get(`${environment.apiUrl}/ExerciseEvaluation`)
       .pipe(
         catchError(this.handleError),
@@ -43,7 +44,7 @@ export class ExerciseDataService {
       )
   }
 
-  getExerciseEvaluation$(trainingId: number, exerciseId: number): Observable<ExerciseEvaluation> {
+  getEvaluation$(trainingId: number, exerciseId: number): Observable<ExerciseEvaluation> {
     return this.http.get(`${environment.apiUrl}/ExerciseEvaluation/${trainingId}/${exerciseId}`)
     .pipe(
       catchError(this.handleError),
@@ -53,6 +54,28 @@ export class ExerciseDataService {
       })
     )
   }
+
+
+  editEvaluation(evaluation: ExerciseEvaluation) {
+    return this.http.put(`${environment.apiUrl}/ExerciseEvaluation`, evaluation.toJsonEdit())
+    .pipe(
+      catchError(this.handleError),
+      map((json: any) : ExerciseEvaluation => ExerciseEvaluation.fromJson(json)),
+      tap((evalu: ExerciseEvaluation) =>  console.log(evalu)
+      )
+    )
+  }
+
+  createEvaluation(trainingId: number, exerciseId: number, evaluation: ExerciseEvaluation): Observable<ExerciseEvaluation> {
+    return this.http
+      .post(`${environment.apiUrl}/ExerciseEvaluation/${trainingId}/${exerciseId}`, evaluation.toJson())
+      .pipe(
+        //tap(() => this.refreshExercises$.next([])),
+        catchError(this.handleError),
+        map((evaluation: any): ExerciseEvaluation => ExerciseEvaluation.fromJson(evaluation))
+      )
+  }
+
 
   get exercises$(): Observable<Exercise[]> {
     return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise`)
@@ -90,6 +113,21 @@ export class ExerciseDataService {
         map((exerciseJson: any): Exercise => Exercise.fromJson(exerciseJson))
       )
   }
+
+
+  removeExerciseFromTraining(trainingId: number, exerciseId: number) {
+    return this.http
+      .delete(`${environment.apiUrl}/Exercise/${trainingId}/${exerciseId}`)
+      .pipe(
+        tap(() => {
+          this.refreshExercises$.next([])
+        }),
+        catchError(this.handleError),
+        map((exerciseJson: any): Exercise => Exercise.fromJson(exerciseJson))
+      )
+  }
+
+
 
 
 

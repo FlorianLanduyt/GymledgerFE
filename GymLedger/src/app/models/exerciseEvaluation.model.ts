@@ -53,13 +53,13 @@ export class ExerciseEvaluation {
         this._training = value;
     }
     
-    private _exercise: Exercise;
-    public get exercise(): Exercise {
-        return this._exercise;
-    }
-    public set exercise(value: Exercise) {
-        this._exercise = value;
-    }
+    // private _exercise: Exercise;
+    // public get exercise(): Exercise {
+    //     return this._exercise;
+    // }
+    // public set exercise(value: Exercise) {
+    //     this._exercise = value;
+    // }
 
     static fromJson(json: any): ExerciseEvaluation {
         const t = new ExerciseEvaluation()
@@ -69,11 +69,34 @@ export class ExerciseEvaluation {
         t._series = json.series
         t._weight = json.weight
         t._repetitions = json.repetitions;
+        t._id = json.id;
         
         // t._training = Training.fromJson(json.training)
         // t._exercise = Exercise.fromJson(json.exercise)
 
         return t;
+    }
+    
+
+    toJson(): any{
+        return {
+            feelingOfExercise: this._difficultyScore,
+            note: this.note,
+            sets: this._series,
+            weight: this._weight,
+            repetitions: this._repetitions,
+        }
+    }
+
+    toJsonEdit(): any {
+        return {
+            id: this._id,
+            feelingOfExercise: this._difficultyScore,
+            note: this.note,
+            sets: this._series,
+            weight: this._weight,
+            repetitions: this._repetitions,
+        }
     }
 
 

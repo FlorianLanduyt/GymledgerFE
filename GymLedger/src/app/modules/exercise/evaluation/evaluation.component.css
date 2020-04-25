@@ -38,6 +38,7 @@
 textarea {
     background-color: white;
     border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px;
 }
 
 .customTitle {
