@@ -12,7 +12,7 @@ export class ExercisePageComponent implements OnInit {
   public filterTitle: string = '';
   public heading: string;
   @Input() trainingId: number = 0;
-  @Input() isAnAddExerciseToTraining;
+  @Input() isAnAddExerciseToTraining: boolean;
    
 
   constructor() { 

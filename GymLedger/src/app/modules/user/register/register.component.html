@@ -7,26 +7,49 @@
 
         <div class="form-group">
           <label class="infotekst" class="infotekst">Voornaam</label>
-          <input formControlName="firstName" />
+          <input [ngClass]="{
+              'invalidInput': user.get('firstName').errors && user.get('firstName').touched
+            }"
+            formControlName="firstName" />
+
+          <mat-error class="err" *ngIf="user.get('firstName').errors && user.get('firstName').touched">
+            {{ getErrorMessage(user.get('firstName').errors) }}
+          </mat-error>
         </div>
 
         <div class="form-group">
           <label class="infotekst">Familienaam</label>
-          <input formControlName="lastName" />
+          <input [ngClass]="{
+            'invalidInput': user.get('lastName').errors && user.get('lastName').touched
+          }" formControlName="lastName" />
+          <mat-error class="err" *ngIf="user.get('lastName').errors && user.get('lastName').touched">
+            {{ getErrorMessage(user.get('lastName').errors) }}
+          </mat-error>
         </div>
 
         <div class="form-group">
           <label class="infotekst">Email</label>
-          <input formControlName="email" />
+          <input [ngClass]="{
+            'invalidInput': user.get('email').errors && user.get('email').touched
+          }" formControlName="email" />
+          <mat-error class="err" *ngIf="user.get('email').errors && user.get('email').touched">
+            {{ getErrorMessage(user.get('email').errors) }}
+          </mat-error>
         </div>
 
         <div class="form-group">
           <label class="infotekst">Geboortedatum</label>
           <div class="datumContainer">
-            <input formControlName='birthday' [matDatepicker]="picker">
+            <input [ngClass]="{
+              'invalidInput': user.get('birthday').errors && user.get('birthday').touched
+            }" formControlName='birthday' [matDatepicker]="picker">
             <mat-datepicker-toggle class="toggle" matSuffix [for]="picker"></mat-datepicker-toggle>
           </div>
           <mat-datepicker #picker></mat-datepicker>
+
+          <mat-error class="err" *ngIf="user.get('birthday').errors && user.get('birthday').touched">
+            {{ getErrorMessage(user.get('birthday').errors) }}
+          </mat-error>
         </div>
 
         <div class="form-group">
@@ -35,22 +58,49 @@
             <mat-radio-button value="true"> Trainer </mat-radio-button>
             <mat-radio-button value="false">Gymnast </mat-radio-button>
           </mat-radio-group>
+          <mat-error class="err" *ngIf="user.get('isCoach').errors && user.get('isCoach').touched">
+            {{ getErrorMessage(user.get('isCoach').errors) }}
+          </mat-error>
         </div>
       </div>
 
       <span fxLayout="column" formGroupName="passwordGroup">
         <div class="form-group">
           <label class="infotekst">Wachtwoord</label>
-          <input type="password" formControlName="password" />
+          <input [ngClass]="{
+            'invalidInput': user.get('passwordGroup').get('password').errors && user.get('passwordGroup').get('password').touched
+          }" type="password" formControlName="password" />
+
+          <mat-error class="err" *ngIf="
+              user.get('passwordGroup').get('password').errors && 
+              user.get('passwordGroup').get('password').touched
+              ">
+            {{ getErrorMessage(user.get('passwordGroup').get('password').errors )}}
+          </mat-error>
         </div>
+
+
         <div class="form-group">
           <label class="infotekst">Bevestig wachtwoord</label>
-          <input type="password" formControlName="confirmPassword" />
+          <input [ngClass]="{
+            'invalidInput': user.get('passwordGroup').get('confirmPassword').errors && user.get('passwordGroup').get('confirmPassword').touched
+          }" type="password" formControlName="confirmPassword" />
+
+          <mat-error class="err" *ngIf="
+              user.get('passwordGroup').errors &&
+              user.get('passwordGroup').get('confirmPassword').touched &&
+              user.get('passwordGroup').get('password').touched
+            ">
+            {{getErrorMessage(
+              user.get('passwordGroup').errors
+            )}}
+          </mat-error>
+
         </div>
       </span>
     </mat-card-content>
     <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
-      <button class="addButton ctmBtn btn" type="submit" dis>Registreer</button>
+      <button class="addButton ctmBtn btn" type="submit" [disabled]="!user.valid">Registreer</button>
     </div>
     <div class="loginContainer">
       Als je al een account aangemaakt hebt,

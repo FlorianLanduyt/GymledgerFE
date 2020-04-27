@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,26 +21,44 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     })
   }
 
 
   onSubmit() {
-    this.authService.login(
-      this.user.value.email,
-      this.user.value.password
-    ).subscribe(val => {
-      if (val) {
-        if (this.authService.redirectUrl) {
-          this.router.navigateByUrl(this.authService.redirectUrl);
-          this.authService.redirectUrl = undefined;
-        } else {
-          this.router.navigate(['/gymnast']);
-        }
+    this.authService.userNameExists$(this.user.value.email, this.user.value.password).subscribe((exists: boolean) => {
+      if(exists){
+        console.log(exists)
+        this.authService.login(
+          this.user.value.email,
+          this.user.value.password
+        ).subscribe(val => {
+          if (val) {
+            if (this.authService.redirectUrl) {
+              this.router.navigateByUrl(this.authService.redirectUrl);
+              this.authService.redirectUrl = undefined;
+            } else {
+              this.router.navigate(['/gymnast']);
+            }
+          }
+        }, err => this.errorMsg = "Er is iets onverwacht misgelopen. Probeer later opnieuw.");
+      } else {
+        this.errorMsg = "Incorrect wachtwoord of e-mailadres"
       }
-    }, err => this.errorMsg = err.json().message);
+    })
   }
-  
+
+
+  getErrorMessage(errors: any) {
+    if (!errors) {
+      return null;
+    }
+    if (errors.required) {
+      return 'Dit veld is verplicht';
+    } else if (errors.email) {
+      return `geen geldige emailadres`;
+    }
+  }
 }

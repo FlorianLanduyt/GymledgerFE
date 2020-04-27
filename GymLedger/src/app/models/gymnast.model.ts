@@ -58,7 +58,7 @@ export class Gymnast {
     }
 
     static fromJson(json: any): Gymnast {
-        //console.log(json.trainings)
+        console.log(json)
         const g = new Gymnast(
             json.firstName,
             json.lastName,

@@ -15,7 +15,6 @@ export class ExerciseDataService {
   private exercisesUrl: string = `${environment.apiUrl}/Exercise`
 
 
-
   private _refreshExercises = new BehaviorSubject([])
 
   constructor(

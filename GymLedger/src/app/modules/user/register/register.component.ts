@@ -21,11 +21,10 @@ function serverSideValidateEmail(
   };
 }
 
-
 function comparePasswords(control: AbstractControl): ValidationErrors {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
-  return password.value === confirmPassword ? null : { 'passwordsDiffer': true }
+  return password.value === confirmPassword.value ? null : { 'passwordsDiffer': true }
 }
 
 @Component({
@@ -100,15 +99,26 @@ export class RegisterComponent implements OnInit {
         }
       }
     );
-
-    // console.log( 
-    //   this.user.value.firstName,
-    //   this.user.value.lastName,
-    //   this.user.value.email,
-    //   this.user.value.passwordGroup.password,
-    //   this.user.value.isCoach,
-    //   this.user.value.birthday)
-  
   }
+
+  getErrorMessage(errors: any) {
+    if (!errors) {
+      return null;
+    }
+    if (errors.required) {
+      return 'Dit veld is verplicht';
+    } else if (errors.minlength) {
+      return `heeft teniminste ${errors.minlength.requiredLength} karakters nodig (heeft ${errors.minlength.actualLength})`;
+    } else if (errors.hasNumber) {
+      return `heeft tenminste 1 nummer nodig`;
+    } else if (errors.userAlreadyExists) {
+      return `deze gebruikersnaam is reeds in gebruik`;
+    } else if (errors.email) {
+      return `geen geldige emailadres`;
+    } else if (errors.passwordsDiffer) {
+      return `komt niet overeen met wachtwoord`;
+    }
+  }
+
 
 }

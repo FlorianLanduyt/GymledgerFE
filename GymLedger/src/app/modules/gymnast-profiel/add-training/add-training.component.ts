@@ -2,11 +2,12 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Training } from 'src/app/models/training.model';
 import { Category } from 'src/app/models/category.model';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY, of } from 'rxjs';
 import { CategoryDataService } from '../category-data.service';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { GymnastDataService } from '../gymnast-data.service';
 import { AuthenticationService } from '../../user/authentication.service';
+import { Gymnast } from 'src/app/models/gymnast.model';
 
 @Component({
   selector: 'app-add-training',
@@ -16,24 +17,30 @@ import { AuthenticationService } from '../../user/authentication.service';
 
 
 export class AddTrainingComponent implements OnInit {
-  @Output() public newTrainingForm = new EventEmitter <boolean>();
+  @Output() public newTrainingForm = new EventEmitter<boolean>();
   @Input() public training: Training;
 
   public isEdit: boolean = false;
 
   public trainingFg: FormGroup;
   private _fetchCategories$: Observable<Category[]> = this._catService.categories$;
-  
 
-  constructor(private fb: FormBuilder, 
-      private _catService: CategoryDataService,
-      private _toastr: ToastrService,
-      private _gymnastService: GymnastDataService,
-      private _authService: AuthenticationService
-      ) { }
+  private currentUser: Gymnast
+
+
+  constructor(private fb: FormBuilder,
+    private _catService: CategoryDataService,
+    private _toastr: ToastrService,
+    private _gymnastService: GymnastDataService,
+    private _authService: AuthenticationService
+  ) { }
 
   ngOnInit(): void {
-    if(this.training){
+    this._authService.currentGymnast$.subscribe((user) => {
+      this.currentUser = user;
+    })
+
+    if (this.training) {
       this.isEdit = true;
     }
 
@@ -43,14 +50,14 @@ export class AddTrainingComponent implements OnInit {
 
   private initTrainingForm() {
     this.trainingFg = this.fb.group({
-      category: [this.isEdit? this.training.category:'', Validators.required],
-      date: [this.isEdit? this.training.date:'', Validators.required],
-      feelingBefore: [this.isEdit? this.training.feelingBeforeTraining:''],
-      feelingAfter: [this.isEdit? this.training.feelingAfterTraining:'']
+      category: [this.isEdit ? this.training.category : '', Validators.required],
+      date: [this.isEdit ? this.training.date : '', Validators.required],
+      feelingBefore: [this.isEdit ? this.training.feelingBeforeTraining : ''],
+      feelingAfter: [this.isEdit ? this.training.feelingAfterTraining : '']
     }
-    // ,
-    // { validator: validateCategory}
-    // 
+      // ,
+      // { validator: validateCategory}
+      // 
     )
   }
 
@@ -58,32 +65,24 @@ export class AddTrainingComponent implements OnInit {
     return this._fetchCategories$;
   }
 
-  onSubmit(){
-    this.closeForm()
+  onSubmit() {
+    this.closeForm();
 
-    if(!this.isEdit){
-      var newTraining:Training = this.createNewTraining();
+    if (!this.isEdit) {
+      var newTraining: Training = this.createNewTraining();
+      this._authService.user$.subscribe((email: string) => {
+        if(email){
+          this._gymnastService.addNewTraining(email, newTraining).subscribe();
+        }
+      })
     } else {
       this.editTraining();
+      this._gymnastService.putTraining(this.training).subscribe()
     }
-    
-
-      if(!this.isEdit){
-        //this._authService.user$.subscribe((email: string) => {
-          this._gymnastService.addNewTraining('florian.landuyt@hotmail.com', newTraining).add(() => {
-            this._toastr.success(`De training is toegevoegd`,"Succes")
-        })
-        //})
-        
-      } else {
-        this._gymnastService.putTraining(this.training).subscribe()
-      }
-    
 
   }
 
   private editTraining() {
-    console.log("edit")
     this.training.category = this.trainingFg.value.category;
     this.training.date = this.trainingFg.value.date;
     this.training.feelingBeforeTraining = this.trainingFg.value.feelingBefore;
@@ -99,7 +98,7 @@ export class AddTrainingComponent implements OnInit {
     return newTraining;
   }
 
-  closeForm(){
+  closeForm() {
     this.newTrainingForm.emit(false);
   }
 

@@ -6,6 +6,7 @@ import { Training } from 'src/app/models/training.model';
 import { tap, catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../../user/authentication.service';
+import { GlobalsService } from 'src/app/globals.service';
 
 @Component({
   selector: 'app-gymnast-profile',
@@ -16,26 +17,22 @@ export class GymnastProfileComponent implements OnInit {
   private _gymnast$: Observable<Gymnast>
 
   constructor(
-    private _gymnastService: GymnastDataService,
-    private _authService: AuthenticationService
+    private _authService: AuthenticationService,
     ) { }
 
   ngOnInit(): void {
-    // this._authService.user$.subscribe((email: string) => {
-    //   console.log("email: ", email)
-    //   if(email){
-    //     this._gymnastService.getGymnastByEmail$(email).subscribe(
-    //       g => this._gymnast = g
-    //     )
-    //   }
-    // })
-
-    this._gymnast$ = this._gymnastService.getGymnastByEmail$('florian.landuyt@hotmail.com')
+    this._authService.user$.subscribe((user) => {
+      if(user){
+        this._gymnast$ = this._authService.currentGymnast$;
+      }
+      
+    })
   }
 
   get gymnast$(): Observable<Gymnast>{
     return this._gymnast$;
   }
+
 
   
 

@@ -24,14 +24,10 @@ export class ExerciseListComponent implements OnInit {
 
   ngOnInit(): void {
     this._exerciseService.refreshExercises$.subscribe(() => {
-      if (this.trainingId == 0) {                   //All the existing exercises 
+      if (this.trainingId == 0) {                   //The list of all the existing exercises on the ExercisePage
         this.exercises$ = this._exerciseService.exercises$;
-      } else {
-        if (!this.isAnAddExerciseToTraining) {      //The exercises of a training 
-          this.exercises$ = this._exerciseService.getExercisesOfTraining$(this.trainingId);
-        } else {                                    // The still available exercises to add in the list with trainings
-          this.exercises$ = this._exerciseService.getExercisesNotInTraining$(this.trainingId);
-        }
+      } else {                                 // The list of exercises whereout to choose from for in an exercise
+        this.exercises$ = this._exerciseService.getExercisesNotInTraining$(this.trainingId);
       }
     })
   }

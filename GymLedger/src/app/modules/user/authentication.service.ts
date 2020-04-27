@@ -4,11 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Gymnast } from 'src/app/models/gymnast.model';
+import { GlobalsService } from 'src/app/globals.service';
 
 
 function parseJwt(token) {
   if (!token) {
-    return null
+    return null;
   }
   const base64Token = token.split('.')[1];
   const base64 = base64Token.replace(/-/g, '+').replace(/_/g, '/');
@@ -20,14 +22,18 @@ function parseJwt(token) {
 })
 
 export class AuthenticationService {
-  private readonly _tokenKey = 'currentUser';
+  private readonly _tokenKey = `${this._globals.userKey}`;
   private _user$: BehaviorSubject<string>
+
   public redirectUrl: string = null;
 
   constructor(
     private http: HttpClient,
-    private _router: Router) {
+    private _router: Router,
+    private _globals: GlobalsService) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
+    console.log(parsedToken)
+
     if (parsedToken) {
       const expires = new Date(parseInt(parsedToken.exp, 10) * 1000) < new Date()
       if (expires) {
@@ -35,7 +41,9 @@ export class AuthenticationService {
         parsedToken = null
       }
     }
-    this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name)
+    this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.sub)
+
+    console.log("Ctor: ", this.token)
   }
 
   get token(): string {
@@ -47,18 +55,24 @@ export class AuthenticationService {
     return this._user$
   }
 
+  get currentGymnast$(): Observable<Gymnast> {
+    let loggedInUserEmail = this._user$.getValue();
+     return this.http
+      .get(`${environment.apiUrl}/Gymnast/gymnast/${loggedInUserEmail}`)
+      .pipe(map((json: any): Gymnast => Gymnast.fromJson(json))
+      )
+  }
+
   login(email: string, password: string): Observable<boolean> {
     return this.http.post(
       `${environment.apiUrl}/account`,
       { email, password },
       { responseType: 'text' }
     ).pipe(
-      tap((token) => {
-        console.log(token)
-      }),
       map((token: any) => {
         if (token) {
           localStorage.setItem(this._tokenKey, token);
+          console.log("Email gebruiker: ", email)
           this._user$.next(email);
           return true;
         } else {
@@ -100,7 +114,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    if (this._user$.getValue()) {
+    if (this.user$.getValue()) {
       localStorage.removeItem('currentUser');
       this._user$.next(null);
       this._router.navigate(['/user/login']);
@@ -114,9 +128,18 @@ export class AuthenticationService {
         params: { email }
       }
     ).pipe(
-      tap((respons: any) => {
-        console.log(respons)
+      tap((response: any) => {
+        console.log(response)
       })
+    )
+  }
+
+  userNameExists$(email: string, password: string): Observable<boolean>{
+    return this.http.get<boolean>(
+      `${environment.apiUrl}/account/userNameExists`,
+      {
+        params: {email, password}
+      }
     )
   }
 

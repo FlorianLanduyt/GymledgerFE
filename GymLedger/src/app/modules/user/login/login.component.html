@@ -1,5 +1,8 @@
 <div class="formContainer">
   <form class="formSection" [formGroup]="user" (ngSubmit)=onSubmit()>
+    <mat-error class="errorMsg" *ngIf="errorMsg">
+      {{this.errorMsg}}
+    </mat-error>
     <h1 class="hoofdtitel">Aanmelden</h1>
 
 
@@ -7,17 +10,34 @@
       <div fxLayout="column" fxLayoutGap="2%">
         <div class="form-group">
           <label class="infotekst">Email</label>
-          <input formControlName="email" />
-        </div>
+          <input [ngClass]="{
+            'invalidInput': errorMsg || 
+            (user.get('email').errors && user.get('email').touched)
+          }"
+          formControlName="email" />
 
+          <!-- <mat-error>
+            {{getErrorMessage(user.get('email').errors)}}
+          </mat-error> -->
+
+        </div>
         <div class="form-group">
           <label class="infotekst">Wachtwoord</label>
-          <input type='password' formControlName="password" />
+          <input [ngClass]="{
+            'invalidInput': errorMsg ||
+            (user.get('password').errors && user.get('password').touched)
+          }" type='password' formControlName="password" />
+          <!-- <mat-error>
+            {{getErrorMessage(user.get('password').errors)}}
+          </mat-error> -->
         </div>
+        
       </div>
     </mat-card-content>
+    
     <div class="actions" fxLayout="row">
-      <button class="btn addButton ctmBtn" type="submit" dis>Meld aan</button>
+      
+      <button class="btn addButton ctmBtn" type="submit" [disabled]="!user.valid">Meld aan</button>
     </div>
     <span class="registerContainer">
       Heb je nog geen account? 

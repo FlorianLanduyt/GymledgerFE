@@ -33,3 +33,19 @@ mat-radio-button:not(:first-child) {
 .loginContainer { 
     font-size: 0.9em;
 }
+
+.err {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.form-group {
+    position: relative;
+}
+
+
+.invalidInput {
+    border: red solid 1px;
+   
+}

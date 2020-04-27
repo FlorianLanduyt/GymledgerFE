@@ -19,8 +19,6 @@
     margin-top: 15px;
 }
 
-
-
 .ctmBtn {
     width: 100%;
     margin-bottom: 10px;
@@ -28,4 +26,23 @@
 
 .registerContainer {
     font-size: 0.8em;
+}
+
+
+.invalidInput {
+    border: red solid 1px;
+   
+}
+
+.actions {
+    position: relative;
+    padding-top: 20px;
+}
+
+.errorMsg {
+    background-color: #E63946;
+    display: inline-block;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
 }

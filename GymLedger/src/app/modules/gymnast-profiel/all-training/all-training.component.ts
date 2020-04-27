@@ -37,16 +37,14 @@ export class AllTrainingComponent implements OnInit {
 
 
   private getAllTrainings() {
-    // this._authService.user$.subscribe((email: string) => {
-    //   if (email) {
-    //     this._gymnastService.getTrainings$(email).subscribe((t: Training[]) => {
-    //       this._trainingList = t;
-    //     });
-    //   }
-    // }
-    // )
+    this._authService.user$.subscribe((email: string) => {
+      if (email) {
+        this._trainingList$ = this._gymnastService.getTrainings$(email)
+      }
+    }
+    )
 
-    this._trainingList$ =  this._gymnastService.getTrainings$('florian.landuyt@hotmail.com')
+    // this._trainingList$ =  this._gymnastService.getTrainings$('florian.landuyt@hotmail.com')
 
   }
 

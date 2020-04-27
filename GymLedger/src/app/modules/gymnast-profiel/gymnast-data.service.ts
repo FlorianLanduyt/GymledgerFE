@@ -22,7 +22,7 @@ export class GymnastDataService {
   private _trainings: Training[]
 
   constructor(private http: HttpClient, private _authService: AuthenticationService) { 
-    this.gymnastEmail = 'florian.landuyt@hotmail.com'
+    //this.gymnastEmail = 'florian.landuyt@hotmail.com'
     
     // this.trainings$.subscribe((trainings: Training[]) => {
     //   this._trainings = trainings;
@@ -88,7 +88,6 @@ export class GymnastDataService {
         }),
         catchError(this.handleError), 
         map(Training.fromJson))
-        .subscribe()
   }
 
   deleteTraining(trainingId: number){
