@@ -37,10 +37,12 @@ export class LoginComponent implements OnInit {
         ).subscribe(val => {
           if (val) {
             if (this.authService.redirectUrl) {
-              this.router.navigateByUrl(this.authService.redirectUrl);
-              this.authService.redirectUrl = undefined;
+              // this.router.navigateByUrl(this.authService.redirectUrl);
+              // this.authService.redirectUrl = undefined;
+
+              this.router.navigate(['training/gymnast']);
             } else {
-              this.router.navigate(['/gymnast']);
+              this.router.navigate(['training/gymnast']);
             }
           }
         }, err => this.errorMsg = "Er is iets onverwacht misgelopen. Probeer later opnieuw.");

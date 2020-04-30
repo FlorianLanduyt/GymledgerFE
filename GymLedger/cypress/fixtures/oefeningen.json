@@ -1,0 +1,32 @@
+[
+    {
+      "id": 1,
+      "description": "Squat",
+      "image": "www.image.be",
+      "trainingExercises": []
+    },
+    {
+      "id": 2,
+      "description": "Gyrospinn",
+      "image": "www.image.be",
+      "trainingExercises": []
+    },
+    {
+      "id": 3,
+      "description": "Flex bars",
+      "image": "www.image.be",
+      "trainingExercises": []
+    },
+    {
+      "id": 4,
+      "description": "Xco met knieen op bal",
+      "image": "www.image.be",
+      "trainingExercises": []
+    },
+    {
+      "id": 5,
+      "description": "Flies",
+      "image": "www.image.be",
+      "trainingExercises": []
+    }
+]

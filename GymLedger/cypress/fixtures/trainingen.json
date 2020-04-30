@@ -1,0 +1,66 @@
+[
+{
+    "id": 1,
+    "category": {
+      "id": 1,
+      "description": "",
+      "name": "General"
+    },
+    "date": "2020-04-29T00:00:00",
+    "day": "woensdag",
+    "feelingBeforeTraining": 5,
+    "feelingAfterTraining": 7,
+    "gymnast": null,
+    "trainingExercises": [],
+    "exerciseEvaluations": [],
+    "amountOfExercises": 0
+  },
+  {
+    "id": 2,
+    "category": {
+      "id": 2,
+      "description": "",
+      "name": "Corestability"
+    },
+    "date": "2020-05-02T00:00:00",
+    "day": "zaterdag",
+    "feelingBeforeTraining": 4,
+    "feelingAfterTraining": 8,
+    "gymnast": null,
+    "trainingExercises": [],
+    "exerciseEvaluations": [],
+    "amountOfExercises": 0
+  },
+  {
+    "id": 3,
+    "category": {
+      "id": 4,
+      "description": "",
+      "name": "Legpower"
+    },
+    "date": "2020-05-03T00:00:00",
+    "day": "zondag",
+    "feelingBeforeTraining": 0,
+    "feelingAfterTraining": 0,
+    "gymnast": null,
+    "trainingExercises": [],
+    "exerciseEvaluations": [],
+    "amountOfExercises": 0
+  },
+  {
+    "id": 4,
+    "category": {
+      "id": 5,
+      "description": "",
+      "name": "Backpower"
+    },
+    "date": "2020-05-04T00:00:00",
+    "day": "maandag",
+    "feelingBeforeTraining": 9,
+    "feelingAfterTraining": 9,
+    "gymnast": null,
+    "trainingExercises": [],
+    "exerciseEvaluations": [],
+    "amountOfExercises": 0
+  }
+]

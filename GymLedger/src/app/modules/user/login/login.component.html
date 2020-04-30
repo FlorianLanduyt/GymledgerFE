@@ -1,6 +1,6 @@
 <div class="formContainer">
-  <form class="formSection" [formGroup]="user" (ngSubmit)=onSubmit()>
-    <mat-error class="errorMsg" *ngIf="errorMsg">
+  <form data-cy="form" class="formSection" [formGroup]="user" (ngSubmit)=onSubmit()>
+    <mat-error data-cy="generalError" class="errorMsg" *ngIf="errorMsg">
       {{this.errorMsg}}
     </mat-error>
     <h1 class="hoofdtitel">Aanmelden</h1>
@@ -14,7 +14,8 @@
             'invalidInput': errorMsg || 
             (user.get('email').errors && user.get('email').touched)
           }"
-          formControlName="email" />
+          formControlName="email"
+          data-cy="username" />
 
           <!-- <mat-error>
             {{getErrorMessage(user.get('email').errors)}}
@@ -26,7 +27,8 @@
           <input [ngClass]="{
             'invalidInput': errorMsg ||
             (user.get('password').errors && user.get('password').touched)
-          }" type='password' formControlName="password" />
+          }" type='password' formControlName="password" 
+          data-cy="password" />
           <!-- <mat-error>
             {{getErrorMessage(user.get('password').errors)}}
           </mat-error> -->
@@ -37,7 +39,7 @@
     
     <div class="actions" fxLayout="row">
       
-      <button class="btn addButton ctmBtn" type="submit" [disabled]="!user.valid">Meld aan</button>
+      <button class="btn addButton ctmBtn" type="submit" data-cy="loginButton" [disabled]="!user.valid">Meld aan</button>
     </div>
     <span class="registerContainer">
       Heb je nog geen account? 
