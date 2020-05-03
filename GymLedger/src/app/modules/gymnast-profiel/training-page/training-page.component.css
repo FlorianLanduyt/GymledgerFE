@@ -1,0 +1,18 @@
+
+.titleSection {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    justify-items: center;
+    background-color:var(--achtergrond) !important;
+    /* margin-bottom: 30px; */
+
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    align-items: center;
+    justify-content: space-between;
+}

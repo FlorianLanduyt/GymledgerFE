@@ -15,6 +15,7 @@ import { GlobalsService } from 'src/app/globals.service';
 })
 export class GymnastProfileComponent implements OnInit {
   private _gymnast$: Observable<Gymnast>
+  public isHomepage: boolean = true;
 
   constructor(
     private _authService: AuthenticationService,

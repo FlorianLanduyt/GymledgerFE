@@ -27,8 +27,6 @@ export class EvaluationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("test")
-
     this._exerciseService.getEvaluation$(this.trainingId, this.exerciseId)
       .subscribe(
         (evaluation: ExerciseEvaluation) => {
@@ -38,8 +36,6 @@ export class EvaluationComponent implements OnInit {
         err => {
           this.evaluation == null;
         });
-
-
     this.initEvaluationForm();
   }
 

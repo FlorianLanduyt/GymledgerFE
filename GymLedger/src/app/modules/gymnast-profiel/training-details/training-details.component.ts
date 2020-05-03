@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddExerciseToTrainingComponent } from '../../exercise/add-exercise-to-training/add-exercise-to-training.component';
 import { ExerciseDataService } from '../../exercise/exercise-data.service';
+import { AddTrainingComponent } from '../add-training/add-training.component';
 
 @Component({
   selector: 'app-training-details',
@@ -33,8 +34,16 @@ export class TrainingDetailsComponent implements OnInit {
   ngOnInit(): void {
     this._route.data.subscribe(item =>
       this.training = item['training'])
-    //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id)
+
+
+    this.training.feelingBeforeTraining = this.checkZero(this.training.feelingBeforeTraining)
+    this.training.feelingAfterTraining = this.checkZero(this.training.feelingAfterTraining);
   }
+
+  private checkZero(feeling: string): string {
+    return feeling == '0' ? "/" : feeling
+  }
+
 
   public removeTraining() {
     this._gymnastService.deleteTraining(this.training.id)
@@ -63,8 +72,8 @@ export class TrainingDetailsComponent implements OnInit {
     const config = new MatDialogConfig();
 
     // config.disableClose = true;
-    config.width = "80%";
-    config.height = "600px"
+    // config.width = "60%";
+    config.height = "800px"
     config.autoFocus = true;
     config.data = {
       trainingId: this.training.id
@@ -75,6 +84,24 @@ export class TrainingDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id);
       this._exerciseService.refreshExercises$.next
+    })
+  }
+
+  initEditTraining() {
+    const config = new MatDialogConfig();
+
+    config.disableClose = true;
+    config.width = "80%";
+    config.autoFocus = true;
+    config.data = {
+      training: this.training
+    }
+
+    const dialogRef = this.dialog.open(AddTrainingComponent, config);
+
+    dialogRef.afterClosed().subscribe(() => {
+      //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id);
+      // this._exerciseService.refreshExercises$.next
     })
   }
 }

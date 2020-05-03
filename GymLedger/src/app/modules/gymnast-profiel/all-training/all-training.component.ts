@@ -18,8 +18,10 @@ export class AllTrainingComponent implements OnInit {
   public errorMessage: string = ""
   public newTrainingForm: boolean = false;
 
+  @Input() public isHomepage: boolean;
+
   // private _fetchTrainings$: Observable<Training[]>
-  private _trainingList$: Observable<Training[]>;
+  private _trainingList :Training[];
 
   constructor(
     private _gymnastService: GymnastDataService,
@@ -39,36 +41,35 @@ export class AllTrainingComponent implements OnInit {
   private getAllTrainings() {
     this._authService.user$.subscribe((email: string) => {
       if (email) {
-        this._trainingList$ = this._gymnastService.getTrainings$(email)
+        this._gymnastService.getTrainings$(email).subscribe((list) => {
+          this._trainingList = list;
+          if(this.isHomepage){
+            this.initListForHomepage();
+          }
+        })
       }
-    }
-    )
-
-    // this._trainingList$ =  this._gymnastService.getTrainings$('florian.landuyt@hotmail.com')
-
+    })
   }
 
-  // )
-  // this.fetchTrainings()
 
 
-  // private fetchTrainings(){
-  //   this._gymnastService.allTrainings$.subscribe((t: []) => {
-  //     this._trainings = t
-  //   })
+  private initListForHomepage(): void{
+    var threeInFuture: Training[] = null;
+    threeInFuture = this._trainingList.filter(this.inFuture);
 
-  // this._fetchTrainings$ = this._gymnastService.allTrainings$.pipe(
-  //   catchError(err => {
-  //     this.errorMessage = err;
-  //     return EMPTY
-  //   })
-  // )
+    this._trainingList = this._trainingList.slice(0, 3);
+  }
 
+  // WIP
+  inFuture(training: Training) {
+    const vandaag = new Date();
 
+    var nVandaag: string = `${vandaag.getFullYear()}-${vandaag.getUTCMonth()}-${vandaag.getDay()}`
+    return training.date.getDate < new Date().getDate;
+  }
 
-
-  get trainings$(): Observable<Training[]> {
-    return this._trainingList$
+  get trainings():Training[] {
+    return this._trainingList
   }
 
   public showDetails(selected: Training) {

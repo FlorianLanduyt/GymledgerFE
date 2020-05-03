@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Training } from 'src/app/models/training.model';
 import { Category } from 'src/app/models/category.model';
@@ -8,6 +8,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 import { GymnastDataService } from '../gymnast-data.service';
 import { AuthenticationService } from '../../user/authentication.service';
 import { Gymnast } from 'src/app/models/gymnast.model';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-training',
@@ -17,31 +18,38 @@ import { Gymnast } from 'src/app/models/gymnast.model';
 
 
 export class AddTrainingComponent implements OnInit {
-  @Output() public newTrainingForm = new EventEmitter<boolean>();
-  @Input() public training: Training;
+  public training: Training;
+  public title: string;
+  public subTitle: string;
 
   public isEdit: boolean = false;
 
   public trainingFg: FormGroup;
   private _fetchCategories$: Observable<Category[]> = this._catService.categories$;
 
-  private currentUser: Gymnast
-
 
   constructor(private fb: FormBuilder,
     private _catService: CategoryDataService,
     private _toastr: ToastrService,
     private _gymnastService: GymnastDataService,
-    private _authService: AuthenticationService
-  ) { }
+    private _authService: AuthenticationService,
+    public dialogRef: MatDialogRef<AddTrainingComponent>,
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {
+    if(data){
+      this.training = data.training
+    }
+      
+   }
 
   ngOnInit(): void {
-    this._authService.currentGymnast$.subscribe((user) => {
-      this.currentUser = user;
-    })
-
-    if (this.training) {
+    if (this.data) {
       this.isEdit = true;
+      this.title = "Pas de gekozen training aan";
+      this.subTitle = "Pas de velden van de gekozen training aan";
+    } else {
+      this.title = "Creëer een nieuwe training";
+      this.subTitle = "Maak een nieuwe training door de velden op een juiste manier in te vullen";
     }
 
     this.initTrainingForm();
@@ -52,8 +60,8 @@ export class AddTrainingComponent implements OnInit {
     this.trainingFg = this.fb.group({
       category: [this.isEdit ? this.training.category : '', Validators.required],
       date: [this.isEdit ? this.training.date : '', Validators.required],
-      feelingBefore: [this.isEdit ? this.training.feelingBeforeTraining : ''],
-      feelingAfter: [this.isEdit ? this.training.feelingAfterTraining : '']
+      feelingBefore: [this.isEdit ? this.training.feelingBeforeTraining : '', [Validators.min(0), Validators.max(10)]],
+      feelingAfter: [this.isEdit ? this.training.feelingAfterTraining : '', [Validators.min(0), Validators.max(10)]]
     }
       // ,
       // { validator: validateCategory}
@@ -85,8 +93,19 @@ export class AddTrainingComponent implements OnInit {
   private editTraining() {
     this.training.category = this.trainingFg.value.category;
     this.training.date = this.trainingFg.value.date;
-    this.training.feelingBeforeTraining = this.trainingFg.value.feelingBefore;
-    this.training.feelingAfterTraining = this.trainingFg.value.feelingAfter;
+
+    if(this.trainingFg.value.feelingBefore == null){
+      this.training.feelingBeforeTraining = "0";
+    } else {
+      this.training.feelingBeforeTraining = this.trainingFg.value.feelingBefore;
+    }
+
+    if(this.trainingFg.value.feelingAfter == null) {
+      this.training.feelingBeforeTraining = "0";
+    } else {
+      this.training.feelingAfterTraining = this.trainingFg.value.feelingAfter;
+    }
+    
   }
 
   private createNewTraining() {
@@ -95,16 +114,24 @@ export class AddTrainingComponent implements OnInit {
     newTraining.date = this.trainingFg.value.date;
     newTraining.feelingBeforeTraining = this.trainingFg.value.feelingBefore;
     newTraining.feelingAfterTraining = this.trainingFg.value.feelingAfter;
+
+    this.dialogRef.close()
+
     return newTraining;
   }
 
   closeForm() {
-    this.newTrainingForm.emit(false);
+    this.dialogRef.close()
   }
 
   getErrorMessage(errors: any): string {
     if (errors.required) {
-      return 'moet ingevuld zijn'
+      return 'Dit veld is verplicht'
+    } else if(errors.min) {
+      return `Kies een getal hoger dan ${errors.min.min}`
+    } else if(errors.max) {
+      return `Kies een getal lager of gelijk ${errors.max.max}`
     }
   }
+  // ${errors.min} en ${errors.max}
 }

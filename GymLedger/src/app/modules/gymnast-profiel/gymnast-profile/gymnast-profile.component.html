@@ -1,12 +1,18 @@
 <div class=page *ngIf="gymnast$ | async as gymnast; else loading">
     <!-- <div>dit is gymnast {{ gymnast.firstname }}</div> -->
+
     <div>
         <section class="trainingSection">
-            <!-- <span class="naastElkaar">
-                <h1>Trainingen</h1>
-                <button (click)='scroll(doel)' type="button" class="addButton">Voeg toe</button>
-            </span> -->
-            <app-training-list></app-training-list>
+            <div class="titleContainer">
+                <h1 class="hoofdtitel">Eerstvolgende trainingen</h1>
+                <div class="linkSection">
+                    <a [routerLink]="['/list']" class="infotekst">Alle trainingen </a>
+                    <mat-icon>keyboard_arrow_right </mat-icon> 
+                </div>
+               
+                
+            </div>
+            <app-training-list [isHomepage]="isHomepage" ></app-training-list>
         </section>
     </div>
 </div>

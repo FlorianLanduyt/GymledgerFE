@@ -45,7 +45,7 @@ textarea {
   /* PALETTE */
 
   --blue: #623cea;
-  --blue-hover: #d0acf9;
+  --blue-hover: #B1C5F6;
 
   --bone: #e7dfc6;
   --bone-hover: #FDFCE3;
@@ -119,28 +119,6 @@ button {
 }
 
 
-/* .btn {
-  width: 10em;
-  height: 2.4em;
-  border-radius: 5px;
-  box-shadow: none;
-  outline: none;
-  border-style: solid;
-  transition: all ease-in-out 0.05s;
-}
-
-.btn:hover {
-  cursor: pointer;
-}
-
-.btn:active {
-  transform: scale(0.95, 0.95);
-}
-
-.btn:not(:first-child) {
-  margin-left: 20px;
-} */
-
 
 /* --------------- FORMS ---------------- */
 
@@ -148,10 +126,21 @@ button {
   display: flex;
   flex-direction: column;
   padding-bottom: 30px;
+  position: relative;
 }
 
 .form-group>* {
   padding-bottom: 10px;
+}
+
+.invalidInput {
+  border: red solid 1px !important;
+}
+
+.err {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 
@@ -175,4 +164,13 @@ button {
   line-height: 1.5rem;
   /* line-height: 1.5em; */
 
+}
+
+a {
+  color: var(--blauw);
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--blue);
 }

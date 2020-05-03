@@ -18,13 +18,9 @@ export class TrainingComponent implements OnInit {
   private _afterFeeling: string;
 
 
-  constructor(private _categoryService: CategoryDataService,
-    private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit(): void {
-    // const cat = Category[this.training.category.name].toLowerCase();
-    // this._category = cat.charAt(0).toUpperCase() + cat.slice(1)
-
     this._beforeFeeling = this.checkZero(this.training.feelingBeforeTraining)
     this._afterFeeling = this.checkZero(this.training.feelingAfterTraining);
   }

@@ -3,10 +3,44 @@
     <p class="category">{{training.category.name}}</p>
     <div class="infoContainer">
       <h1 class="hoofdtitel">Training van {{training.day}} {{training.date | date}} </h1>
-      <mat-icon (click)="changeToEdit()" class="icon md-36 customIcon">edit</mat-icon>
+      <mat-icon (click)="initEditTraining()" class="icon md-36 customIcon">edit</mat-icon>
     </div>
-    <p class="infotekst">Lichaamsgevoel voor de training: <span class="number"> {{training.feelingBeforeTraining}}</span></p>
-    <p>Lichaamsgevoel na de training: <span class="number">{{training.feelingAfterTraining}}</span></p>
+
+    <div>
+      <p class="ondertitel">Lichaamsgevoel</p>
+      <div class="gevoelContainer">
+
+        <div class="gevoel">
+          <p class="infotekst">Start</p>
+          <div class="numberScale">
+            <div class="numberBox">
+              <div class="numberInBox">
+                {{training.feelingBeforeTraining}}
+              </div>
+            </div>
+            <div class="scale">
+              /10
+            </div>
+          </div>
+        </div>
+        <div class="gevoel">
+          <p class="infotekst">Einde</p>
+          <div class="numberScale">
+            <div class="numberBox">
+              <div class="numberInBox">
+                {{training.feelingAfterTraining}}
+              </div>
+            </div>
+            <div class="scale">
+              /10
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
     <div class="oefeningContainer">
       <div class="titleContainer">
         <div class="ondertitel">Oefeningen</div>
@@ -22,5 +56,5 @@
   </div>
 </div>
 <div *ngIf="isEdit">
-  <app-add-training (newTrainingForm)="isEdit = false" [training]="training"></app-add-training>
+  <app-add-training></app-add-training>
 </div>

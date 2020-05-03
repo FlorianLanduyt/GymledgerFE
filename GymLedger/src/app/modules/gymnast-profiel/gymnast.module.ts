@@ -11,12 +11,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { TrainingResolver } from './training-resolver.service';
 import { AuthGuard } from '../user/auth.guard';
 import { ExerciseModule } from "../exercise/exercise.module";
+import { TrainingPageComponent } from './training-page/training-page.component';
 
 
 const routes: Routes = [
   { path: '', canActivate: [AuthGuard],  redirectTo: 'gymnast', pathMatch: 'full'},
   { path: 'gymnast', canActivate: [AuthGuard], component: GymnastProfileComponent},
-  { path: 'list', canActivate: [AuthGuard], component: AllTrainingComponent},
+  { path: 'list', canActivate: [AuthGuard], component: TrainingPageComponent},
   { 
     path: 'details/:id', canActivate: [AuthGuard], 
     component: TrainingDetailsComponent, 
@@ -31,7 +32,8 @@ const routes: Routes = [
     TrainingComponent,
     GymnastProfileComponent,
     AddTrainingComponent,
-    TrainingDetailsComponent
+    TrainingDetailsComponent,
+    TrainingPageComponent
   ],
   imports: [
     CommonModule,

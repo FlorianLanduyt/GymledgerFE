@@ -21,18 +21,9 @@ export class GymnastDataService {
 
   private _trainings: Training[]
 
-  constructor(private http: HttpClient, private _authService: AuthenticationService) { 
-    //this.gymnastEmail = 'florian.landuyt@hotmail.com'
-    
-    // this.trainings$.subscribe((trainings: Training[]) => {
-    //   this._trainings = trainings;
-    //   this._trainings$.next(this._trainings)
-    // })
+  constructor(private http: HttpClient) { 
   }
 
-  // get allTrainings$(): Observable<Training[]> {
-  //   return this._trainings$;
-  // }
 
   get refreshTrainingList$() {
     return this._refreshTrainingList$;
@@ -64,10 +55,9 @@ export class GymnastDataService {
 
   getTrainings$(email:string): Observable<Training[]> {
     return this.http.get<Training[]>(`${environment.apiUrl}/Training/${email}/trainings`)
-        .pipe(
-          // tap( training => console.log("Trainings: ", JSON.stringify(training))),
-          catchError(this.handleError),
-          //map((list: any): Training[] => list.map(Training.fromJson))
+        .pipe( 
+          
+          catchError(this.handleError)
           )
   }
 

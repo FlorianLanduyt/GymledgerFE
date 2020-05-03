@@ -1,51 +1,79 @@
 <div class="formPage">
   <div class="formContainer">
     <form [formGroup]="trainingFg" (ngSubmit)='onSubmit()'>
-      <h2 *ngIf="!isEdit">Creëer een nieuwe training </h2>
-      <h2 *ngIf="isEdit">Pas training aan </h2>
-      <p *ngIf="!isEdit" class="subHead">Maak een nieuwe training door de velden op een juiste manier in te vullen </p>
-      <p *ngIf="isEdit" class="subHead">Pas de velden van de gekozen training aan.</p>
-      <div class="inputItem">
-        <mat-form-field>
-          <mat-label>Kies een datum</mat-label>
-          <input formControlName='date' matInput [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-error *ngIf="trainingFg.get('date')['errors'] && trainingFg.get('date').touched">
-          <!-- {{getErrorMessage(trainingFg.get('category')['errors'])}} -->
-          {{ getErrorMessage(trainingFg.get('category')['errors']) }}
-        </mat-error>
-      </div>
-      <div class="inputItem">
-        <label>Category</label>
-        <select formControlName='category'>
-          <option hidden value="">Kies het onderwerp</option>
-          <option [ngValue]="c" *ngFor="let c of (categories$ | async)">
-            {{c.name}}
-          </option>
-        </select>
-        <mat-error *ngIf="trainingFg.get('category')['errors']  
-           && trainingFg.get('category').touched">
-          <!-- {{getErrorMessage(trainingFg.get('category')['errors'])}} -->
-          {{ getErrorMessage(trainingFg.get('category')['errors']) }}
-        </mat-error>
-      </div>
-      <div class="inputItem">
-        <label>Gevoel voor de training (tussen 1 en 10)</label>
-        <input class="normalInput" formControlName="feelingBefore" type="number">
-      </div>
-      <div class="inputItem">
-        <label>Gevoel na de training (getal tussen 1 en 10)</label>
-        <input class="normalInput" formControlName='feelingAfter' type='number'>
-      </div>
-      <div class="btnContainer">
-        <div>
-          <button type="button" class="btn addButton cancelButton" (click)="closeForm()">Annuleer</button>
-          <button *ngIf="!isEdit" class="btn addButton" type="submit" [disabled]='!trainingFg.valid'>Voeg toe</button>
-          <button *ngIf="isEdit" class="btn addButton" type="submit" [disabled]='!trainingFg.valid'>Pas aan</button>
+      <h2 class="hoofdtitel">{{this.title}}</h2>
 
+      <div class="requiredSection">
+        <div class="form-group">
+          <label class="infotekst" class="infotekst">Kies een datum</label>
+          <div class="dateContainer">
+            <input [ngClass]="{
+              'invalidInput': trainingFg.get('date').errors && trainingFg.get('date').touched
+            }" class="customInput" formControlName='date' matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle class="toggle" matSuffix [for]="picker"></mat-datepicker-toggle>
+          </div>
+          <mat-datepicker class="picker" #picker></mat-datepicker>
+          <mat-error class="err" *ngIf="trainingFg.get('date').errors && trainingFg.get('date').touched">
+            {{ getErrorMessage(trainingFg.get('date').errors) }}
+          </mat-error>
         </div>
+
+        <div class="form-group">
+          <label class="infotekst">Category</label>
+          <select formControlName='category'>
+            <option hidden value="">Kies het onderwerp</option>
+            <option [ngValue]="c" *ngFor="let c of (categories$ | async)">
+              {{c.name}}
+            </option>
+          </select>
+          <mat-error class="err" *ngIf="trainingFg.get('category').errors 
+           && trainingFg.get('category').touched">
+            {{ getErrorMessage(trainingFg.get('category').errors) }}
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="gevoelSection">
+        <p class="ondertitel">Gevoel</p>
+
+        <div class="form-group">
+          <div class="ctm-form-group">
+            <label class="infotekst"><span class="color">Voor</span> de training</label>
+            <div>
+              <input [ngClass]="{
+                'invalidInput': trainingFg.get('feelingBefore').errors && trainingFg.get('feelingBefore').touched
+              }" class="miniInput" formControlName="feelingBefore" type="number" min="0" max="10">
+            </div>
+            <div class="big">/10</div>
+          </div>
+          <mat-error class="err"
+            *ngIf="trainingFg.get('feelingBefore').errors && trainingFg.get('feelingBefore').touched">
+            {{ getErrorMessage(trainingFg.get('feelingBefore').errors) }}
+          </mat-error>
+        </div>
+
+        <div class="form-group" >
+          <div class="ctm-form-group">
+            <label class="infotekst"><span class="color">Na</span> de training</label>
+            <div>
+              <input [ngClass]="{
+                'invalidInput': trainingFg.get('feelingAfter').errors && trainingFg.get('feelingAfter').touched
+              }" class="miniInput" formControlName='feelingAfter' type='number' min="0" max="10">
+            </div>
+            <div class="big">/10</div>
+          </div>
+          <mat-error class="err"
+            *ngIf="trainingFg.get('feelingAfter').errors && trainingFg.get('feelingAfter').touched">
+            {{ getErrorMessage(trainingFg.get('feelingAfter').errors) }}
+          </mat-error>
+        </div>
+
+      </div>
+
+      <div class="btnContainer">
+        <button type="button" class="btn addButton cancelButton" (click)="closeForm()">Annuleer</button>
+        <button *ngIf="!isEdit" class="btn addButton" type="submit" [disabled]='!trainingFg.valid'>Voeg toe</button>
+        <button *ngIf="isEdit" class="btn addButton" type="submit" [disabled]='!trainingFg.valid'>Pas aan</button>
       </div>
     </form>
   </div>

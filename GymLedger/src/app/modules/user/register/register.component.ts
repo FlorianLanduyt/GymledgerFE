@@ -50,20 +50,20 @@ export class RegisterComponent implements OnInit {
       passwordGroup: this.fb.group(
         {
           password: [
-            'P@ssword111', 
+            '', 
             [
               Validators.required, 
               Validators.minLength(8)
             ]
           ],
-          confirmPassword: ['P@ssword111', Validators.required]
+          confirmPassword: ['', Validators.required]
         }, 
         { validator: comparePasswords }),
 
-      isCoach: ['true', Validators.required],
-      firstName: ['peter', Validators.required],
-      lastName: ['pieters', Validators.required],
-      birthday: [new Date(), Validators.required]
+      isCoach: ['false', Validators.required], // WIP Enkel nog maar een gymnast
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      birthday: ['', Validators.required]
     });
   }
 

@@ -105,7 +105,9 @@ export class Training {
             // json.amountOfExercises
         )
         t._category = Category.fromJson(json.category)
-        t._date = json.date;
+         t._date = json.date
+         //t._date = new Date(parseInt(json.date.substr(6)));
+
         t._feelingBeforeTraining = json.feelingBeforeTraining
         t._feelingAfterTraining = json.feelingAfterTraining
         t._id = json.id;
