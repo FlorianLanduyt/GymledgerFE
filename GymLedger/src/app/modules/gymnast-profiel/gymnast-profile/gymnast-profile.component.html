@@ -1,22 +1,35 @@
 <div class=page *ngIf="gymnast$ | async as gymnast; else loading">
-    <!-- <div>dit is gymnast {{ gymnast.firstname }}</div> -->
+  <!-- <div>dit is gymnast {{ gymnast.firstname }}</div> -->
+  
+    <section class="pageSection">
+      <div class="titleContainer">
+        <h1 class="hoofdtitel">Eerstvolgende trainingen</h1>
+        <div class="linkSection">
+          <a [routerLink]="['/list']" class="infotekst">Alle trainingen </a>
+          <mat-icon>keyboard_arrow_right </mat-icon>
+        </div>
+      </div>
+      <app-training-list [isHomepage]="isHomepage"></app-training-list>
+    </section>
 
-    <div>
-        <section class="trainingSection">
-            <div class="titleContainer">
-                <h1 class="hoofdtitel">Eerstvolgende trainingen</h1>
-                <div class="linkSection">
-                    <a [routerLink]="['/list']" class="infotekst">Alle trainingen </a>
-                    <mat-icon>keyboard_arrow_right </mat-icon> 
-                </div>
-               
-                
+    <section class="pageSection">
+        <div class="titleContainer">
+            <h1 class="hoofdtitel">Oefeningen</h1>
+            <div class="linkSection">
+                <a [routerLink]="['/list']" class="infotekst">Alle oefeningen </a>
+                <mat-icon>keyboard_arrow_right </mat-icon>
             </div>
-            <app-training-list [isHomepage]="isHomepage" ></app-training-list>
-        </section>
-    </div>
+        </div>
+        <div class="list">
+            <app-exercise-list [isHomepage]="isHomepage"></app-exercise-list>
+        </div>
+        
+    </section>
+
+ 
+
 </div>
 
 <ng-template #loading>
-    <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </ng-template>

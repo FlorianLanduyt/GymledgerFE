@@ -154,7 +154,8 @@ button {
 
 .ondertitel {
   font-size: 25px;
-  font-weight: 400;
+  font-weight: 300;
+  margin-bottom: 10px;
   /* line-height: 50px; */
 }
 

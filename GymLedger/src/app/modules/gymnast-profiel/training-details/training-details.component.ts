@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { GymnastDataService } from '../gymnast-data.service';
 import { Training } from 'src/app/models/training.model';
 import { ToastrService } from 'ngx-toastr';
@@ -15,10 +15,11 @@ import { AddTrainingComponent } from '../add-training/add-training.component';
   styleUrls: ['./training-details.component.css']
 })
 export class TrainingDetailsComponent implements OnInit {
-  //@Input() public training: Training
   public training: Training;
   private _isEdit = false;
-  //public exercises$ = new Observable<Exercise[]>();
+
+  public feelingBefore: string;
+  public feelingAfter: string;
 
   public trainingFg: FormGroup
 
@@ -28,16 +29,16 @@ export class TrainingDetailsComponent implements OnInit {
     private router: Router,
     private _route: ActivatedRoute,
     private _toastr: ToastrService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    this._route.data.subscribe(item =>
-      this.training = item['training'])
+
+    this._route.data.subscribe(item => this.training = item['training'])
 
 
-    this.training.feelingBeforeTraining = this.checkZero(this.training.feelingBeforeTraining)
-    this.training.feelingAfterTraining = this.checkZero(this.training.feelingAfterTraining);
+    this.feelingBefore = this.training.feelingBeforeTraining;
+    this.feelingAfter = this.training.feelingAfterTraining;
   }
 
   private checkZero(feeling: string): string {
@@ -49,7 +50,7 @@ export class TrainingDetailsComponent implements OnInit {
     this._gymnastService.deleteTraining(this.training.id)
       .subscribe((response: Training) => {
         this._toastr.success("De training is verwijderd", "Succes")
-        this.router.navigate([''])
+        this.router.navigate(['list'])
       }
       )
   }
@@ -100,8 +101,6 @@ export class TrainingDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddTrainingComponent, config);
 
     dialogRef.afterClosed().subscribe(() => {
-      //this.exercises$ = this._exercisService.getExercisesOfTraining$(this.training.id);
-      // this._exerciseService.refreshExercises$.next
     })
   }
 }

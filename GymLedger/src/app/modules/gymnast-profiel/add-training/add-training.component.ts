@@ -86,6 +86,7 @@ export class AddTrainingComponent implements OnInit {
     } else {
       this.editTraining();
       this._gymnastService.putTraining(this.training).subscribe()
+      this._gymnastService.refreshSingleTraining$.next();
     }
 
   }
@@ -94,6 +95,8 @@ export class AddTrainingComponent implements OnInit {
     this.training.category = this.trainingFg.value.category;
     this.training.date = this.trainingFg.value.date;
 
+    console.log(this.trainingFg.value.feelingBefore)
+
     if(this.trainingFg.value.feelingBefore == null){
       this.training.feelingBeforeTraining = "0";
     } else {
@@ -101,7 +104,7 @@ export class AddTrainingComponent implements OnInit {
     }
 
     if(this.trainingFg.value.feelingAfter == null) {
-      this.training.feelingBeforeTraining = "0";
+      this.training.feelingAfterTraining = "0";
     } else {
       this.training.feelingAfterTraining = this.trainingFg.value.feelingAfter;
     }

@@ -10,10 +10,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./exercise-list.component.css']
 })
 export class ExerciseListComponent implements OnInit {
-  public exercises$: Observable<Exercise[]>;
+  public exercises: Exercise[];
+
   @Input() public filterTitle: string = '';
   @Input() public trainingId: number = 0;
   @Input() public isAnAddExerciseToTraining: boolean;
+  @Input() public isHomepage: boolean;
 
   constructor(
     private _exerciseService: ExerciseDataService,
@@ -25,11 +27,21 @@ export class ExerciseListComponent implements OnInit {
   ngOnInit(): void {
     this._exerciseService.refreshExercises$.subscribe(() => {
       if (this.trainingId == 0) {                   //The list of all the existing exercises on the ExercisePage
-        this.exercises$ = this._exerciseService.exercises$;
+        this._exerciseService.exercises$.subscribe(list => {
+          this.exercises = list;
+          if(this.isHomepage)
+            this.initListForHomepage()
+        });
       } else {                                 // The list of exercises whereout to choose from for in an exercise
-        this.exercises$ = this._exerciseService.getExercisesNotInTraining$(this.trainingId);
+        this._exerciseService.getExercisesNotInTraining$(this.trainingId).subscribe(list => {
+          this.exercises = list;
+        });
       }
     })
+
+    if(this.isHomepage){
+      
+    }
   }
 
   AddExistingExerciseToTraining(eId: number) {
@@ -38,12 +50,14 @@ export class ExerciseListComponent implements OnInit {
         .subscribe(
           (response: Exercise) => {
             if (response) {
-              this.exercises$ = this._exerciseService.getExercisesNotInTraining$(this.trainingId);
+              this._exerciseService.getExercisesNotInTraining$(this.trainingId).subscribe(list => {
+                this.exercises = list
+              });
               this._toastr.success(`\"${response.description}\" is toegevoegd aan de lijst van trainingen`, 'Success')
               this._exerciseService.refreshExercises$.next([])
             }
           },
-          err => {
+          err => { // Kon enkel maar gebeuren bij een vorige versie
             if (err) {
               this._toastr.info("Deze oefening staat al in de lijst van trainingen", "Dubbele oefening")
               return EMPTY
@@ -52,4 +66,9 @@ export class ExerciseListComponent implements OnInit {
         );
     }
   }
+
+  initListForHomepage(){
+    this.exercises = this.exercises.slice(0, 3);
+  }
+
 }

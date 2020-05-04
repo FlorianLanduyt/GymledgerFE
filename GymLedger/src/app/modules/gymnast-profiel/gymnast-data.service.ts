@@ -17,11 +17,15 @@ export class GymnastDataService {
 
   // private _trainings$ = new BehaviorSubject<Training[]>([]);
   private _refreshTrainingList$ = new Subject<void>();
+  private _refreshSingleTraining$ = new Subject<void>();
 
 
-  private _trainings: Training[]
 
   constructor(private http: HttpClient) { 
+  }
+
+  get refreshSingleTraining$(){
+    return this._refreshSingleTraining$;
   }
 
 
@@ -43,10 +47,6 @@ export class GymnastDataService {
   getGymnastByEmail$(email:string): Observable<Gymnast> {
     return this.http.get(`${environment.apiUrl}/Gymnast/gymnast/${email}`)
     .pipe(
-      
-      tap((jsonG: any) => {
-        console.log(jsonG)
-      }),
       catchError(this.handleError),
       map((jsonGymnast: any): Gymnast => Gymnast.fromJson(jsonGymnast)),
       
@@ -55,10 +55,7 @@ export class GymnastDataService {
 
   getTrainings$(email:string): Observable<Training[]> {
     return this.http.get<Training[]>(`${environment.apiUrl}/Training/${email}/trainings`)
-        .pipe( 
-          
-          catchError(this.handleError)
-          )
+        .pipe(catchError(this.handleError) )
   }
 
    getTraining$(id: string): Observable<Training> {
@@ -83,18 +80,16 @@ export class GymnastDataService {
   deleteTraining(trainingId: number){
     return this.http.delete(`${environment.apiUrl}/Training/${trainingId}`)
     .pipe(
-      
-      catchError(this.handleError),
-      tap((jsonTraining: any) => {
-        // console.log(jsonTraining)
-      }),
-      //map((jsonTraining: any): Training => Training.fromJson(jsonTraining))
+      catchError(this.handleError)
     )
   }
 
   putTraining(training: Training){
     return this.http.put(`${environment.apiUrl}/Training/edit`,training.toJsonEdit())
     .pipe(
+      tap((trainingJson: any) => {
+        this._refreshSingleTraining$.next()
+      }),
       catchError(this.handleError),
       map((jsonTraining: any): Training => Training.fromJson(jsonTraining))
     )
