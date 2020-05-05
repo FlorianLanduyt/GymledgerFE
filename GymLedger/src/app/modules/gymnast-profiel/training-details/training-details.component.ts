@@ -41,9 +41,9 @@ export class TrainingDetailsComponent implements OnInit {
     this.feelingAfter = this.training.feelingAfterTraining;
   }
 
-  private checkZero(feeling: string): string {
-    return feeling == '0' ? "/" : feeling
-  }
+  // private checkZero(feeling: string): string {
+  //   return feeling == '0' ? "/" : feeling
+  // }
 
 
   public removeTraining() {
@@ -51,8 +51,7 @@ export class TrainingDetailsComponent implements OnInit {
       .subscribe((response: Training) => {
         this._toastr.success("De training is verwijderd", "Succes")
         this.router.navigate(['list'])
-      }
-      )
+      })
   }
 
   public changeToEdit() {
