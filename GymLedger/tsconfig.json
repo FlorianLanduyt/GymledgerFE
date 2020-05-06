@@ -22,5 +22,6 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
+  "skipLibCheck": true // Anders fout bij importen van auth0client (Kan niet anders worden opgelost)
 }

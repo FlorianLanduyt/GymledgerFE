@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from "../material/material.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { TestprofileComponent } from './testprofile/testprofile.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, TestprofileComponent],
   imports: [
     CommonModule,
     MaterialModule,

@@ -22,15 +22,18 @@ function parseJwt(token) {
 })
 
 export class AuthenticationService {
-  private readonly _tokenKey = `${this._globals.userKey}`;
+  private readonly _tokenKey = `currentUser`;
   private _user$: BehaviorSubject<string>
 
   public redirectUrl: string = null;
 
+  private auth0Domain: string = 'dev-krp3h00i.eu.auth0.com'
+  private auth0Id: string = 'ctm71np2uY92yccq34CObulcFUIWyqG'
+
+
   constructor(
     private http: HttpClient,
-    private _router: Router,
-    private _globals: GlobalsService) {
+    private _router: Router) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
     console.log(parsedToken)
 
@@ -42,10 +45,27 @@ export class AuthenticationService {
       }
     }
     this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.sub)
+    // console.log(this.userinfo)
 
+    // this.initWebAuth0();
     console.log("Ctor: ", this.token)
   }
 
+  // initWebAuth0(){
+  //   var webAuth = new auth0.WebAuth({
+  //     domain:       'dev-krp3h00i.eu.auth0.com',
+  //     clientID:     'ctm71np2uY92yccq34CObulcFUIWyqGS'
+  //   });
+  
+  //   // Trigger login with google
+  //   webAuth.authorize({
+  //     connection: 'google-oauth2'
+  //   });
+  // }
+
+
+
+  
   get token(): string {
     const localToken = localStorage.getItem(this._tokenKey);
     return !!localToken ? localToken : '';
