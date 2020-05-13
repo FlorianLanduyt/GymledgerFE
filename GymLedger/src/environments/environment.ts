@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: '/api'
+  apiUrl: 'https://gymledgerapi20200511091542.azurewebsites.net'
 };
 
 /*
