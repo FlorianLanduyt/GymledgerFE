@@ -1,12 +1,13 @@
 {
     "/api": {
       "target": {
-        "host": "localhost",
+        "host": "gymledgerapi20200511091542.azurewebsites.net",
         "protocol": "https:",
-        "port": 5001
+        "port": 443
       },
       "secure": false,
       "changeOrigin": true,
       "logLevel": "info"
     }
 }
+
