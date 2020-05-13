@@ -18,6 +18,9 @@ export class AllTrainingComponent implements OnInit {
   public errorMessage: string = ""
   public newTrainingForm: boolean = false;
 
+  public trainingElement: string = "training"
+  public addTrainingLink: string = "/list"
+
   @Input() public isHomepage: boolean;
 
   // private _fetchTrainings$: Observable<Training[]>
@@ -51,7 +54,9 @@ export class AllTrainingComponent implements OnInit {
     })
   }
 
-
+  get isListEmpty(){
+    return this._trainingList.length == 0? true:false;
+  }
 
   private initListForHomepage(): void{
     var threeInFuture: Training[] = null;

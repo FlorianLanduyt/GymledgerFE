@@ -56,3 +56,6 @@
     transition: ease 0.4s;
 }
 
+app-empty-list-placeholder {
+    width: 70%;
+}

@@ -37,6 +37,15 @@ textarea {
   height: 70px;
 }
 
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--blue);
+}
+
 :root {
   --paars: #f2f2f8;
   --blauw: #006b89;
@@ -165,13 +174,4 @@ button {
   line-height: 1.5rem;
   /* line-height: 1.5em; */
 
-}
-
-a {
-  color: var(--blauw);
-  text-decoration: none;
-}
-
-a:visited {
-  color: var(--blue);
 }

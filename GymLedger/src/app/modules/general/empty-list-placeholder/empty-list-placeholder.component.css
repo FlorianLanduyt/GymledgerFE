@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    border: grey 1px dashed;
+    width: 100%;
+    height: 200px;
+    line-height: 200px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.09) 4px 5px 4px;
+}
+
+.addLink {
+    cursor: pointer;
+}

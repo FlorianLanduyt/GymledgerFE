@@ -12,6 +12,7 @@ import { TrainingResolver } from './training-resolver.service';
 import { AuthGuard } from '../user/auth.guard';
 import { ExerciseModule } from "../exercise/exercise.module";
 import { TrainingPageComponent } from './training-page/training-page.component';
+import { GeneralModule } from "../general/general.module";
 
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    ExerciseModule
+    ExerciseModule,
+    GeneralModule
   ], exports : [
     GymnastProfileComponent,
     TrainingComponent,

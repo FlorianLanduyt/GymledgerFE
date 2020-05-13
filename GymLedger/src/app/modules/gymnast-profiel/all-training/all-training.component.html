@@ -2,10 +2,17 @@
   <div class="titleSection">
   </div>
   <div class="trainingContainer" *ngIf="trainings; else loadingOrError">
+    <div *ngIf="!isListEmpty; else emptyList">
     <section class="trainingLijst">
       <app-training class="training" (selectedTraining)='showDetails($event)' *ngFor="let training of trainings" [training]=training>
       </app-training>
     </section>
+  </div>
+
+  <ng-template #emptyList>
+    <app-empty-list-placeholder [addLink]="addTrainingLink" [element]="trainingElement"></app-empty-list-placeholder>
+  </ng-template>
+  
 
   </div>
   <div #doel>

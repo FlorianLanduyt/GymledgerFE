@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { RouterModule } from "@angular/router";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EmptyListPlaceholderComponent } from './empty-list-placeholder/empty-list-placeholder.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EmptyListPlaceholderComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ], 
   exports: [
     NavbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EmptyListPlaceholderComponent
   ]
 })
 export class GeneralModule { }
