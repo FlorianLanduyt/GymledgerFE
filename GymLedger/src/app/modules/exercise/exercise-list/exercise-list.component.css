@@ -24,6 +24,10 @@
     align-self: stretch;
 } 
 
+app-empty-list-placeholder {
+    width: 100%;
+}
+
 
 
 

@@ -17,6 +17,9 @@ export class ExerciseListComponent implements OnInit {
   @Input() public isAnAddExerciseToTraining: boolean;
   @Input() public isHomepage: boolean;
 
+  public oefeningElement: string = "oefening"
+  public addOefeningLink: string = ""
+
   constructor(
     private _exerciseService: ExerciseDataService,
     private _toastr: ToastrService
@@ -65,6 +68,10 @@ export class ExerciseListComponent implements OnInit {
           }
         );
     }
+  }
+
+  get isListEmpty() {
+    return this.exercises.length == 0? true:false;
   }
 
   initListForHomepage(){

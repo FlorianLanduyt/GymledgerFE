@@ -11,6 +11,7 @@ import { AddExerciseToTrainingComponent } from './add-exercise-to-training/add-e
 import { TrainingExercisesListComponent } from './training-exercises-list/training-exercises-list.component';
 import { EvaluationComponent } from './evaluation/evaluation.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GeneralModule } from "../general/general.module";
 
 
 
@@ -27,7 +28,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GeneralModule
   ],
    exports: [
      ExerciseListComponent,

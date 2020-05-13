@@ -1,6 +1,5 @@
-
   <div class="oefeningenContainer" *ngIf="exercises">
-    <div class="lijstSection">
+    <div *ngIf="!this.isListEmpty; else emptyList" class="lijstSection">
         <app-exercise 
           class="oefeningVierkant"  
           *ngFor="let e of (exercises | exerciseFilter : filterTitle)" 
@@ -8,5 +7,9 @@
           (exerciseId)="AddExistingExerciseToTraining($event)" >
         </app-exercise>
     </div>
+
+  <ng-template #emptyList>
+    <app-empty-list-placeholder [element]="oefeningElement" [addLink]="addOefeningLink"></app-empty-list-placeholder>
+  </ng-template>
   </div>
 
