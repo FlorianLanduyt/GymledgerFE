@@ -146,3 +146,18 @@ select {
     flex: 0 0 30%;
 }
 
+.cat-from-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.catItem {
+    flex: 0 0 40%;
+}
+
+.smallCatItem {
+    /* flex: 0 0 20%; */
+}

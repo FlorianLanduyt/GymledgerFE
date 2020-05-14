@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
+  //  apiUrl: '/api'
   apiUrl: 'https://gymledgerapi20200511091542.azurewebsites.net/api'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
