@@ -16,32 +16,19 @@
 
  form {
     border-radius: 10px;
-    /* padding: 50px 100px; */
     margin-bottom: 20px;
-    /* background-color: #FCFCFC;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 7px; */
     margin-bottom: 100px
  }
-/* 
- label {
-     display: block;
-     font-size: 14px;
-     font-weight: 500;
-     padding-bottom: 8px ;
-     color: #676569;
-     
- } */
+
 
  .normalInput {
     border: none;
     background-color: #fafbfc;
     height: 30px;
     max-width: 400px;
-    /* min-width: 200px; */
     border: 1px solid #d1d5da;
     font-size: 12px;
     border-radius: 5px;
-    /* box-shadow: inset 0 1px 2px rgba(27,31,35,.075); */
     padding: 4px 8px;
     outline: none; 
 }
@@ -65,9 +52,6 @@ select {
     border-bottom: 1px solid lightgray;
 }
 
-/* .btnContainer {
-    border-top: #d1d5da 1px solid;
-} */
 
 
 .requiredSection {
@@ -104,7 +88,6 @@ select {
   border: 1px solid #ced4da;
   line-height: 1.5;
   width: 100%;
-  /* padding: .375rem .75rem; */
   outline: none;
   font-size: 1rem;
 }
@@ -158,6 +141,3 @@ select {
     flex: 0 0 40%;
 }
 
-.smallCatItem {
-    /* flex: 0 0 20%; */
-}

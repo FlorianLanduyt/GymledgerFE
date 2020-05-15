@@ -95,6 +95,7 @@ export class Training {
         return {
             trainingId: this._id,
             categoryId: this.category.id,
+            category: this.category.name,
             date: this.date,
             feelingBeforeTraining: this.feelingBeforeTraining,
             feelingAfterTraining: this.feelingAfterTraining,

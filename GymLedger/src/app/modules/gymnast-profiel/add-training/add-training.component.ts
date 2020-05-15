@@ -115,7 +115,15 @@ export class AddTrainingComponent implements OnInit {
   }
 
   private editTraining() {
-    this.training.category = this.trainingFg.value.categorySelect;
+    if(this.trainingFg.value.categoryGroup.categorySelect !=  ""){
+      this.training.category = this.trainingFg.value.categoryGroup.categorySelect;
+    } else {
+      var newCategory = new Category()
+      newCategory.name = this.trainingFg.value.categoryGroup.categoryInput;
+      newCategory.description = ""; // tijdelijk geen beschrijving 
+      this.training.category = newCategory;
+    }
+    
     this.training.date = this.trainingFg.value.date;
 
 
@@ -136,12 +144,8 @@ export class AddTrainingComponent implements OnInit {
   private createNewTraining() {
     const newTraining = new Training();
     if(this.trainingFg.value.categoryGroup.categorySelect !=  ""){
-      console.log(this.trainingFg.value.categoryGroup.categorySelect)
-      console.log("oldcat")
       newTraining.category = this.trainingFg.value.categoryGroup.categorySelect;
     } else {
-      console.log("new cat");
-      console.log(this.trainingFg.value.categoryGroup.categoryInput)
       var newCategory = new Category()
       newCategory.name = this.trainingFg.value.categoryGroup.categoryInput;
       newCategory.description = ""; // tijdelijk geen beschrijving 
