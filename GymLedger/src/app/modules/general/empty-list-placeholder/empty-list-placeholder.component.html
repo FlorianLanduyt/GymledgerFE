@@ -1,4 +1,4 @@
 <div class="container">
-    <p class="infotekst">Nog geen <span>{{element}}</span> toegevoegd. <a class="addLink" (click)=goToPage() >Voeg hier één toe </a></p>
+    <p class="infotekst">Nog geen <span>{{element}}</span> toegevoegd. <a *ngIf="addLink" class="addLink" (click)=goToPage() >Voeg hier één toe </a></p>
 </div>
 

@@ -14,7 +14,9 @@ export class TrainingExercisesListComponent implements OnInit {
   @Input() public trainingId: number;
   public exerciseEvaulation: FormGroup
 
-  public exercises$: Observable<Exercise[]>
+  private _exercises: Exercise[];
+
+  public element = "oefening aan training"
 
 
   constructor(
@@ -23,8 +25,24 @@ export class TrainingExercisesListComponent implements OnInit {
 
   ngOnInit(): void {
     this._exerciseService.refreshExercises$.subscribe(() => {
-      this.exercises$ = this._exerciseService.getExercisesOfTraining$(this.trainingId)
+      this.fetchExercises$();
     })
+    this.fetchExercises$();
+    
+  }
+
+  fetchExercises$(){
+    this._exerciseService.getExercisesOfTraining$(this.trainingId).subscribe(list => {
+      this._exercises = list;
+    })
+  }
+
+  get exercises(): Exercise[]{
+    return this._exercises;
+  }
+
+  get isListEmpty(){
+    return this._exercises.length == 0? true: false;
   }
 
 }
