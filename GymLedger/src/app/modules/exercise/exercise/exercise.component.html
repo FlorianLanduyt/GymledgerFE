@@ -2,7 +2,15 @@
     <div>
       <img class="projectFoto" src="{{imgSrc}}">
     </div>
-    <p>
+    
+    <p *ngIf="!addForm; else form">
       {{e.description}}
     </p>
+    <ng-template #form>
+      <form [formGroup]="exerciseFg">
+        <div class="form-group">
+          <input placeholder="naam" formControlName="name" >
+        </div>
+      </form>
+    </ng-template>
   </div>

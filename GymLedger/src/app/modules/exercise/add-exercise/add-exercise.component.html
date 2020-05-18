@@ -1,0 +1,13 @@
+<div>
+    <h1 class="hoofdtitel">Creeer een nieuwe oefening</h1>
+    <form [formGroup]="exerciseFg" (ngSubmit)='submit()'>
+        <div class="form-group">
+            <label class="infotekt">Naam van de oefening</label>
+            <input  formControlName='name'>
+        </div>
+        <div class="btnContainer">
+            <button type="button"  (click)="cancel()" class="btn">Annuleer</button>
+            <button type="submit" class="btn addButton">Voeg toe</button>
+        </div>
+    </form>
+</div>

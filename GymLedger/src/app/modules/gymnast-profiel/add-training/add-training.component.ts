@@ -105,7 +105,7 @@ export class AddTrainingComponent implements OnInit {
         if (email) {
           this._gymnastService.addNewTraining(email, newTraining).subscribe();
         }
-      })
+      }).unsubscribe()
     } else {
       this.editTraining();
       this._gymnastService.putTraining(this.training).subscribe()

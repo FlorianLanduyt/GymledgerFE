@@ -15,20 +15,18 @@
     /* flex-direction: column; */
     align-items: center;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.titleContainer h1 {
+/* .titleContainer h1 {
     flex: 1 0 auto;
-}
+} */
 
-.titleContainer div {
-    flex: 3 0 auto;
-    display: flex;
-}
 
-input {
+
+.searchExercise {
     height: 30px;
-    width: 100%;
+    width: 40%;
     padding: 4px 10px;
     border-radius: 5px;
     border: 0;

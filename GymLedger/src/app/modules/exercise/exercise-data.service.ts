@@ -6,6 +6,7 @@ import { Exercise } from 'src/app/models/exercise.model';
 import { environment } from 'src/environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { ExerciseEvaluation } from 'src/app/models/exerciseEvaluation.model';
+import { AuthenticationService } from '../user/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class ExerciseDataService {
   private _refreshExercises = new BehaviorSubject([])
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private _authService: AuthenticationService
   ) { }
 
   get refreshExercises$() {
@@ -87,16 +89,32 @@ export class ExerciseDataService {
       );
   }
 
-  getExercisesOfTraining$(trainingId: number): Observable<Exercise[]> {
-    return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/${trainingId}`)
+  getExercisesFromGymnast$(email: string): Observable<Exercise[]> {
+      return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/list/${email}`)
       .pipe(
+        tap((json: any) => {
+           console.log(json)
+        }),
+        catchError(this.handleError),
+        map((list: any): Exercise[] => list.map(Exercise.fromJson)),
+      );
+  }
+
+  getExercisesOfTraining$(trainingId: number): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/training/${trainingId}`)
+      .pipe(
+        tap((response) => {
+          console.log(response)
+        }
+          
+        ),
         catchError(this.handleError),
         map((list: any): Exercise[] => list.map(Exercise.fromJson))
       )
   }
 
   getExercisesNotInTraining$(trainingId: number): Observable<Exercise[]> {
-    return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/oefeningNietInTraining/${trainingId}`)
+    return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/oefeningNietInTraining/${trainingId}/`)
       .pipe(
         catchError(this.handleError),
         map((list: any): Exercise[] => list.map(Exercise.fromJson))
@@ -124,6 +142,19 @@ export class ExerciseDataService {
         catchError(this.handleError),
         map((exerciseJson: any): Exercise => Exercise.fromJson(exerciseJson))
       )
+  }
+
+  addExercise(exercise: Exercise, gymnastEmail: string){
+    return this.http.post(
+      `${environment.apiUrl}/Exercise/${gymnastEmail}`, exercise.toJson())
+      .pipe(
+        tap(() =>
+          this.refreshExercises$.next([])
+        ),
+        catchError(this.handleError),
+        map((exerciseJson: any): Exercise => Exercise.fromJson(exerciseJson))
+      
+    )
   }
 
 

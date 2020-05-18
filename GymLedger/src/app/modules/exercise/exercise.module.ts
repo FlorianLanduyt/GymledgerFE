@@ -12,6 +12,7 @@ import { TrainingExercisesListComponent } from './training-exercises-list/traini
 import { EvaluationComponent } from './evaluation/evaluation.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GeneralModule } from "../general/general.module";
+import { AddExerciseComponent } from './add-exercise/add-exercise.component';
 
 
 
@@ -23,7 +24,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [ExerciseListComponent, ExerciseComponent, ExerciseFilterPipe, ExercisePageComponent, AddExerciseToTrainingComponent, TrainingExercisesListComponent, EvaluationComponent],
+  declarations: [ExerciseListComponent, ExerciseComponent, ExerciseFilterPipe, ExercisePageComponent, AddExerciseToTrainingComponent, TrainingExercisesListComponent, EvaluationComponent, AddExerciseComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -33,7 +34,7 @@ const routes: Routes = [
   ],
    exports: [
      ExerciseListComponent,
-     TrainingExercisesListComponent
+     TrainingExercisesListComponent,
    ]
 })
 export class ExerciseModule { }

@@ -3,6 +3,7 @@ import { ExerciseDataService } from '../exercise-data.service';
 import { Observable, EMPTY } from 'rxjs';
 import { Exercise } from 'src/app/models/exercise.model';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../../user/authentication.service';
 
 @Component({
   selector: 'app-exercise-list',
@@ -22,29 +23,29 @@ export class ExerciseListComponent implements OnInit {
 
   constructor(
     private _exerciseService: ExerciseDataService,
-    private _toastr: ToastrService
+    private _toastr: ToastrService,
+    private _authService: AuthenticationService
   ) {
     this.isAnAddExerciseToTraining = false;
   }
 
   ngOnInit(): void {
+    
     this._exerciseService.refreshExercises$.subscribe(() => {
       if (this.trainingId == 0) {                   //The list of all the existing exercises on the ExercisePage
         this._exerciseService.exercises$.subscribe(list => {
           this.exercises = list;
           if(this.isHomepage)
             this.initListForHomepage()
-        });
+        })
       } else {                                 // The list of exercises whereout to choose from for in an exercise
         this._exerciseService.getExercisesNotInTraining$(this.trainingId).subscribe(list => {
           this.exercises = list;
-        });
+        })
       }
     })
 
-    if(this.isHomepage){
-      
-    }
+
   }
 
   AddExistingExerciseToTraining(eId: number) {
