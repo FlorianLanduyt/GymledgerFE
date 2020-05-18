@@ -30,7 +30,10 @@ export class ExerciseListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    // this._authService.user$.subscribe(email => {
+    //   if(email){}
+    // })
+
     this._exerciseService.refreshExercises$.subscribe(() => {
       if (this.trainingId == 0) {                   //The list of all the existing exercises on the ExercisePage
         this._exerciseService.exercises$.subscribe(list => {
