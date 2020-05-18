@@ -30,48 +30,56 @@ export class ExerciseListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this._authService.user$.subscribe(email => {
-    //   if(email){}
-    // })
-
-    this._exerciseService.refreshExercises$.subscribe(() => {
-      if (this.trainingId == 0) {                   //The list of all the existing exercises on the ExercisePage
-        this._exerciseService.exercises$.subscribe(list => {
-          this.exercises = list;
-          if(this.isHomepage)
-            this.initListForHomepage()
-        })
-      } else {                                 // The list of exercises whereout to choose from for in an exercise
-        this._exerciseService.getExercisesNotInTraining$(this.trainingId).subscribe(list => {
-          this.exercises = list;
+    this._authService.user$.subscribe(email => {
+      if(email){
+        this._exerciseService.refreshExercises$.subscribe(() => {
+          if (this.trainingId == 0) {                   //The list of all the existing exercises on the ExercisePage
+            this._exerciseService.getExercisesFromGymnast$(email).subscribe(list => {
+              this.exercises = list;
+              if(this.isHomepage)
+                this.initListForHomepage()
+            })
+          } else {                                 // The list of exercises whereout to choose from for in an exercise
+            this._exerciseService.getExercisesNotInTraining$(email,this.trainingId).subscribe(list => {
+              this.exercises = list;
+            })
+          }
         })
       }
     })
+
+    
 
 
   }
 
   AddExistingExerciseToTraining(eId: number) {
-    if (this.isAnAddExerciseToTraining) {
-      this._exerciseService.addExerciseToTraining(this.trainingId, eId)
-        .subscribe(
-          (response: Exercise) => {
-            if (response) {
-              this._exerciseService.getExercisesNotInTraining$(this.trainingId).subscribe(list => {
-                this.exercises = list
-              });
-              this._toastr.success(`\"${response.description}\" is toegevoegd aan de lijst van trainingen`, 'Success')
-              this._exerciseService.refreshExercises$.next([])
-            }
-          },
-          err => { // Kon enkel maar gebeuren bij een vorige versie
-            if (err) {
-              this._toastr.info("Deze oefening staat al in de lijst van trainingen", "Dubbele oefening")
-              return EMPTY
-            }
-          }
-        );
-    }
+    this._authService.user$.subscribe(email => {
+      if(email){
+        if (this.isAnAddExerciseToTraining) {
+          this._exerciseService.addExerciseToTraining(this.trainingId, eId)
+            .subscribe(
+              (response: Exercise) => {
+                if (response) {
+                  this._exerciseService.getExercisesNotInTraining$(email, this.trainingId).subscribe(list => {
+                    this.exercises = list
+                  });
+                  this._toastr.success(`\"${response.description}\" is toegevoegd aan de lijst van trainingen`, 'Success')
+                  this._exerciseService.refreshExercises$.next([])
+                }
+              },
+              err => { // Kon enkel maar gebeuren bij een vorige versie
+                if (err) {
+                  this._toastr.info("Deze oefening staat al in de lijst van trainingen", "Dubbele oefening")
+                  return EMPTY
+                }
+              }
+            );
+        }
+      }
+    }).unsubscribe()
+
+    
   }
 
   get isListEmpty() {

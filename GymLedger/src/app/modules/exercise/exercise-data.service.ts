@@ -78,16 +78,16 @@ export class ExerciseDataService {
   }
 
 
-  get exercises$(): Observable<Exercise[]> {
-    return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise`)
-      .pipe(
-        tap((json: any) => {
-          // console.log(json)
-        }),
-        catchError(this.handleError),
-        map((list: any): Exercise[] => list.map(Exercise.fromJson))
-      );
-  }
+  // get exercises$(): Observable<Exercise[]> {
+  //   return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise`)
+  //     .pipe(
+  //       tap((json: any) => {
+  //         // console.log(json)
+  //       }),
+  //       catchError(this.handleError),
+  //       map((list: any): Exercise[] => list.map(Exercise.fromJson))
+  //     );
+  // }
 
   getExercisesFromGymnast$(email: string): Observable<Exercise[]> {
       return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/list/${email}`)
@@ -113,8 +113,8 @@ export class ExerciseDataService {
       )
   }
 
-  getExercisesNotInTraining$(trainingId: number): Observable<Exercise[]> {
-    return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/oefeningNietInTraining/${trainingId}/`)
+  getExercisesNotInTraining$(email: string, trainingId: number): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/oefeningNietInTraining/${trainingId}/${email}`)
       .pipe(
         catchError(this.handleError),
         map((list: any): Exercise[] => list.map(Exercise.fromJson))
