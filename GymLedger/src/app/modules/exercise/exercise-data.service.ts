@@ -92,9 +92,6 @@ export class ExerciseDataService {
   getExercisesFromGymnast$(email: string): Observable<Exercise[]> {
       return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/list/${email}`)
       .pipe(
-        tap((json: any) => {
-           console.log(json)
-        }),
         catchError(this.handleError),
         map((list: any): Exercise[] => list.map(Exercise.fromJson)),
       );
@@ -103,11 +100,7 @@ export class ExerciseDataService {
   getExercisesOfTraining$(trainingId: number): Observable<Exercise[]> {
     return this.http.get<Exercise[]>(`${environment.apiUrl}/Exercise/training/${trainingId}`)
       .pipe(
-        tap((response) => {
-          console.log(response)
-        }
-          
-        ),
+        
         catchError(this.handleError),
         map((list: any): Exercise[] => list.map(Exercise.fromJson))
       )
